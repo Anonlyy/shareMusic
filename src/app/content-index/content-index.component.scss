@@ -1,0 +1,167 @@
+@charset "utf-8";
+.content-media {
+  height: 815px;
+  overflow-y: auto;
+  .media-banner {
+    //padding:0 50px;
+    height: 250px;
+    padding: 10px 10px 20px;
+    img {
+      max-width: 100%;
+      width: 100%;
+      height: 250px;
+    }
+  }
+  .media-body {
+    .media {
+      margin-bottom: 30px;
+      background-color: white;
+      box-shadow: 0 3px 10px rgba(0,0,0,.02);
+      .media-header {
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+        border-bottom: 2px solid #31C27C;
+        .media-title {
+          margin: 0;
+          float: left;
+          font-size: 1.2rem;
+        }
+        .more-link {
+          color: #333;
+          float: right;
+          transition: all .3s;
+          font-size: .85rem;
+          &:hover {
+            color: #31C27C;
+          }
+        }
+      }
+      .media-content {
+        background-color: white;
+        .content-list {
+          padding: 0 5px;
+          list-style: none;
+          margin-bottom: 0;
+          display: block;
+          .content {
+            float: left;
+            width: 1/6*100%;
+            overflow: hidden;
+            height: 280px;
+            box-sizing: content-box;
+            .content-inner {
+              display: block;
+              overflow: hidden;
+              font-size: 0;
+              text-align: center;
+              position: relative;
+              img {
+                transition: all .3s;
+                width: 100%;
+                height: 200px;
+              }
+              .content-hover {
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                opacity: 0;
+                z-index: 1000;
+                display: none;
+                font-size: .7rem;
+                color: white;
+                background-color: rgba(0, 0, 0, .6);
+                transition: all .3s;
+                text-align: left;
+                free-icon {
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  font-size: 0;
+                  transform: translate(-50%, -50%);
+                }
+              }
+              &:hover {
+                img {
+                  transform: scale(1.2);
+                }
+                .content-hover {
+                  opacity: 1;
+                  display: block;
+                  free-icon {
+                    font-size: 3rem;
+                    transform: translate(-50%, -50%);
+                  }
+                  p {
+                    //align-self: flex-end;
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                  }
+                }
+              }
+            }
+            .content-desc {
+              padding-top: 3px;
+              a {
+                color: #333;
+                display: block;
+                font-size: .75rem;
+                height: 30px;
+                line-height: 15px;
+                overflow: hidden;
+                &:hover {
+                  color: #31C27C;
+                }
+              }
+              .content-footer {
+                p {
+                  font-weight: bold;
+                  margin: 0;
+                  font-size: .8rem;
+                  .badeg {
+                    display: inline-block;
+                    font-size: .7rem;
+                    font-weight: 300;
+                    background-color: #31C27C;
+                    border-radius: 7px;
+                    margin-left: 5px;
+                    color: white;
+                    padding: 0 5px;
+                  }
+                }
+              }
+
+            }
+
+          }
+        }
+      }
+    }
+    .newMusic{
+      .media-content{
+        .content-list{
+          .content{
+            width:1/5*100%;
+            .content-inner{
+              img{
+                height: 250px;
+              }
+            }
+            &:hover{
+              .content-inner{
+                img{
+                  transform:scale(1.5) rotate(-30deg);
+                }
+              }
+            }
+          }
+        }
+      }
+
+    }
+  }
+}

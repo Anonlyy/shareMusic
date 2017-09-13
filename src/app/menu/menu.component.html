@@ -1,0 +1,75 @@
+<div class="menu-header">
+  <img class="user-img" src="{{isLogin?userInfo.avatarUrl:'http://iph.href.lu/200x200'}}" alt="" (click)="isLogin?'':switchSlideNav()">
+  <h3 class="user-name">
+    <free-icon icon="user-circle"></free-icon>
+    {{isLogin?userInfo.username:'admin'}}
+  </h3>
+</div>
+<div class="menu-body free-iscroll">
+  <ul class="menu-list">
+    <li class="list-title">
+      在线音乐
+    </li>
+    <li class="list-item active">
+      <a href="#">
+        <free-icon icon="music" [spin]="false"></free-icon>  音乐广场
+      </a>
+    </li>
+    <li class="list-item item-playlist" (click)="openList()">
+      <a href="#">
+        <free-icon icon="user-o"></free-icon>
+        我的歌单
+        <span class="icon-desc" [class.open-desc]="isOpen" >
+          <free-icon icon="angle-down"></free-icon>
+        </span>
+      </a>
+      <ul class="play-list" [class.active]="isOpen" [hidden]="!isLogin">
+        <li class="list-item text-truncate" *ngFor="let item of userPlayList">
+          <img src="{{item.coverImgUrl}}" alt="">
+          {{item.name}}
+        </li>
+      </ul>
+    </li>
+    <li class="list-item">
+      <a href="#">
+        <free-icon icon="film"></free-icon>  音乐广场
+      </a>
+    </li>
+    <li class="list-item">
+      <a href="#">
+        <free-icon icon="heartbeat"></free-icon>  电台
+      </a>
+    </li>
+    <li class="list-item">
+      <a href="#">
+        <free-icon icon="clock-o"></free-icon>  播放历史
+      </a>
+    </li>
+  </ul>
+</div>
+<free-sidenav [visible]="leftSidenav" overlay="true" direction="right">
+  <header class="slide-header">
+    <h3 class="title"> <free-icon icon="user"></free-icon>  登录</h3>
+    <button class="btn-close" fButton circle="true" icon="times" (click)="switchSlideNav()"></button>
+  </header>
+  <form [formGroup]="loginForm" class="login-form" (submit)="formSubmit()">
+    <div class="form-control">
+      <input type="text" formControlName="tel" name="tel" class="input-tel" placeholder="请输入你的手机号">
+      <span></span>
+      <div class="tip" [hidden]="loginForm.get('tel').untouched">
+        <free-icon [hidden]="loginForm.hasError('tel','tel')" icon="check" style="color: #31C27C;"></free-icon>
+        <free-icon [hidden]="!loginForm.hasError('tel','tel')" icon="times" style="color: #E33244;"></free-icon>
+      </div>
+    </div>
+    <div class="form-control">
+      <input type="password" formControlName="password" name="tel"  placeholder="请输入你的密码">
+      <span></span>
+      <div class="tip" [hidden]="loginForm.get('password').pristine">
+        <free-icon [hidden]="loginForm.hasError('requried','password')" icon="check" style="color: #31C27C;"></free-icon>
+        <free-icon [hidden]="!loginForm.hasError('requried','password')" icon="times" style="color: #E33244;"></free-icon>
+      </div>
+    </div>
+    <button type="submit" fButton block  theme="success">提交</button>
+  </form>
+</free-sidenav>
+<free-notification [messages]="delayMessages" theme="{{messageTheme}}" [delay]="1200"></free-notification>

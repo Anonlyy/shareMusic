@@ -1,0 +1,13 @@
+@charset "utf-8";
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
+  z-index: 10002;
+  visibility: visible;
+  //left: 825.5px;
+  //top: 413px;
+  opacity: 1;
+}

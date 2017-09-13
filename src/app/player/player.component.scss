@@ -1,0 +1,46 @@
+@charset "utf-8";
+.player-left {
+  float: left;
+  display: block;
+  width: 230px;
+  height: 65px;
+  border-top: 1px solid #E8EBEB;
+  .button-group{
+    height:65px;
+    line-height:65px;
+    width: 158px;
+    margin: 0 auto;
+    vertical-align: bottom;
+    .btn-item{
+      cursor: pointer;
+      font-size: .75rem;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      line-height:32px;
+      border-radius: 50%;
+      border:2px solid #2CAE6F;
+      color: #2CAE6F;
+      text-align: center;
+      &:hover{
+        border-color: #2A975A;
+        color: #2A975A;
+      }
+    }
+    .center{
+      margin:0 15px;
+      width: 40px;
+      height: 40px;
+      line-height:40px;
+    }
+  }
+}
+
+.player-body {
+  box-shadow: 0 -5px 5px rgba(0,0,0,.03);
+  display: block;
+  float: left;
+  width: 970px;
+  height: 65px;
+}
+

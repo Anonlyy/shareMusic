@@ -1,0 +1,76 @@
+<div class="content-media free-iscroll">
+  <div class="media-banner">
+    <img src="http://iph.href.lu/900x400?text=banner" alt="">
+  </div>
+  <div class="media-body">
+    <!--推荐歌单-->
+    <div class="media">
+      <div class="media-header">
+        <h4 class="media-title">
+          <free-icon icon="fire" style="color: darkred;"></free-icon> 热门歌单</h4>
+        <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon></a>
+      </div>
+      <div class="media-content">
+        <ul class="content-list clearfix">
+          <li class="content" *ngFor="let item of songList">
+            <a href="#" class="content-inner">
+              <img src="{{item.picUrl}}" alt="">
+              <div class="content-hover">
+                <free-icon icon="play-circle"></free-icon>
+                <p>
+                  {{item.copywriter}}
+                </p>
+
+              </div>
+            </a>
+            <div class="content-desc">
+              <a href="#">
+                {{item.name}}
+              </a>
+              <div class="content-footer">
+                <p>收藏:<span class="badeg">{{item.playCount}} </span></p>
+                <p>数目:<span class="badeg">{{item.trackCount}} </span></p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--推荐歌单-->
+    <!--最新音乐-->
+    <div class="media newMusic">
+      <div class="media-header">
+        <h4 class="media-title"> 最新音乐</h4>
+        <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon></a>
+      </div>
+      <div class="media-content">
+        <ul class="content-list clearfix">
+          <!-- *ngFor="let item of songList"-->
+          <li class="content" *ngFor="let item of newSongList">
+            <a href="#" class="content-inner">
+              <img src="{{item.blurPicUrl}}" alt="">
+              <div class="content-hover">
+                <free-icon icon="play-circle"></free-icon>
+                <p>
+                  {{item.name}}
+                </p>
+              </div>
+            </a>
+            <!--<div class="content-desc">-->
+              <!--<a href="#">-->
+                <!--{{item.name}}-->
+              <!--</a>-->
+              <!--<div class="content-footer">-->
+                <!--<p>收藏:<span class="badeg">{{item.playCount}} </span></p>-->
+                <!--<p>数目:<span class="badeg">{{item.trackCount}} </span></p>-->
+              <!--</div>-->
+            <!--</div>-->
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--最新音乐-->
+
+  </div>
+</div>
+

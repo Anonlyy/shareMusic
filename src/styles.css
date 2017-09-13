@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/font-awesome/css/font-awesome.min.css";
+@import '../node_modules/freeng/resources/freeng.min.css';
+@import '../node_modules/freeng/resources/themes/blue.css';
+*{
+  /*font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif!important;*/
+  /*font-family:poppin,'PingFang SC',Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif!important;*/
+  font-weight: 300;
+}
+body,html{
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin:0;
+  font-size: 16px;
+  background-color: #f2f2f2;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif!important;
+}
+.free-sidenav.free-sidenav-right .free-sidenav-wrapper{
+  box-shadow: -3px 0 3px rgba(0,0,0,.05);
+}
+.text-truncate {
+  word-wrap: normal; /* for IE */
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.clearfix::before,.clearfix::after{
+  content: '';
+  display: block;
+  height:0;
+  visibility: hidden;
+  clear: both;
+}
