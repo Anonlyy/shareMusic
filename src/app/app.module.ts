@@ -15,11 +15,11 @@ import { LoginAlertComponent } from './alert/loginAlert.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UserService} from "./service/user.service";
-import {CookieService} from "angular2-cookie/services/cookies.service";
 import {AccordionModule} from "freeng/component/accordion/accordion.component";
 import { ContentIndexComponent } from './content-index/content-index.component';
 import {MusicService} from "./service/music.service";
 import {BadgeModule} from "freeng/component/badge/badge.component";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 @NgModule({
   declarations: [
     AppComponent,

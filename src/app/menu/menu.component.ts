@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {telValidator} from "../valid/validator"
 import {UserService} from "../service/user.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
-import {userInfo} from "os";
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -28,9 +27,9 @@ export class MenuComponent implements OnInit {
       tel:["",[Validators.required,telValidator]],
       password:["",[Validators.required,Validators.minLength(6)]]
     });
-    if(this.cookieService.get('userInfo')){
-      this.userData = this.cookieService.get('userInfo');
-      this.dataToUserInfo(JSON.parse(this.userData));
+    if(this.cookieService.getObject('userInfo')){ //读取用户信息缓存
+      this.userData = this.cookieService.getObject('userInfo');
+      this.dataToUserInfo(this.userData);
     }
   }
   switchSlideNav(){
@@ -43,45 +42,51 @@ export class MenuComponent implements OnInit {
         title: '通知',
         content: '账号或密码为空！'
       });
+      return;
     }
-    else{
-      _this.userServer.login(_this.loginForm.get('tel').value,_this.loginForm.get('password').value)
-        .subscribe(result=>{
-          let data = result;
-          if(data.code==200){
-            _this.messageTheme = 'success';
-            _this.delayMessages.push({
-              title: '通知',
-              content: '登录成功！'
-            });
-            _this.switchSlideNav();
-            _this.cookieService.putObject('userInfo',data.profile);
-            _this.userServer.loginRefresh().subscribe(
-              result=>{
-                if(result.code==200){  //登录成功
-                  console.log('=====刷新成功=====');
-                  _this.dataToUserInfo(_this.userData);
-                  _this.loginForm.reset();
-                }
+    _this.getUserInfo();
+  }
+  //获取用户信息
+  getUserInfo(){
+    const _this = this;
+    _this.userServer.login(_this.loginForm.get('tel').value,_this.loginForm.get('password').value)
+      .subscribe(result=>{
+        let data = result;
+        if(data.code==200){
+          _this.messageTheme = 'success';
+          _this.delayMessages.push({
+            title: '通知',
+            content: '登录成功！'
+          });
+          _this.switchSlideNav();
+          _this.userServer.loginRefresh().subscribe(
+            result=>{
+              if(result.code==200){  //登录成功
+                console.log('=====刷新成功=====');
               }
-            )
-          }
-          else if(data.code==415){
-            _this.messageTheme = 'warning';
-            _this.delayMessages.push({
-              title: '通知',
-              content: '登陆次数过多,请稍后再试！'
+              else{
+                console.log('=====刷新失败=====')
+              }
             });
-          }
-          else{
-            _this.messageTheme = 'error';
-            _this.delayMessages.push({
-              title: '通知',
-              content: '账户密码错误！'
-            });
-          }
-        })
-    }
+          _this.cookieService.putObject('userInfo',data.profile);
+          _this.dataToUserInfo(data.profile);
+          _this.loginForm.reset();
+        }
+        else if(data.code==415){
+          _this.messageTheme = 'warning';
+          _this.delayMessages.push({
+            title: '通知',
+            content: '登陆次数过多,请稍后再试！'
+          });
+        }
+        else{
+          _this.messageTheme = 'error';
+          _this.delayMessages.push({
+            title: '通知',
+            content: '账户密码错误！'
+          });
+        }
+      })
   }
   dataToUserInfo(userData:any){
     const _this = this;
@@ -91,9 +96,9 @@ export class MenuComponent implements OnInit {
     _this.userServer.getUserPlaylist(_this.userInfo.userId)
       .subscribe(result=>{
         let data = result;
-        console.log(data);
         if(data.code==200){
           _this.userPlayList = data.playlist;
+          // this.userInfo = new UserInfo()
         }
         else{
           console.log("获取失败:"+data.code);
@@ -105,7 +110,9 @@ export class MenuComponent implements OnInit {
   }
 }
 
-
+//用户信息对象
 export class UserInfo{
-  constructor(public userId:string,public username:string,public avatarUrl:string){}
+  constructor(public userId:string,
+              public username:string,
+              public avatarUrl:string){}
 }

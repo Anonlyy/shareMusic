@@ -64,9 +64,9 @@
     <div class="form-control">
       <input type="password" formControlName="password" name="tel"  placeholder="请输入你的密码">
       <span></span>
-      <div class="tip" [hidden]="loginForm.get('password').pristine">
-        <free-icon [hidden]="loginForm.hasError('requried','password')" icon="check" style="color: #31C27C;"></free-icon>
-        <free-icon [hidden]="!loginForm.hasError('requried','password')" icon="times" style="color: #E33244;"></free-icon>
+      <div class="tip" [hidden]="loginForm.get('password').untouched">
+        <free-icon [hidden]="loginForm.hasError('minlength','password')" icon="check" style="color: #31C27C;"></free-icon>
+        <free-icon [hidden]="!loginForm.hasError('minlength','password')" icon="times" style="color: #E33244;"></free-icon>
       </div>
     </div>
     <button type="submit" fButton block  theme="success">提交</button>

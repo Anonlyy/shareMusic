@@ -8,17 +8,57 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
   styleUrls: ['./content-index.component.scss']
 })
 export class ContentIndexComponent implements OnInit {
+  topList = [
+    {
+      id:'0',
+      name:'云音乐新歌榜',
+      picUrl:'/assets/image/topList0.jpg'
+    },
+    {
+      id:'1',
+      name:'云音乐热歌榜',
+      picUrl:'/assets/image/topList2.jpg'
+    },
+    {
+      id:'2',
+      name:'网易原创歌曲榜',
+      picUrl:'/assets/image/topList3.jpg'
+    },
+    {
+      id:'3',
+      name:'云音乐飙升榜',
+      picUrl:'/assets/image/topList1.jpg'
+    },
+    {
+      id:'4',
+      name:'云音乐电音榜',
+      picUrl:'/assets/image/topList4.jpg'
+    }];  //排行榜数据
   songList:SongList;  //推荐歌单
-  newSongList=[]; //最新音乐列表
+  newSongList:any; //最新音乐列表
   newSong:Song; //最新音乐
+  bannerUrl:string;
   constructor(public musicServer:MusicService,public cookieServer:CookieService) { }
-
   ngOnInit() {
-    this.getSongList();
-    // if(!this.cookieServer.getObject('newSongList')){
-    //   console.log(this.cookieServer.getObject('newSongList'));
-    // }
-    this.getSong();
+    this.getBannerImg();
+    this.newSongList =[];
+    let songListCookie = this.cookieServer.getObject('newSongList');
+    let songCookie = this.cookieServer.getObject('songList');
+    if(songListCookie){this.newSongList = this.cookieServer.getObject('newSongList');}
+    else{this.getSongList();}
+    if(songCookie){this.setSongList(songCookie);}
+    else{this.getSong();}
+  }
+  public setSongList(data:any){
+    this.songList = data;
+  }
+  public getBannerImg(){
+    const _this = this;
+    _this.musicServer.getBannerImg()
+      .subscribe(result=>{
+        _this.bannerUrl = result.banners[Math.ceil(Math.random()*5)].pic;
+        console.log(_this.bannerUrl)
+      })
   }
   public getSongList(){
     const _this = this;
@@ -46,13 +86,13 @@ export class ContentIndexComponent implements OnInit {
         result=>{
           let data = result;
           if(data.code==200){
-            for(let i of data.result){
-              // console.log(i);
-              _this.newSong = new Song(i.id,i.song.name,i.song.artists[0].name,i.song.artists[0].id,i.song.album.picUrl);
+            // console.log(i);
+            _this.newSongList =[];
+            for(let item of data.result){
+              _this.newSong = new Song(item.id,item.song.name,item.song.artists[0].name,item.song.artists[0].id,item.song.album.picUrl);
               _this.newSongList.push(_this.newSong);
               // _this.cookieServer.putObject('newSongList',_this.newSongList);
             }
-            console.log('newSongList',_this.newSongList);
           }
           else{
             console.log(data);
@@ -62,6 +102,12 @@ export class ContentIndexComponent implements OnInit {
           alert(error);
         }
       );
+  }
+  playSong(index:number){
+    // console.log(this.newSongList[index]);
+    this.musicServer.setSongId(this.newSongList[index]);
+    // let id = this.newSongList[]
+    // this.musicServer.setSongId()
   }
 }
 

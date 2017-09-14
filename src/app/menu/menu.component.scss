@@ -16,6 +16,9 @@ input:focus{
     margin:5px 0 0;
     font-weight: normal;
     font-size:1rem;
+    free-icon{
+      color: #31C27C;
+    }
   }
 }
 .menu-body{
@@ -76,7 +79,7 @@ input:focus{
         transition: all .2s;
       }
       .open-desc{
-        transform: rotate(-90deg);
+        transform: rotateZ(180deg);
       }
       >.play-list{
         padding:0;
@@ -173,7 +176,7 @@ input:focus{
       }
 
     }
-    input.ng-invalid.ng-untouched+span::after{
+    input.ng-invalid.ng-touched+span::after{
       content: '';
       width: 100%;
       background-color: #E33244;

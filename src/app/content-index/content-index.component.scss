@@ -4,12 +4,12 @@
   overflow-y: auto;
   .media-banner {
     //padding:0 50px;
-    height: 250px;
-    padding: 10px 10px 20px;
+    //height: 28px;
+    padding: 10px 80px;
     img {
       max-width: 100%;
       width: 100%;
-      height: 250px;
+      height: 340px;
     }
   }
   .media-body {
@@ -25,7 +25,7 @@
         .media-title {
           margin: 0;
           float: left;
-          font-size: 1.2rem;
+          font-size: 1rem;
         }
         .more-link {
           color: #333;
@@ -48,8 +48,9 @@
             float: left;
             width: 1/6*100%;
             overflow: hidden;
+            z-index: 1001;
             height: 280px;
-            box-sizing: content-box;
+            transition: all .3s;
             .content-inner {
               display: block;
               overflow: hidden;
@@ -69,10 +70,11 @@
                 bottom: 0;
                 opacity: 0;
                 z-index: 1000;
-                display: none;
+                transform: translate(-10px);
                 font-size: .7rem;
                 color: white;
-                background-color: rgba(0, 0, 0, .6);
+                //background: linear-gradient(45deg, #ff89e9 0%,#05abe0 100%);
+                background-color: rgba(0, 0, 0, .2);
                 transition: all .3s;
                 text-align: left;
                 free-icon {
@@ -85,17 +87,16 @@
               }
               &:hover {
                 img {
-                  transform: scale(1.2);
+                  filter:blur(3px);
                 }
                 .content-hover {
+                  transform: translateX(0);
                   opacity: 1;
-                  display: block;
                   free-icon {
                     font-size: 3rem;
                     transform: translate(-50%, -50%);
                   }
                   p {
-                    //align-self: flex-end;
                     position: absolute;
                     bottom: 0;
                     left: 0;
@@ -134,27 +135,49 @@
                   }
                 }
               }
-
             }
-
           }
         }
       }
     }
     .newMusic{
+      padding-bottom:15px;
       .media-content{
         .content-list{
           .content{
             width:1/5*100%;
+            height: 210px;
             .content-inner{
               img{
-                height: 250px;
+                height: 210px;
+              }
+              .content-hover{
+                padding:10px;
+                .name{
+                  .song-name{
+                    font-size: 1rem;
+                    color: #31C27C;
+                    text-align: right;
+                    font-weight: normal;
+                    margin-right:10px;
+                  }
+                  .artists-name{
+                    font-weight: bold;
+                    font-size: 1.2rem;
+                  }
+                }
               }
             }
             &:hover{
               .content-inner{
                 img{
+                  filter:blur(0);
                   transform:scale(1.5) rotate(-30deg);
+                }
+                .content-hover{
+                  free-icon{
+                    font-size: 5rem;
+                  }
                 }
               }
             }
@@ -162,6 +185,51 @@
         }
       }
 
+    }
+    .media-charts{
+      .media-content {
+        .content-list {
+          .content {
+            width: 1/5*100%;
+            height: 218px;
+            text-align: center;
+            .content-info{
+              overflow: hidden;
+              display: block;
+              position: relative;
+              img{
+                width: 100%;
+                height: 218px;
+                transition: all .3s;
+                display: block;
+              }
+              .content-hover{
+                transition: all .3s;
+                z-index: 1000;
+                height:30px;
+                line-height:30px;
+                font-size: 1rem;
+                opacity: 0;
+                color: white;
+                background-color: rgba(0,0,0,.6);
+              }
+              &:hover{
+                img{
+                  transform: translateY(-30px);
+                }
+                .content-hover{
+                  opacity: 1;
+                  transform: translateY(-30px);
+                }
+
+              }
+            }
+            .content-desc{
+              font-weight: bold;
+            }
+          }
+        }
+      }
     }
   }
 }

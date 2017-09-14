@@ -7,8 +7,6 @@ import {Http} from "@angular/http";
   styleUrls: ['app.component.scss']
 })
 export class AppComponent implements OnInit{
-  data:any;
-
   constructor(public http:Http){}
 
   ngOnInit(): void {

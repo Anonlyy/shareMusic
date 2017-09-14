@@ -1,6 +1,6 @@
 <div class="content-media free-iscroll">
   <div class="media-banner">
-    <img src="http://iph.href.lu/900x400?text=banner" alt="">
+    <img src="{{bannerUrl}}" alt="">
   </div>
   <div class="media-body">
     <!--推荐歌单-->
@@ -40,37 +40,56 @@
     <!--最新音乐-->
     <div class="media newMusic">
       <div class="media-header">
-        <h4 class="media-title"> 最新音乐</h4>
+        <h4 class="media-title"><free-icon icon="flag" style="color:#31C27C;"></free-icon> 最新音乐</h4>
         <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon></a>
       </div>
       <div class="media-content">
         <ul class="content-list clearfix">
-          <!-- *ngFor="let item of songList"-->
-          <li class="content" *ngFor="let item of newSongList">
+          <li class="content" *ngFor="let item of newSongList;let i = index;"  (click)="playSong(i)">
             <a href="#" class="content-inner">
               <img src="{{item.blurPicUrl}}" alt="">
               <div class="content-hover">
                 <free-icon icon="play-circle"></free-icon>
-                <p>
-                  {{item.name}}
-                </p>
+                <div class="name">
+                  <p class="song-name">
+                    {{item.name}}
+                  </p>
+                  <h3 class="artists-name">
+                    {{item.artistsName}}
+                  </h3>
+                </div>
               </div>
             </a>
-            <!--<div class="content-desc">-->
-              <!--<a href="#">-->
-                <!--{{item.name}}-->
-              <!--</a>-->
-              <!--<div class="content-footer">-->
-                <!--<p>收藏:<span class="badeg">{{item.playCount}} </span></p>-->
-                <!--<p>数目:<span class="badeg">{{item.trackCount}} </span></p>-->
-              <!--</div>-->
-            <!--</div>-->
           </li>
         </ul>
       </div>
     </div>
     <!--最新音乐-->
-
+    <!--排行榜-->
+    <div class="media media-charts">
+      <div class="media-header">
+        <h4 class="media-title"><free-icon icon="feed" style="color:#31C27C;"></free-icon> 排行榜</h4>
+        <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon></a>
+      </div>
+      <div class="media-content">
+        <ul class="content-list clearfix">
+          <!--topList-->
+          <li class="content" *ngFor="let item of topList">
+            <a href="#" class="content-info">
+              <img src="{{item.picUrl}}" alt="">
+              <div class="content-hover">
+                <!--<free-icon icon="play-circle"></free-icon>-->
+                <p class="name">
+                  {{item.name}}
+                  <free-icon icon="arrow-circle-right"></free-icon>
+                </p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--排行榜-->
   </div>
 </div>
 
