@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs";
 import {Http} from "@angular/http";
 import {Song} from "../content-index/content-index.component";
 
 @Injectable()
 export class MusicService {
-  song:Song;
-  constructor(public http:Http) { }
+  song: EventEmitter<Song>;
+  constructor(public http:Http) {
+    this.song = new EventEmitter();
+  }
   /**
    * 获取推荐歌单
    * @returns {Observable<R|T>}
@@ -47,11 +49,11 @@ export class MusicService {
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
-  public setSongId(song:Song){
-    this.song = song;
-  }
-  public getSongId():Observable<Song>{
-    return Observable.of(this.song);
+
+  public setCookie(time:number):Date{
+    let date = new Date();
+    date.setMinutes(date.getMinutes()+time);
+    return date;
   }
 
   public handleSuccess(res){

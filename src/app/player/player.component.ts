@@ -4,6 +4,7 @@ import {Http} from "@angular/http";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {MusicService} from "../service/music.service";
 import {Song} from "../content-index/content-index.component";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'player',
@@ -11,42 +12,106 @@ import {Song} from "../content-index/content-index.component";
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
-  audio:HTMLAudioElement; //音乐对象
-  constructor(public musicService:MusicService) {
-
-
-  }
+  audio:HTMLAudioElement = new Audio(); //音乐对象
+  media:Song = new Song('00','NULL','NULL','NULL','NULL');
+  MediaTime = {
+    duration:'00:00',
+    currentTime:'00:00'
+  };
+  progressWidth:number = 0;
+  isPlay:boolean = false;
+  constructor(public musicService:MusicService,public cookieService:CookieService) {}
 
   ngOnInit() {
-    // console.log(this.MediaObj);
-    // this.http.get('/music/url?id=347230').subscribe(result=>{
-    //   let data = result.json();
-    //   this.songUrl = data.data[0].url;
-    //   console.log(this.songUrl)
-    // })
-    // this.playMedia('347221');
-      this.musicService.getSongId()
-        .subscribe(result=>{
-          console.log(result);
-        })
-
-
+    this.musicService.song.subscribe((result)=>{//获取歌曲详情
+      this.media = result;
+      this.playMedia(result.id);
+    })
   }
+
+  /**
+   * 播放音乐事件
+   * @param id
+   */
 
   playMedia(id:string){
     const _this = this;
+    _this.isPlay = true;
     _this.musicService.getSongUrl(id)
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
-          _this.audio = new Audio();
           _this.audio.src = data.data[0].url;
           _this.audio.load();
           _this.audio.play();
+          _this.getTime(_this.audio);
         }
       })
   }
-  mediaPlay(Media:any){
+
+  /**
+   * 获取歌曲时长
+   * @param Media
+   */
+  public getTime(Media:HTMLAudioElement) {
+    const _this = this;
+    setTimeout(function () {
+      let duration = Media.duration;
+      if(isNaN(duration)){
+        _this.getTime(Media);
+      }
+      else{
+        duration = Math.round(Media.duration);
+        _this.MediaTime.duration = _this.setTimes(duration);
+        console.info("该歌曲的总时间为："+_this.setTimes(duration)+"秒");
+        let times = setInterval(()=>{
+          _this.MediaTime.currentTime = _this.setTimes(Math.floor(Media.currentTime));
+          // console.log('currentTime：',_this.setTimes(Math.floor(Media.currentTime)));
+          _this.progressWidth +=(100/duration);
+
+          if(_this.MediaTime.currentTime>=_this.MediaTime.duration||_this.audio.paused){
+            //noinspection TypeScriptUnresolvedFunction
+            clearInterval(times);
+            _this.progressWidth=0;
+            _this.isPlay = false;
+            _this.MediaTime.currentTime = "00:00";
+          }
+        },1000);
+
+      }
+    }, 10);
+  }
+
+
+  /**
+   * 秒长转换分钟格式
+   * @param duration
+   * @returns {string}
+   */
+  private setTimes(duration){
+    let min,sec;
+    min =Math.floor(duration/60)<10?('0'+Math.floor(duration/60)):Math.floor(duration/60);
+    sec =Math.floor(duration-min*60)<10?('0'+Math.floor(duration-min*60)):Math.floor(duration-min*60);
+    return `${min}:${sec}`;
+    // console.log(`${min}:${sec}`);
+  }
+
+  /**
+   * 播放暂停点击事件
+   * @param Media
+   */
+
+  handleMediaPlay(){
+    const _this = this;
+    _this.isPlay = !_this.isPlay;
+    if(_this.audio.paused){ //暂停状态
+      _this.getTime(_this.audio);
+      _this.audio.play();
+    }
+    else {
+      _this.audio.pause();
+    }
+
     // Media.play().then(result=>{
     //   console.log("======开始播放========")
     // }).catch(

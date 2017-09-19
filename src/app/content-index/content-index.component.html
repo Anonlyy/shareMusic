@@ -1,6 +1,14 @@
 <div class="content-media free-iscroll">
   <div class="media-banner">
-    <img src="{{bannerUrl}}" alt="">
+
+    <el-carousel height="320px">
+      <el-carousel-item *ngFor="let item of bannerUrls;let i = index;">
+        <div class="small">
+          <img src="{{item}}" alt="">
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+
   </div>
   <div class="media-body">
     <!--推荐歌单-->
@@ -8,12 +16,13 @@
       <div class="media-header">
         <h4 class="media-title">
           <free-icon icon="fire" style="color: darkred;"></free-icon> 热门歌单</h4>
-        <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon></a>
+        <a href="#" class="more-link">更多 <free-icon icon="caret-square-o-down"></free-icon>
+        </a>
       </div>
       <div class="media-content">
         <ul class="content-list clearfix">
           <li class="content" *ngFor="let item of songList">
-            <a href="#" class="content-inner">
+            <a [routerLink]="['/list',item.id]" class="content-inner">
               <img src="{{item.picUrl}}" alt="">
               <div class="content-hover">
                 <free-icon icon="play-circle"></free-icon>
@@ -28,7 +37,7 @@
                 {{item.name}}
               </a>
               <div class="content-footer">
-                <p>收藏:<span class="badeg">{{item.playCount}} </span></p>
+                <p>收藏:<span class="badeg">{{item.playCount | number:'1.0-0'}} </span></p>
                 <p>数目:<span class="badeg">{{item.trackCount}} </span></p>
               </div>
             </div>
@@ -46,17 +55,17 @@
       <div class="media-content">
         <ul class="content-list clearfix">
           <li class="content" *ngFor="let item of newSongList;let i = index;"  (click)="playSong(i)">
-            <a href="#" class="content-inner">
+            <a class="content-inner">
               <img src="{{item.blurPicUrl}}" alt="">
               <div class="content-hover">
                 <free-icon icon="play-circle"></free-icon>
                 <div class="name">
-                  <p class="song-name">
-                    {{item.name}}
-                  </p>
                   <h3 class="artists-name">
                     {{item.artistsName}}
                   </h3>
+                  <p class="song-name">
+                    {{item.name}}
+                  </p>
                 </div>
               </div>
             </a>

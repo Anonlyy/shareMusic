@@ -20,13 +20,22 @@ import { ContentIndexComponent } from './content-index/content-index.component';
 import {MusicService} from "./service/music.service";
 import {BadgeModule} from "freeng/component/badge/badge.component";
 import {CookieService} from "angular2-cookie/services/cookies.service";
+import {ElModule } from "element-angular";
+import "element-theme-default";
+import {AppRoutingModule} from "./app-routing.module";
+import { SongListComponent } from './song-list/song-list.component';
+import { ErrorComponent } from './error/error.component';
+import {LocationStrategy, HashLocationStrategy} from "@angular/common";
+import {TabGroupModule} from "freeng/component/tab/tab.component";
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
     MenuComponent,
     LoginAlertComponent,
-    ContentIndexComponent
+    ContentIndexComponent,
+    SongListComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -34,16 +43,19 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpModule,
+    AppRoutingModule,
     IconModule,
     ModalModule,
     InputtextModule,
     SidenavModule,
+    TabGroupModule,
     AccordionModule,
     ButtonModule,
     NotificationModule,
-    BadgeModule
+    BadgeModule,
+    ElModule
   ],
-  providers: [MusicService,UserService,CookieService],
+  providers: [MusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

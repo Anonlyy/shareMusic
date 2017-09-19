@@ -5,12 +5,13 @@
   "author": "Xposean",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.config.json  --port 8080",
-    "build": "ng build",
+    "start": "ng serve --proxy-config proxy.config.json --port 8080",
+    "build": "ng build  ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+
   "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
@@ -23,6 +24,7 @@
     "@angular/router": "^4.0.0",
     "angular2-cookie": "^1.2.6",
     "core-js": "^2.4.1",
+    "element-angular": "^0.0.4-alpha.4",
     "font-awesome": "^4.7.0",
     "freeng": "^0.2.3",
     "ngx-cookie": "^1.0.0",

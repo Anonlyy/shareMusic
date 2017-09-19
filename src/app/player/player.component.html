@@ -3,8 +3,8 @@
     <div class="btn-item">
       <free-icon icon="step-backward"></free-icon>
     </div>
-    <div class="btn-item center" (click)="mediaPlay(media)">
-      <free-icon icon="pause"></free-icon>
+    <div class="btn-item center" (click)="handleMediaPlay()">
+      <free-icon icon="{{isPlay?'pause':'play'}}" [style.marginLeft]="isPlay?'0px':'3px'"></free-icon>
     </div>
     <div class="btn-item">
       <free-icon icon="step-forward"></free-icon>
@@ -13,16 +13,18 @@
 </div>
 <div class="player-body">
   <div class="play">
-    <img src="http://iph.href.lu/65x65" class="play-pic" alt="">
+    <img [attr.src]="isPlay?media.blurPicUrl:'http://iph.href.lu/65x65'" class="play-pic" alt="">
       <div class="play-content">
         <p class="play-text">
-          火星人来过 <span>-薛之谦</span>
+          {{media.name}} <span>-{{media.artistsName}}</span>
         </p>
         <span class="play-times">
-          01:30/04:20
+          {{MediaTime.currentTime}}/{{MediaTime.duration}}
         </span>
         <div class="play-range">
-          <span class="range-value"></span>
+          <span class="range-value">
+            <i class="progress" [style.width]="progressWidth+'%'"></i>
+          </span>
         </div>
       </div>
     <!--<audio #media src="">-->
