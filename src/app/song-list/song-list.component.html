@@ -1,30 +1,52 @@
-<div class="media-header clearfix">
-  <div class="media-inner">
-    <img src="http://iph.href.lu/145x150" alt="">
-  </div>
-  <div class="media-notice">
-    <h3 class="media-title">情话哪家强：五月天&苏打绿情歌大PK</h3>
-    <div class="media-artist">
-      <div class="nickname">
-        <img src="http://iph.href.lu/24x24" alt="">
-        <span>Binaryify</span>
+<div class="global-media free-iscroll">
+  <div class="media-header clearfix">
+    <div class="media-inner">
+      <img src="{{playListDetail.picUrl}}" alt="">
+    </div>
+    <div class="media-notice">
+      <h3 class="media-title">{{playListDetail.name}}</h3>
+      <div class="media-artist">
+        <div class="nickname">
+          <img src="{{playListDetail.avatarUrl}}" alt="">
+          <span>{{playListDetail.nickname}}</span>
+        </div>
+        <ul class="tags-list">
+          <li *ngFor="let item of playListDetail.tags">#{{item}}</li>
+        </ul>
       </div>
-      <ul class="tags-list">
-        <li>#国语</li>
-        <li>#流行</li>
-      </ul>
-    </div>
-    <p class="media-desc text-truncate">写好一句网络虚拟社交上的简介又有什么用呢写好一句网络虚拟社交上的简介又有什么用呢写好一句网络虚拟社交上的简介又有什么用呢写好一句网络虚拟社交上的简介又有什么用呢</p>
-    <div class="button-group">
-      <button fButton theme="success" icon="play-circle">播放全部</button>
-      <!--heart-->
-      <button fButton icon="heart-o">收藏歌单</button>
+      <p class="media-desc text-truncate">{{playListDetail.desc}}</p>
+      <div class="button-group">
+        <button fButton theme="success" icon="play-circle">播放全部</button>
+        <!--heart-->
+        <button fButton icon="heart-o">收藏歌单</button>
+      </div>
     </div>
   </div>
-</div>
-<div class="media-body">
-  <div class="tabs-group">
-    <div class="tabs-header"></div>
-    <div class="tabs-content"></div>
+  <div class="media-body">
+    <div class="tabs-group">
+      <div class="tabs-header">
+        <ul class="tabs-title-list">
+          <li class="title-item tabs-active">歌曲 <i class="badeg">{{playListDetail.trackCount}}</i></li>
+          <li class="title-item">评论</li>
+        </ul>
+      </div>
+      <div class="tabs-content">
+        <ul class="tabs-content-list">
+          <li class="list-title clearfix">
+            <span>歌曲</span>
+            <span>歌手</span>
+            <span>专辑</span>
+          </li>
+          <li class="list-item clearfix" *ngFor="let item of songList">
+            <span>
+             <strong class="text-truncate">{{item.name}}</strong>
+            </span>
+            <span class="text-truncate">{{item.artistsName}}</span>
+            <span class="text-truncate">{{item.alName}}</span>
+          </li>
+          <div class="tip">我可是有底线的~</div>
+        </ul>
+      </div>
+    </div>
   </div>
 </div>

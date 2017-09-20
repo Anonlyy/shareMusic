@@ -47,6 +47,8 @@
           .content {
             float: left;
             width: 1/6*100%;
+            padding-left:10px;
+            box-sizing: border-box;
             overflow: hidden;
             z-index: 1001;
             height: 280px;
@@ -136,6 +138,9 @@
                 }
               }
             }
+            &:last-child{
+              padding-left: 0;
+            }
           }
         }
       }
@@ -148,6 +153,7 @@
             cursor: pointer;
             width:1/5*100%;
             height: 210px;
+            margin-bottom: 10px;
             .content-inner{
               img{
                 height: 210px;

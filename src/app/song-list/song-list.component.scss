@@ -1,7 +1,17 @@
 @charset "utf-8";
+ul,li{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.global-media{
+  height: 815px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 .media-header{
   background-color: #F5F5F5;
-  padding:25px 30px;
+  padding:25px;
   .media-inner{
     display: block;
     float: left;
@@ -64,9 +74,92 @@
   }
 }
 .media-body{
-  free-tab-group{
-    .free-tab-group{
-      box-shadow:none!important;
+  .tabs-group{
+    width: 100%;
+    padding:0 20px;
+    box-sizing: border-box;
+    .tabs-header{
+      border-bottom: 1px solid #F5F5F5;
+      height: 50px;
+      line-height: 50px;
+      .tabs-title-list{
+        width: 100%;
+        .title-item{
+          float: left;
+          padding:0 15px;
+          height:50px;
+          text-align: center;
+          font-size: .8rem;
+          font-weight: normal;
+          cursor: pointer;
+          transition: all .2s;
+          position: relative;
+          .badeg{
+            font-style: normal;
+            font-size: .5rem;
+            background-color: #31C27C;
+            padding:0 2px;
+            color: white;
+            border-radius: 5px;
+          }
+          &:hover{
+            color: #30BC78;
+          }
+        }
+        .tabs-active{
+          border-bottom: 2px solid #31C27C;
+        }
+      }
+    }
+    .tabs-content{
+      .tabs-content-list{
+        >li{
+          width: 100%;
+          display: block;
+          border-bottom: 1px solid #F5F5F5;
+          >span{
+            display: block;
+            float: left;
+            height: 35px;
+            line-height:35px;
+            overflow: hidden;
+            font-size: .8rem;
+            font-weight: normal;
+            color: #333;
+            strong{
+              width: 100%;
+              display: block;
+              transition: all .3s;
+              cursor: pointer;
+              font-weight: normal;
+              &:hover{
+                color: #31C27C;
+              }
+            }
+            &:first-child{
+              width: 55%;
+            }
+            &:nth-child(2){
+              width: 20%;
+            }
+            &:last-child{
+              width: 25%;
+            }
+          }
+        }
+        .list-title{
+          span{
+            font-weight: 300;
+            font-size: .75rem;
+          }
+        }
+        .tip{
+          font-size: .7rem;
+          height:35px;
+          line-height:35px;
+          text-align: center;
+        }
+      }
     }
   }
 }

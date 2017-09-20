@@ -50,6 +50,12 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  public getPlayListDetail(id:string):Observable<any>{
+    return this.http.get(`/playlist/detail?id=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
   public setCookie(time:number):Date{
     let date = new Date();
     date.setMinutes(date.getMinutes()+time);

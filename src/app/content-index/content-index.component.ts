@@ -147,7 +147,8 @@ export class Song{
     private id:string,
     public name:string,//歌曲名字
     public artistsName:string, //歌手名字
-    private artistsId:string, //对应的歌曲ID
+    private artistsId:string, //对应的歌手ID
     public blurPicUrl:string, //歌曲封面图片
+    public alName?:string //专辑名字
   ){}
 }
