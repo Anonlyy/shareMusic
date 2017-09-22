@@ -1,5 +1,5 @@
 import {Component, OnInit, AfterContentInit} from '@angular/core';
-import {MusicService} from "../service/music.service";
+import {MusicService, EmitSong} from "../service/music.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 
 @Component({
@@ -7,7 +7,7 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
   templateUrl: './content-index.component.html',
   styleUrls: ['./content-index.component.scss']
 })
-export class ContentIndexComponent implements OnInit,AfterContentInit {
+export class ContentIndexComponent implements OnInit {
 
   topList = [
     {
@@ -45,21 +45,23 @@ export class ContentIndexComponent implements OnInit,AfterContentInit {
     "http://p4.music.126.net/tGPljf-IMOCyPvumoWLOTg==/7987951976374270.jpg",
     "http://p4.music.126.net/mp2Y2n4ueZzIj6JSnUOdtw==/7875801790676538.jpg",
     "http://p3.music.126.net/e0gGadEhjur2UuUpDF9hPg==/7788940372125389.jpg"];
+  songIds = []; //存储播放列表的id列表
   constructor(public musicServer:MusicService,public cookieServer:CookieService) { }
   ngOnInit() {
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
     if(songListCookie){
       this.newSongList =[];
+      this.songIds = [];
       this.newSongList = this.cookieServer.getObject('newSongList');
+      for(let item of this.newSongList){
+        this.songIds.push(item.id);
+      }
     }
     else{
       this.getSongList();
     }
-    songCookie?this.setSongList(songCookie):this.getSong();
-  }
-  ngAfterContentInit(): void {
-    // this.getBannerImg();
+    songCookie?this.setSongList(songCookie):this.getNewSong();
   }
   public setSongList(data:any){
     this.songList = data;
@@ -97,7 +99,7 @@ export class ContentIndexComponent implements OnInit,AfterContentInit {
         }
       );
   }
-  public getSong(){
+  public getNewSong(){
     const _this = this;
     _this.musicServer.getNewSong()
       .subscribe(
@@ -107,10 +109,11 @@ export class ContentIndexComponent implements OnInit,AfterContentInit {
             // console.log(i);
             _this.newSongList =[];
             for(let item of data.result){
+              _this.songIds.push(item.id);
               _this.newSong = new Song(item.id,item.song.name,item.song.artists[0].name,item.song.artists[0].id,item.song.album.picUrl);
               _this.newSongList.push(_this.newSong);
               let option = {
-                expires:_this.musicServer.setCookie(30) //设置缓存时长
+                expires:_this.musicServer.setCookie(30) //设置缓存有效期
               }
               _this.cookieServer.putObject('newSongList',_this.newSongList,option);
             }
@@ -124,9 +127,8 @@ export class ContentIndexComponent implements OnInit,AfterContentInit {
         }
       );
   }
-  playSong(index:number){
-    // this.cookieServer.putObject('songId',this.newSongList[index]);
-    this.musicServer.song.emit(this.newSongList[index]);
+  public playSong(index:number){
+    this.musicServer.emitSong.emit(new EmitSong(this.newSongList[index],this.songIds));
   }
 }
 //单个·歌单对象
@@ -149,6 +151,7 @@ export class Song{
     public artistsName:string, //歌手名字
     private artistsId:string, //对应的歌手ID
     public blurPicUrl:string, //歌曲封面图片
-    public alName?:string //专辑名字
+    public alName?:string, //专辑名字
+    public dt?:number,//歌曲时长
   ){}
 }

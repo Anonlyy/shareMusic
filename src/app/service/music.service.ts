@@ -5,9 +5,11 @@ import {Song} from "../content-index/content-index.component";
 
 @Injectable()
 export class MusicService {
-  song: EventEmitter<Song>;
+  emitSong: EventEmitter<EmitSong>;
+  // songIds:EventEmitter<any>;
   constructor(public http:Http) {
-    this.song = new EventEmitter();
+    this.emitSong = new EventEmitter();
+    // this.songIds = new EventEmitter();
   }
   /**
    * 获取推荐歌单
@@ -50,6 +52,11 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取歌单详情
+   * @param id
+   * @returns {Observable<R|T>}
+   */
   public getPlayListDetail(id:string):Observable<any>{
     return this.http.get(`/playlist/detail?id=${id}`)
       .map(this.handleSuccess)
@@ -68,4 +75,11 @@ export class MusicService {
   public handleError(error){
     return Observable.throw(`${error}`);
   }
+}
+
+export class EmitSong{
+  constructor(
+    public currentSong:Song,
+    public ids:any
+  ){}
 }

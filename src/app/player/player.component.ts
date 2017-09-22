@@ -20,28 +20,38 @@ export class PlayerComponent implements OnInit {
   };
   progressWidth:number = 0;
   isPlay:boolean = false;
+  currentId:string;
   constructor(public musicService:MusicService,public cookieService:CookieService) {}
 
   ngOnInit() {
-    this.musicService.song.subscribe((result)=>{//获取歌曲详情
-      this.media = result;
-      this.playMedia(result.id);
-    })
+    //得到当前歌曲的id
+    this.musicService.emitSong.subscribe((result)=>{//获取歌曲详情
+      //noinspection TypeScriptUnresolvedVariable
+      this.currentId =result.currentSong.id.toString();
+      this.media = result.currentSong;
+      this.playMedia(result.ids);
+    });
+
   }
 
   /**
    * 播放音乐事件
-   * @param id
+   * @param idList
    */
 
-  playMedia(id:string){
+  playMedia(idList){
     const _this = this;
     _this.isPlay = true;
-    _this.musicService.getSongUrl(id)
+    let currentIndex = idList.findIndex(arr=>{
+      return arr==_this.currentId;
+    });
+    console.log('currentIndex',currentIndex)
+    _this.musicService.getSongUrl(idList.join(','))
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
-          _this.audio.src = data.data[0].url;
+          console.log('_this.currentId',data.data[currentIndex].url);
+          _this.audio.src = data.data[currentIndex].url;
           _this.audio.load();
           _this.audio.play();
           _this.getTime(_this.audio);

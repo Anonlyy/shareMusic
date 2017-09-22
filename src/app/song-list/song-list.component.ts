@@ -11,7 +11,7 @@ import {SongList, Song} from "../content-index/content-index.component";
 export class SongListComponent implements OnInit {
 
   id:string;
-  playListDetail:PlayListDetail = new PlayListDetail('null','http://iph.href.lu/56x65','暂无描述',[],0,'admin','http://iph.href.lu/24x24'); //歌单详情对象
+  playListDetail:PlayListDetail = new PlayListDetail('null','/assets/image/loading.jpg','暂无描述',[],0,'admin','/assets/image/loading.jpg'); //歌单详情对象
   song:Song = new Song('0','null','null','0','http://iph.href.lu/56x65');
   songList=[];//存储所有歌曲
   constructor(public routerInfo:ActivatedRoute,public musicService:MusicService) { }
@@ -34,14 +34,14 @@ export class SongListComponent implements OnInit {
           _this.playListDetail = new PlayListDetail(
             data.name,
             data.coverImgUrl,
-            data.description,
+            data.description?data.description:'###这位同志很懒,暂无歌单描述###',
             data.tags,
             data.trackCount,
             data.creator.nickname,
             data.creator.avatarUrl
           );
           for(let item of result.playlist.tracks){
-            _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name);
+            _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
             _this.songList.push(_this.song);
           }
         }
@@ -52,6 +52,7 @@ export class SongListComponent implements OnInit {
       }
     )
   }
+
 }
 
 
