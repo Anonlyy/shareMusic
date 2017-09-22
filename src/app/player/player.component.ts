@@ -27,7 +27,7 @@ export class PlayerComponent implements OnInit {
     //得到当前歌曲的id
     this.musicService.emitSong.subscribe((result)=>{//获取歌曲详情
       //noinspection TypeScriptUnresolvedVariable
-      this.currentId =result.currentSong.id.toString();
+      this.currentId =result.currentSong.id;
       this.media = result.currentSong;
       this.playMedia(result.ids);
     });
@@ -50,8 +50,16 @@ export class PlayerComponent implements OnInit {
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
-          console.log('_this.currentId',data.data[currentIndex].url);
-          _this.audio.src = data.data[currentIndex].url;
+          let current = data.data.find(arr=>{
+            return arr.id == _this.currentId;
+          });
+          console.log('_this.currentId',_this.currentId);
+          console.log('current',current.id);
+
+          // console.log('_this.currentId',_this.currentId);
+          // console.log('data[currentIndex].id',data.data[currentIndex].id);
+          // console.log('data',data.data);
+          _this.audio.src = current.url;
           _this.audio.load();
           _this.audio.play();
           _this.getTime(_this.audio);
