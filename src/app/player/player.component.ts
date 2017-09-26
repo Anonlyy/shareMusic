@@ -22,6 +22,7 @@ export class PlayerComponent implements OnInit {
     id:'0',
     index:-1
   };
+  times:any;
   constructor(public musicService:MusicService,public cookieService:CookieService) {}
 
   ngOnInit() {
@@ -80,6 +81,7 @@ export class PlayerComponent implements OnInit {
   playMedia(url:string){
     const _this = this;
     _this.audio.pause();
+    // _this.audio.crossOrigin = "anonymous";
     _this.audio.src = url; //播放当前点击的歌曲
     _this.audio.load();
     _this.audio.play();
@@ -103,19 +105,20 @@ export class PlayerComponent implements OnInit {
         _this.MediaTime.duration = _this.setTimes(duration);
         console.info("该歌曲的总时间为："+_this.setTimes(duration)+"秒");
         _this.clearTimes();
-        var times = setInterval(()=>{
+
+        _this.times = setInterval(()=>{
           _this.MediaTime.currentTime = _this.setTimes(Math.floor(Media.currentTime));
           // console.log('currentTime：',_this.setTimes(Math.floor(Media.currentTime)));
           _this.progressWidth +=(100/duration);
 
           if(_this.audio.paused){
             //noinspection TypeScriptUnresolvedFunction
-            clearInterval(times);
+            clearInterval(_this.times);
             _this.isPlay = false;
           }
           else if(_this.MediaTime.currentTime>=_this.MediaTime.duration||_this.audio.ended){
             //noinspection TypeScriptUnresolvedFunction
-            clearInterval(times);
+            clearInterval(_this.times);
             console.log('结束播放');
             _this.isPlay = false;
            _this.handleMediaNext();
@@ -127,6 +130,7 @@ export class PlayerComponent implements OnInit {
 
   private clearTimes(){
     this.progressWidth=0;
+    clearInterval(this.times);
     this.MediaTime.currentTime = "00:00";
   }
 
@@ -137,6 +141,7 @@ export class PlayerComponent implements OnInit {
       result=>{
         if(result.code==200){
           let data = result.songs[0];
+          console.log("result",result);
           _this.media= new Song(data.id,data.name,data.ar[0].name,data.ar[0].id,data.al.picUrl)
         }
       },
@@ -167,14 +172,12 @@ export class PlayerComponent implements OnInit {
    */
   handleMediaNext(){
     const _this = this;
-    let id = '';
-    let url = '';
     _this.isPlay = true;
-    console.log('currentMedia',_this.currentMedia);
-    console.log('currentMedia',_this.media);
+    // clearInterval(_this.times);
+    // console.log('currentMedia',_this.currentMedia);
+    // console.log('currentMedia',_this.media);
     if(_this.currentMedia.index>=_this.songUrlList.length-1){
       console.log('最后一首');
-      console.log(this.songUrlList);
       _this.currentMedia = {
         id:_this.songUrlList[0].id,
         index:0
@@ -186,12 +189,9 @@ export class PlayerComponent implements OnInit {
         index:_this.currentMedia.index+1
       }
     }
-    console.log(_this.currentMedia.index,_this.songUrlList[_this.currentMedia.index]);
-    console.log('songUrlList',_this.songUrlList);
-    url = _this.songUrlList[_this.currentMedia.index].url;
-    id = _this.songUrlList[_this.currentMedia.index].id;
-    _this.getSongDetail(id);
-    _this.playMedia(url);
+    console.log(_this.songUrlList);
+    _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
+    _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
   }
   /**
    * 秒长转换分钟格式
