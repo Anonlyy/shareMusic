@@ -23,6 +23,7 @@ export class PlayerComponent implements OnInit {
     index:-1
   };
   times:any;
+  default ='/assets/image/loading.jpg'
   constructor(public musicService:MusicService,public cookieService:CookieService) {}
 
   ngOnInit() {
@@ -44,20 +45,19 @@ export class PlayerComponent implements OnInit {
   getMediaUrl(idList){
     const _this = this;
     _this.isPlay = true;
-    console.log('idList',idList);
+    // console.log('idList',idList);
     _this.musicService.getSongUrl(idList.join(','))
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
           _this.currentMedia.index = data.data.findIndex(arr=>{
-            return arr==_this.currentMedia.id;
+            return arr.id==_this.currentMedia.id;
           });
+          console.log(_this.currentMedia.index);
           //PS:返回的data数据的数组不是根据请求的IdList顺序来的
           let current = data.data.find(arr=>{
             return arr.id == _this.currentMedia.id;
           });
-
-
           _this.playMedia(current.url);
           _this.songUrlList = [];
           for(let item of data.data){
@@ -66,7 +66,7 @@ export class PlayerComponent implements OnInit {
               url:item.url
             })
           }
-          console.log('songUrlList',_this.songUrlList);
+          // console.log('songUrlList',_this.songUrlList);
         }
 
 
@@ -93,7 +93,7 @@ export class PlayerComponent implements OnInit {
    * 获取歌曲时长
    * @param Media
    */
-  public getTime(Media:HTMLAudioElement) {
+  public getTime(Media:HTMLAudioElement,pause?:string) {
     const _this = this;
     setTimeout(function () {
       let duration = Media.duration;
@@ -104,7 +104,9 @@ export class PlayerComponent implements OnInit {
         duration = Math.round(Media.duration);
         _this.MediaTime.duration = _this.setTimes(duration);
         console.info("该歌曲的总时间为："+_this.setTimes(duration)+"秒");
-        _this.clearTimes();
+        if(pause!=="pause"){
+          _this.clearTimes();
+        }
 
         _this.times = setInterval(()=>{
           _this.MediaTime.currentTime = _this.setTimes(Math.floor(Media.currentTime));
@@ -117,11 +119,11 @@ export class PlayerComponent implements OnInit {
             _this.isPlay = false;
           }
           else if(_this.MediaTime.currentTime>=_this.MediaTime.duration||_this.audio.ended){
-            //noinspection TypeScriptUnresolvedFunction
-            clearInterval(_this.times);
             console.log('结束播放');
             _this.isPlay = false;
-           _this.handleMediaNext();
+            _this.handleMediaNext();
+            //noinspection TypeScriptUnresolvedFunction
+            clearInterval(_this.times);
           }
         },1000);
       }
@@ -159,7 +161,7 @@ export class PlayerComponent implements OnInit {
     const _this = this;
     _this.isPlay = !_this.isPlay;
     if(_this.audio.paused){ //暂停状态
-      _this.getTime(_this.audio);
+      _this.getTime(_this.audio,"pause");
       _this.audio.play();
     }
     else {
@@ -173,7 +175,6 @@ export class PlayerComponent implements OnInit {
   handleMediaNext(){
     const _this = this;
     _this.isPlay = true;
-    // clearInterval(_this.times);
     // console.log('currentMedia',_this.currentMedia);
     // console.log('currentMedia',_this.media);
     if(_this.currentMedia.index>=_this.songUrlList.length-1){
@@ -189,10 +190,32 @@ export class PlayerComponent implements OnInit {
         index:_this.currentMedia.index+1
       }
     }
-    console.log(_this.songUrlList);
+    // console.log(_this.songUrlList);
     _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
     _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
   }
+
+  handleMediaBack(){
+    const _this = this;
+    _this.isPlay = true;
+    if(_this.currentMedia.index==0){
+      console.log('第一首');
+      _this.currentMedia = {
+        id:_this.songUrlList[_this.songUrlList.length-1].id,
+        index:_this.songUrlList.length-1
+      }
+    }
+    else{
+      console.log('不是第一首',_this.currentMedia)
+      _this.currentMedia = {
+        id:_this.songUrlList[_this.currentMedia.index-1].id,
+        index:_this.currentMedia.index-1
+      }
+    }
+    _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
+    _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
+  }
+
   /**
    * 秒长转换分钟格式
    * @param duration
@@ -204,6 +227,9 @@ export class PlayerComponent implements OnInit {
     sec =Math.floor(duration-min*60)<10?('0'+Math.floor(duration-min*60)):Math.floor(duration-min*60);
     return `${min}:${sec}`;
     // console.log(`${min}:${sec}`);
+  }
+  public updateUrl(e){
+    e.src = this.default;
   }
 
 

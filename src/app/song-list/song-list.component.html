@@ -1,7 +1,7 @@
 <div class="global-media free-iscroll">
   <div class="media-header clearfix">
     <div class="media-inner">
-      <img [src]="playListDetail.picUrl" alt="">
+      <img [src]="playListDetail.picUrl" #img  (error)="updateUrl(img)" alt="">
     </div>
     <div class="media-notice">
       <h3 class="media-title">{{playListDetail.name}}</h3>
@@ -16,7 +16,7 @@
       </div>
       <p class="media-desc text-truncate">{{playListDetail.desc}}</p>
       <div class="button-group">
-        <button fButton theme="success" icon="play-circle">播放全部</button>
+        <button fButton theme="success" icon="play-circle" (click)="playAllSong()">播放全部</button>
         <!--heart-->
         <button fButton icon="heart-o">收藏歌单</button>
       </div>

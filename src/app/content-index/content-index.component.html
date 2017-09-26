@@ -23,7 +23,7 @@
         <ul class="content-list clearfix">
           <li class="content" *ngFor="let item of songList">
             <a [routerLink]="['/list',item.id]" class="content-inner">
-              <img src="{{item.picUrl}}" alt="">
+              <img  [src]="item.picUrl" alt="{{item.name}}" #img (error)="updateUrl(img)">
               <div class="content-hover">
                 <free-icon icon="play-circle"></free-icon>
                 <p>
@@ -33,7 +33,7 @@
               </div>
             </a>
             <div class="content-desc">
-              <a href="#">
+              <a [routerLink]="['/list',item.id]" >
                 {{item.name}}
               </a>
               <div class="content-footer">
@@ -56,7 +56,7 @@
         <ul class="content-list clearfix">
           <li class="content" *ngFor="let item of newSongList;let i = index;"  (click)="playSong(i)">
             <a class="content-inner">
-              <img src="{{item.blurPicUrl}}" alt="">
+              <img src="{{item.blurPicUrl}}"  #img (error)="updateUrl(img)" alt="">
               <div class="content-hover">
                 <free-icon icon="play-circle"></free-icon>
                 <div class="name">
@@ -85,7 +85,7 @@
           <!--topList-->
           <li class="content" *ngFor="let item of topList">
             <a href="#" class="content-info">
-              <img src="{{item.picUrl}}" alt="">
+              <img  #img (error)="updateUrl(img)" src="{{item.picUrl}}" alt="">
               <div class="content-hover">
                 <!--<free-icon icon="play-circle"></free-icon>-->
                 <p class="name">

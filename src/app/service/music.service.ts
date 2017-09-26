@@ -6,8 +6,8 @@ import {Song} from "../content-index/content-index.component";
 @Injectable()
 export class MusicService {
   emitSong: EventEmitter<EmitSong>;
-  // songIds:EventEmitter<any>;
   constructor(public http:Http) {
+    //如需播放歌曲,需传输当前歌曲对象和idList
     this.emitSong = new EventEmitter();
     // this.songIds = new EventEmitter();
   }

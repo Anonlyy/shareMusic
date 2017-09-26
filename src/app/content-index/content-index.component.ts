@@ -44,8 +44,10 @@ export class ContentIndexComponent implements OnInit {
     "http://p4.music.126.net/CTU5B9R9y3XyYBZXJUXzTg==/2897213141428023.jpg",
     "http://p4.music.126.net/tGPljf-IMOCyPvumoWLOTg==/7987951976374270.jpg",
     "http://p4.music.126.net/mp2Y2n4ueZzIj6JSnUOdtw==/7875801790676538.jpg",
-    "http://p3.music.126.net/e0gGadEhjur2UuUpDF9hPg==/7788940372125389.jpg"];
+    "http://p3.music.126.net/e0gGadEhjur2UuUpDF9hPg==/7788940372125389.jpg"
+  ];
   songIds = []; //存储播放列表的id列表
+  default ='/assets/image/loading.jpg'
   constructor(public musicServer:MusicService,public cookieServer:CookieService) { }
   ngOnInit() {
     let songListCookie = this.cookieServer.getObject('newSongList');
@@ -129,6 +131,12 @@ export class ContentIndexComponent implements OnInit {
   public playSong(index:number){
     this.musicServer.emitSong.emit(new EmitSong(this.newSongList[index],this.songIds));
   }
+  public updateUrl(e){
+    e.src = this.default;
+  }
+
+
+
 }
 //单个·歌单对象
 export class SongList{
