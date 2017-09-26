@@ -96,8 +96,7 @@ export class ContentIndexComponent implements OnInit {
         },
         error=>{
           alert(error);
-        }
-      );
+        });
   }
   public getNewSong(){
     const _this = this;
@@ -113,7 +112,7 @@ export class ContentIndexComponent implements OnInit {
               _this.newSong = new Song(item.id,item.song.name,item.song.artists[0].name,item.song.artists[0].id,item.song.album.picUrl);
               _this.newSongList.push(_this.newSong);
               let option = {
-                expires:_this.musicServer.setCookie(30) //设置缓存有效期
+                expires:_this.musicServer.setCookie(30) //设置缓存有效期,分钟为单位
               }
               _this.cookieServer.putObject('newSongList',_this.newSongList,option);
             }

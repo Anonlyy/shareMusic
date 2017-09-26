@@ -63,6 +63,13 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  public getSongDetail(id:string):Observable<any>{
+    return this.http.get(`/song/detail?ids=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+
   public setCookie(time:number):Date{
     let date = new Date();
     date.setMinutes(date.getMinutes()+time);
