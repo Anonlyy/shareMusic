@@ -27,6 +27,7 @@ import { SongListComponent } from './song-list/song-list.component';
 import { ErrorComponent } from './error/error.component';
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {TabGroupModule} from "freeng/component/tab/tab.component";
+import { HeaderComponent } from './header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import {TabGroupModule} from "freeng/component/tab/tab.component";
     LoginAlertComponent,
     ContentIndexComponent,
     SongListComponent,
-    ErrorComponent
+    ErrorComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

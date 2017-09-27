@@ -22,13 +22,13 @@ export class SongListComponent implements OnInit {
       data=>{
         //noinspection TypeScriptUnresolvedVariable
         _this.id = data.id;
-        _this.getplayList(_this.id);
+        _this.getPlayList(_this.id);
       }
     )
   }
-  public getplayList(id:string){
+  public getPlayList(id:string){
     const _this = this;
-    _this.musicService.getPlayListDetail(_this.id).subscribe(
+    _this.musicService.getPlayListDetail(id).subscribe(
       result=>{
         let data = result.playlist;
         if(result.code==200){
@@ -41,6 +41,7 @@ export class SongListComponent implements OnInit {
             data.creator.nickname,
             data.creator.avatarUrl
           );
+          _this.songList = [];
           for(let item of result.playlist.tracks){
             _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
             _this.songList.push(_this.song);

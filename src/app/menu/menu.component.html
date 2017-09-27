@@ -1,8 +1,8 @@
 <div class="menu-header">
-  <img class="user-img" src="{{isLogin?userInfo.avatarUrl:'http://iph.href.lu/200x200'}}" alt="" (click)="isLogin?'':switchSlideNav()">
+  <img class="user-img" src="{{isLogin?userInfo.avatarUrl:'/assets/image/loading.jpg'}}" alt="" (click)="isLogin?'':switchSlideNav()">
   <h3 class="user-name">
     <free-icon icon="user-circle"></free-icon>
-    {{isLogin?userInfo.username:'admin'}}
+    {{isLogin?userInfo.username:'未登录'}}
   </h3>
 </div>
 <div class="menu-body free-iscroll">
@@ -10,13 +10,16 @@
     <li class="list-title">
       在线音乐
     </li>
-    <li class="list-item active">
-      <a href="#">
-        <free-icon icon="music" [spin]="false"></free-icon>  音乐广场
+    <li class="list-item" *ngFor="let item of menuNavbar" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="active">
+      <a [routerLink]="[item.url]">
+        <free-icon icon="{{item.icon}}"></free-icon>  {{item.name}}
       </a>
     </li>
-    <li class="list-item item-playlist" (click)="openList()">
-      <a href="#">
+
+
+
+    <li class="list-item item-playlist">
+      <a href="#"  (click)="openList()">
         <free-icon icon="user-o"></free-icon>
         我的歌单
         <span class="icon-desc" [class.open-desc]="isOpen" >
@@ -24,26 +27,11 @@
         </span>
       </a>
       <ul class="play-list" [class.active]="isOpen" [hidden]="!isLogin">
-        <li class="list-item text-truncate" *ngFor="let item of userPlayList">
-          <img src="{{item.coverImgUrl}}" alt="">
-          {{item.name}}
+        <li [routerLink]="['/list',item.id]"  [routerLinkActiveOptions]="{exact: true}" routerLinkActive="am-active"  class="list-item text-truncate" *ngFor="let item of userPlayList">
+          <img src="{{item.coverImgUrl}}" alt="{{item.name}}">
+          <span>{{item.name}}</span>
         </li>
       </ul>
-    </li>
-    <li class="list-item">
-      <a href="#">
-        <free-icon icon="film"></free-icon>  音乐广场
-      </a>
-    </li>
-    <li class="list-item">
-      <a href="#">
-        <free-icon icon="heartbeat"></free-icon>  电台
-      </a>
-    </li>
-    <li class="list-item">
-      <a href="#">
-        <free-icon icon="clock-o"></free-icon>  播放历史
-      </a>
     </li>
   </ul>
 </div>

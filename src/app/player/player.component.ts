@@ -10,6 +10,7 @@ import {Song} from "../content-index/content-index.component";
 })
 export class PlayerComponent implements OnInit {
   audio:HTMLAudioElement = new Audio(); //音乐对象
+  default:string ='/assets/image/loading.jpg';
   media:Song = new Song('00','NULL','NULL','NULL','http://iph.href.lu/65x65');
   MediaTime = {
     duration:'00:00',
@@ -20,12 +21,11 @@ export class PlayerComponent implements OnInit {
   isPlay:boolean = false;
   currentMedia = {
     id:'0',
-    index:-1
+    index:0
   };
-  times:any;
-  default ='/assets/image/loading.jpg'
-  constructor(public musicService:MusicService,public cookieService:CookieService) {}
+  times:any; //定时器
 
+  constructor(public musicService:MusicService,public cookieService:CookieService) {}
   ngOnInit() {
     const _this = this;
     //得到当前歌曲的id
@@ -37,7 +37,6 @@ export class PlayerComponent implements OnInit {
     });
 
   }
-
   /**
    * 获取音乐url事件
    * @param idList
@@ -68,8 +67,6 @@ export class PlayerComponent implements OnInit {
           }
           // console.log('songUrlList',_this.songUrlList);
         }
-
-
       })
   }
 
@@ -118,7 +115,7 @@ export class PlayerComponent implements OnInit {
             clearInterval(_this.times);
             _this.isPlay = false;
           }
-          else if(_this.MediaTime.currentTime>=_this.MediaTime.duration||_this.audio.ended){
+          if(_this.MediaTime.currentTime>=_this.MediaTime.duration||_this.audio.ended){
             console.log('结束播放');
             _this.isPlay = false;
             _this.handleMediaNext();

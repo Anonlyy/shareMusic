@@ -87,25 +87,35 @@ input:focus{
         overflow-y: hidden;
         list-style-type:none;
         .list-item{
-          padding-left:18px;
+          padding:2.5px 0 2.5px 18px;
           height:35px;
           line-height:35px;
           list-style: none;
           font-size: .75rem;
           cursor: pointer;
+          box-sizing: border-box;
           >img{
             width: 30px;
             height: 30px;
             margin-right:3px;
-            line-height:35px;
-            vertical-align: middle;
+            vertical-align: top;
           }
-          &:hover{
-            background-color:#E5EDEE;
+          >span{
+            display: inline-block;
+            height:30px;
+            vertical-align: top;
+            line-height:30px;
           }
+          //&:hover{
+          //  background-color:#E5EDEE;
+          //}
+        }
+        .am-active{
+          background-color: #31C27C;
+          color: white;
         }
       }
-      >.active{
+      >.active:not(.item-playlist){
         height: auto;
       }
     }

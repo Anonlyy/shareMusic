@@ -153,13 +153,15 @@ ul,li{
             font-size: .75rem;
           }
         }
-        .tip{
-          font-size: .7rem;
-          height:35px;
-          line-height:35px;
-          text-align: center;
-        }
+
       }
     }
+  }
+  .tip{
+    font-size: .7rem;
+    height:35px;
+    line-height:35px;
+    text-align: center;
+    background: linear-gradient(rgba(0,0,0,.01),rgba(0,0,0,.1));
   }
 }

@@ -1,0 +1,27 @@
+<div class="global-header">
+  <div class="search">
+    <div class="input-search">
+      <input type="text" class="input" placeholder="搜索">
+      <i>
+        <free-icon icon="search"></free-icon>
+      </i>
+    </div>
+
+  </div>
+  <div class="header-right">
+    <ul class="button-group clearfix">
+      <li class="button-item" [routerLink]="['/index']">
+        <free-icon icon="home"></free-icon>
+        <!--<span>返回主页</span>-->
+      </li>
+      <li class="button-item" (click)="fullScreen(!isFullScreen)">
+        <free-icon icon="expand"></free-icon>
+        <!--<span>返回主页</span>-->
+      </li>
+      <li class="button-item">
+        <free-icon icon="sign-out"></free-icon>
+        <!--<span>返回主页</span>-->
+      </li>
+    </ul>
+  </div>
+</div>
