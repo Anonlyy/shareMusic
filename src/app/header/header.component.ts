@@ -16,6 +16,13 @@ export class HeaderComponent implements OnInit {
     if(_this.cookieService.getObject('userInfo')){ //读取用户信息缓存
       console.log(_this.cookieService.getObject('userInfo'));
     }
+    else{
+      _this.userService.emitUserInfo.subscribe(
+        result=>{
+          console.log('result',result);
+        }
+      );
+    }
   }
 
   //全屏
