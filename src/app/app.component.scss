@@ -31,7 +31,8 @@
   }
   .global-body{
     padding-top:50px;
-    padding-bottom:50px;
+    padding-bottom:65px;
+    box-sizing: content-box;
     background-color: rgba(0,0,0,.02);
     display: table-cell;
     width: 1040px;

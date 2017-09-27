@@ -1,16 +1,21 @@
 import { Component, OnInit } from '@angular/core';
+import {UserService} from "../service/user.service";
+import {CookieService} from "angular2-cookie/services/cookies.service";
 
 @Component({
-  selector: 'header',
+  selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
   isFullScreen:boolean = false;
-  constructor() { }
+  constructor(public userService:UserService,public cookieService:CookieService) { }
 
   ngOnInit() {
-
+    const _this = this;
+    if(_this.cookieService.getObject('userInfo')){ //读取用户信息缓存
+      console.log(_this.cookieService.getObject('userInfo'));
+    }
   }
 
   //全屏

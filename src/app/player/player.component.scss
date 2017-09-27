@@ -41,10 +41,13 @@
 
 .player-body {
   box-shadow: 0 -5px 5px rgba(0,0,0,.03);
-  display: block;
   float: left;
   width: 1040px;
   height: 65px;
+  background-color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
   .play{
     height: 65px;
     //width: 650px;
@@ -98,6 +101,23 @@
             background: linear-gradient(45deg, #31C27C 0%,#05abe0 100%);
           }
         }
+      }
+    }
+  }
+  .play-right{
+    position: absolute;
+    right:30px;
+    top: 0;
+    bottom: 0;
+    .button-group{
+      width: 100%;
+      margin: 0;
+      padding:0;
+      list-style:none;
+      .button-item{
+        float: left;
+        width: 30px;
+        text-align:center;
       }
     }
   }

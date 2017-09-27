@@ -4,6 +4,7 @@ import {telValidator} from "../valid/validator"
 import {UserService} from "../service/user.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {Router, NavigationEnd} from "@angular/router";
+import {MusicService} from "../service/music.service";
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -16,7 +17,7 @@ export class MenuComponent implements OnInit {
   leftSidenav:boolean = false; //控制侧边栏
   loginForm:FormGroup;
   userData:any;
-  userInfo:UserInfo;
+  userInfo:UserInfo = new UserInfo('0','Xposean','/assets/image/loading.jpg');
   isLogin:boolean=false;//检测是否登录
   isOpen:boolean=false;
   userPlayList=[]; //歌单列表
@@ -43,7 +44,7 @@ export class MenuComponent implements OnInit {
     }
   ]
 
-  constructor(public fbind:FormBuilder,public userServer:UserService,public cookieService:CookieService,public router:Router) { }
+  constructor(public fbind:FormBuilder,public userServer:UserService,public cookieService:CookieService,public router:Router,public musicServer:MusicService) { }
 
   ngOnInit() {
     this.loginForm = this.fbind.group({
@@ -53,6 +54,7 @@ export class MenuComponent implements OnInit {
     if(this.cookieService.getObject('userInfo')){ //读取用户信息缓存
       this.userData = this.cookieService.getObject('userInfo');
       this.dataToUserInfo(this.userData);
+
     }
   }
   switchSlideNav(){
@@ -86,7 +88,10 @@ export class MenuComponent implements OnInit {
             result=>{
               if(result.code==200){  //登录成功
                 console.log('=====刷新成功=====');
-                _this.cookieService.putObject('userInfo',data.profile);
+                let option = {
+                  expires:_this.musicServer.setCookie(30) //设置缓存时长
+                }
+                _this.cookieService.putObject('userInfo',data.profile,option);
                 _this.dataToUserInfo(data.profile);
                 _this.loginForm.reset();
               }
@@ -118,7 +123,8 @@ export class MenuComponent implements OnInit {
     _this.isLogin = true;
     console.log('=====用户信息赋值成功===='+userData.userId);
     _this.userInfo = new UserInfo(userData.userId,userData.nickname,userData.avatarUrl);
-    _this.userServer.emitUserInfo.emit(_this.userInfo); //传递给服务,广播给其他组件用户已经登录
+    this.userServer.emitUserInfo.emit(this.userInfo); //传递给服务,广播给其他组件用户已经登录
+    // this.userServer.emitUserInfo.emit(new UserInfo('0','Xposean','/assets/image/loading.jpg')); //传递给服务,广播给其他组件用户已经登录
     _this.userServer.getUserPlaylist(_this.userInfo.userId)
       .subscribe(result=>{
         let data = result;

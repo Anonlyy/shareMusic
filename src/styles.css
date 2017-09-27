@@ -8,6 +8,10 @@
   /*font-family:poppin,'PingFang SC',Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif!important;*/
   font-weight: 300;
 }
+li:focus,a:focus{
+  outline:none;
+  border:none;
+}
 body,html{
   width: 100%;
   height: 100%;
@@ -16,6 +20,12 @@ body,html{
   font-size: 16px;
   background-color: #f2f2f2;
   font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif!important;
+}
+input{
+  outline:none;
+  background: none;
+  border:none;
+  box-shadow: none;
 }
 .free-sidenav.free-sidenav-right .free-sidenav-wrapper{
   box-shadow: -3px 0 3px rgba(0,0,0,.05);
