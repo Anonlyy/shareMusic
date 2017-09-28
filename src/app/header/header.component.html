@@ -9,19 +9,47 @@
 
   </div>
   <div class="header-right">
+
     <ul class="button-group clearfix">
-      <li class="button-item" [routerLink]="['/index']">
-        <free-icon icon="home"></free-icon>
-        <!--<span>返回主页</span>-->
-      </li>
-      <li class="button-item" (click)="fullScreen(!isFullScreen)">
-        <free-icon icon="expand"></free-icon>
-        <!--<span>返回主页</span>-->
-      </li>
-      <li class="button-item">
-        <free-icon icon="sign-out"></free-icon>
-        <!--<span>返回主页</span>-->
-      </li>
+      <el-tooltip  placement="bottom">
+        <li class="button-item" [routerLink]="['/index']">
+          <free-icon icon="home"></free-icon>
+          <!--<span>返回主页</span>-->
+        </li>
+        <ng-template #tip>
+          <span>返回主页</span>
+        </ng-template>
+      </el-tooltip>
+      <el-tooltip  placement="bottom">
+        <li class="button-item" (click)="fullScreen(!isFullScreen)">
+          <free-icon icon="expand"></free-icon>
+          <!--<span>返回主页</span>-->
+        </li>
+        <ng-template #tip>
+          <span>全屏</span>
+        </ng-template>
+      </el-tooltip>
+      <el-tooltip  placement="bottom">
+        <li class="button-item" (click)="clearUserCookie()">
+          <free-icon icon="sign-out"></free-icon>
+          <!--<span>返回主页</span>-->
+        </li>
+        <ng-template #tip>
+          <span>退出登录</span>
+        </ng-template>
+      </el-tooltip>
+      <!--<li class="button-item" [routerLink]="['/index']">-->
+        <!--<free-icon icon="home"></free-icon>-->
+        <!--&lt;!&ndash;<span>返回主页</span>&ndash;&gt;-->
+      <!--</li>-->
+      <!--<li class="button-item" (click)="fullScreen(!isFullScreen)">-->
+        <!--<free-icon icon="expand"></free-icon>-->
+        <!--&lt;!&ndash;<span>返回主页</span>&ndash;&gt;-->
+      <!--</li>-->
+      <!--<li class="button-item">-->
+        <!--<free-icon icon="sign-out"></free-icon>-->
+        <!--&lt;!&ndash;<span>返回主页</span>&ndash;&gt;-->
+      <!--</li>-->
     </ul>
   </div>
 </div>

@@ -28,6 +28,7 @@ import { ErrorComponent } from './error/error.component';
 import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {TabGroupModule} from "freeng/component/tab/tab.component";
 import { HeaderComponent } from './header/header.component';
+import { MusicTimePipe } from './pipe/music-time.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +38,8 @@ import { HeaderComponent } from './header/header.component';
     ContentIndexComponent,
     SongListComponent,
     ErrorComponent,
-    HeaderComponent
+    HeaderComponent,
+    MusicTimePipe
   ],
   imports: [
     BrowserModule,

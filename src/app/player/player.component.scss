@@ -60,7 +60,7 @@
     .play-content{
       float: left;
       position: relative;
-      width: 650px;
+      width: 770px;
       height:65px;
       padding:10px 0 10px 16px;
       box-sizing: border-box;
@@ -106,18 +106,25 @@
   }
   .play-right{
     position: absolute;
-    right:30px;
-    top: 0;
-    bottom: 0;
+    right:46px;
     .button-group{
       width: 100%;
       margin: 0;
       padding:0;
+      height:30px;
+      line-height:30px;
       list-style:none;
       .button-item{
         float: left;
-        width: 30px;
+        cursor: pointer;
+        width: 35px;
         text-align:center;
+        font-size: 1.2rem;
+        transition:all .1s;
+        color: #333;
+        &:hover{
+          color: #35C17B;
+        }
       }
     }
   }

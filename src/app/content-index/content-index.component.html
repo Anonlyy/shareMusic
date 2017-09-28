@@ -25,7 +25,8 @@
             <a [routerLink]="['/list',item.id]" class="content-inner">
               <img  [src]="item.picUrl" alt="{{item.name}}" #img (error)="updateUrl(img)">
               <div class="content-hover">
-                <free-icon icon="play-circle"></free-icon>
+                <i class="cover-play"></i>
+                <!--<free-icon icon="play-circle"></free-icon>-->
                 <p>
                   {{item.copywriter}}
                 </p>
@@ -58,7 +59,8 @@
             <a class="content-inner">
               <img src="{{item.blurPicUrl}}"  #img (error)="updateUrl(img)" alt="">
               <div class="content-hover">
-                <free-icon icon="play-circle"></free-icon>
+                <i class="cover-play"></i>
+                <!--<free-icon icon="play-circle"></free-icon>-->
                 <div class="name">
                   <h3 class="artists-name">
                     {{item.artistsName}}

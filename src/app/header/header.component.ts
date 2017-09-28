@@ -49,4 +49,9 @@ export class HeaderComponent implements OnInit {
     }
 
   }
+  //退出登录
+  clearUserCookie(){
+    this.cookieService.remove('userInfo');
+    window.location.reload();
+  }
 }

@@ -9,12 +9,13 @@ import {Song} from "../content-index/content-index.component";
   styleUrls: ['./song-list.component.scss']
 })
 export class SongListComponent implements OnInit {
-
   id:string;
   playListDetail:PlayListDetail = new PlayListDetail('null','/assets/image/loading.jpg','暂无描述',[],0,'admin','/assets/image/loading.jpg'); //歌单详情对象
-  song:Song = new Song('0','null','null','0','http://iph.href.lu/56x65');
+  song:Song = new Song('0','null','null','0','http://iph.href.lu/56x65','0',0);
   songList=[];//存储所有歌曲对象
+  songIds= [];//存储所有歌曲对象的id
   default ='/assets/image/loading.jpg';
+  currentPlayIndex:number;//正在播放
   constructor(public routerInfo:ActivatedRoute,public musicService:MusicService) { }
   ngOnInit() {
     const _this = this;
@@ -26,6 +27,7 @@ export class SongListComponent implements OnInit {
       }
     )
   }
+  //获取歌单详情
   public getPlayList(id:string){
     const _this = this;
     _this.musicService.getPlayListDetail(id).subscribe(
@@ -45,6 +47,7 @@ export class SongListComponent implements OnInit {
           for(let item of result.playlist.tracks){
             _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
             _this.songList.push(_this.song);
+            _this.songIds.push(item.id);
           }
         }
         console.log(result);
@@ -54,18 +57,21 @@ export class SongListComponent implements OnInit {
       }
     )
   }
+  //图片加载错误
   public updateUrl(e){
     e.src = this.default;
   }
+  //播放全部
   public playAllSong(){
     const _this = this;
     //播放所有歌曲,默认以第一首为当前歌曲
-    let songIds = [];
-    for(let item of _this.songList){
-      songIds.push(item.id);
-    }
     //noinspection TypeScriptValidateTypes
-    this.musicService.emitSong.emit(new EmitSong(_this.songList[0],songIds));
+    this.musicService.emitSong.emit(new EmitSong(_this.songList[0],_this.songIds));
+  }
+  //双击播放音乐
+  public playMusic(index:number){
+    console.log(this.songList[index]);
+    this.musicService.emitSong.emit(new EmitSong(this.songList[index],this.songIds));
   }
 }
 

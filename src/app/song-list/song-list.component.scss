@@ -11,7 +11,7 @@ ul,li{
 }
 .media-header{
   background-color: #F5F5F5;
-  padding:25px;
+  padding:15px 25px 25px 25px;
   .media-inner{
     display: block;
     float: left;
@@ -123,37 +123,53 @@ ul,li{
             height: 35px;
             line-height:35px;
             overflow: hidden;
-            font-size: .8rem;
+            font-size: .75rem;
             font-weight: normal;
             color: #333;
             strong{
               width: 100%;
               display: block;
-              transition: all .3s;
               cursor: pointer;
               font-weight: normal;
+              box-sizing: content-box;
+              transition: all .3s;
+
               &:hover{
                 color: #31C27C;
               }
             }
             &:first-child{
-              width: 55%;
+              width: 50%;
             }
             &:nth-child(2){
               width: 20%;
             }
+            &:nth-child(3){
+              width: 20%;
+            }
             &:last-child{
-              width: 25%;
+              width: 10%;
+              text-align: center;
             }
           }
         }
         .list-title{
           span{
             font-weight: 300;
-            font-size: .75rem;
+            font-size: .74rem;
+
           }
         }
-
+        .playing{
+          background-color: #F2F2F2;
+          border-left: 2px solid #31C27C;
+          span{
+            color: #31C27C;
+            strong{
+              padding-left: 10px;
+            }
+          }
+        }
       }
     }
   }

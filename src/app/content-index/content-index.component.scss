@@ -71,7 +71,7 @@
                 left: 0;
                 bottom: 0;
                 opacity: 0;
-                z-index: 1000;
+                //z-index: 100;
                 transform: translate(-10px);
                 font-size: .7rem;
                 color: white;
@@ -86,6 +86,20 @@
                   font-size: 0;
                   transform: translate(-50%, -50%);
                 }
+                .cover-play{
+                  position: absolute;
+                  top: 50%;
+                  z-index: 100;
+                  background: url("../../assets/image/cover_play.png") no-repeat;
+                  background-size: 100% 100%;
+                  left: 50%;
+                  transition: all .3s;
+                  opacity: .5;
+                  transform: translate(-50%, -50%);
+                  display: block;
+                  width: 30px;
+                  height: 30px;
+                }
               }
               &:hover {
                 img {
@@ -94,9 +108,10 @@
                 .content-hover {
                   transform: translateX(0);
                   opacity: 1;
-                  free-icon {
-                    font-size: 3rem;
-                    transform: translate(-50%, -50%);
+                  .cover-play {
+                    opacity:.9;
+                    width: 60px;
+                    height: 60px;
                   }
                   p {
                     position: absolute;
@@ -160,6 +175,10 @@
               }
               .content-hover{
                 padding:10px;
+                .cover-play {
+                  width: 65px;
+                  height: 65px;
+                }
                 .name{
                   .song-name{
                     font-weight: bold;
@@ -180,11 +199,13 @@
               .content-inner{
                 img{
                   filter:blur(0);
-                  transform:scale(1.5) rotate(-30deg);
+                  transform:scale(1.2) translateX(-10%) translateZ(0);
                 }
                 .content-hover{
-                  free-icon{
-                    font-size: 5rem;
+                  .cover-play {
+                    opacity:.9;
+                    width: 65px;
+                    height: 65px;
                   }
                 }
               }

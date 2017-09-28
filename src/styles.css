@@ -8,6 +8,10 @@
   /*font-family:poppin,'PingFang SC',Tahoma,Arial,\5FAE\8F6F\96C5\9ED1,sans-serif!important;*/
   font-weight: 300;
 }
+*::selection,*::-moz-selection{
+  background-color: #35C17B;
+  color: white;
+}
 li:focus,a:focus{
   outline:none;
   border:none;

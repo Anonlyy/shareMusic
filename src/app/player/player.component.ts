@@ -11,7 +11,7 @@ import {Song} from "../content-index/content-index.component";
 export class PlayerComponent implements OnInit {
   audio:HTMLAudioElement = new Audio(); //音乐对象
   default:string ='/assets/image/loading.jpg';
-  media:Song = new Song('00','NULL','NULL','NULL','http://iph.href.lu/65x65');
+  media:Song = new Song('00','暂无正在播放的歌曲~','','NULL','http://iph.href.lu/65x65');
   MediaTime = {
     duration:'00:00',
     currentTime:'00:00'

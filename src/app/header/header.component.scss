@@ -19,7 +19,7 @@
       height: 30px;
       position: relative;
       .input{
-        width: 80px;
+        width: 60px;
         transition: all .3s;
         padding-left:10px;
         height:30px;
@@ -33,6 +33,7 @@
           background-color: #31C27C;
           border-radius: 15px;
           width: 250px;
+          padding-left:15px;
           &::-webkit-input-placeholder{
             color: white;
           }
@@ -75,7 +76,7 @@
         border-radius: 30%;
         transition:all .3s;
         &:hover{
-          transform: scale(1.2);
+          transform: scale(1.1);
           color: #31C27C;
         }
       }

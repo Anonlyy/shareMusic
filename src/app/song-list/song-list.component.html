@@ -36,13 +36,15 @@
             <span>歌曲</span>
             <span>歌手</span>
             <span>专辑</span>
+            <span>时长</span>
           </li>
-          <li class="list-item clearfix" *ngFor="let item of songList">
+          <li class="list-item clearfix playing" *ngFor="let item of songList;let index = index;">
             <span>
-             <strong class="text-truncate">{{item.name}}</strong>
+             <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
             </span>
             <span class="text-truncate">{{item.artistsName}}</span>
             <span class="text-truncate">{{item.alName}}</span>
+            <span class="text-truncate">{{item.dt | musicTime}}</span>
           </li>
         </ul>
       </div>

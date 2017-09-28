@@ -54,7 +54,6 @@ export class MenuComponent implements OnInit {
     if(this.cookieService.getObject('userInfo')){ //读取用户信息缓存
       this.userData = this.cookieService.getObject('userInfo');
       this.dataToUserInfo(this.userData);
-
     }
   }
   switchSlideNav(){
@@ -87,15 +86,18 @@ export class MenuComponent implements OnInit {
           _this.userServer.loginRefresh().subscribe(
             result=>{
               if(result.code==200){  //登录成功
-                console.log('=====刷新成功=====');
+                console.log('=====刷新成功=====',data);
+                _this.isLogin = true;
+                _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl);
                 let option = {
                   expires:_this.musicServer.setCookie(30) //设置缓存时长
                 }
-                _this.cookieService.putObject('userInfo',data.profile,option);
-                _this.dataToUserInfo(data.profile);
+                _this.cookieService.putObject('userInfo',_this.userInfo,option);
+                _this.dataToUserInfo(_this.userInfo); //获取歌单
                 _this.loginForm.reset();
               }
               else{
+                _this.loginForm.reset();
                 console.log('=====刷新失败=====')
               }
             });
@@ -118,19 +120,17 @@ export class MenuComponent implements OnInit {
       })
   }
   //获取用户歌单
-  dataToUserInfo(userData:any){
+  dataToUserInfo(userData:UserInfo){
     const _this = this;
     _this.isLogin = true;
     console.log('=====用户信息赋值成功===='+userData.userId);
-    _this.userInfo = new UserInfo(userData.userId,userData.nickname,userData.avatarUrl);
+    _this.userInfo = new UserInfo(userData.userId,userData.username,userData.avatarUrl);
     this.userServer.emitUserInfo.emit(this.userInfo); //传递给服务,广播给其他组件用户已经登录
-    // this.userServer.emitUserInfo.emit(new UserInfo('0','Xposean','/assets/image/loading.jpg')); //传递给服务,广播给其他组件用户已经登录
     _this.userServer.getUserPlaylist(_this.userInfo.userId)
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
           _this.userPlayList = data.playlist;
-          // this.userInfo = new UserInfo()
         }
         else{
           console.log("获取失败:"+data.code);
