@@ -29,6 +29,8 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {TabGroupModule} from "freeng/component/tab/tab.component";
 import { HeaderComponent } from './header/header.component';
 import { MusicTimePipe } from './pipe/music-time.pipe';
+import {ElMessageService} from "element-angular/release";
+import {ExDynamicService, DocumentWrapper} from "element-angular/release/shared/services";
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +59,7 @@ import { MusicTimePipe } from './pipe/music-time.pipe';
     ButtonModule,
     NotificationModule,
     BadgeModule,
-    ElModule
+    ElModule.forRoot()
   ],
   providers: [MusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]

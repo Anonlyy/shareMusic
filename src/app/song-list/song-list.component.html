@@ -1,5 +1,7 @@
 <div class="global-media free-iscroll">
-  <div class="media-header clearfix">
+  <!--[el-loading]="true" [text]="'拼命加载中'"y-->
+  <!--<el-tag>加载中..</el-tag>-->
+  <div class="media-header clearfix" >
     <div class="media-inner">
       <img [src]="playListDetail.picUrl" #img  (error)="updateUrl(img)" alt="">
     </div>
@@ -38,7 +40,7 @@
             <span>专辑</span>
             <span>时长</span>
           </li>
-          <li class="list-item clearfix playing" *ngFor="let item of songList;let index = index;">
+          <li class="list-item clearfix " *ngFor="let item of songList;let index = index;">
             <span>
              <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
             </span>

@@ -1,41 +1,104 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {MusicService} from "../service/music.service";
 import {Song} from "../content-index/content-index.component";
+import {UserInfo} from "../menu/menu.component";
+import {UserService} from "../service/user.service";
+import { ElMessageService } from 'element-angular'
 
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
   audio:HTMLAudioElement = new Audio(); //音乐对象
+   //错误信息提示
   default:string ='/assets/image/loading.jpg';
   media:Song = new Song('00','暂无正在播放的歌曲~','','NULL','http://iph.href.lu/65x65');
   MediaTime = {
     duration:'00:00',
     currentTime:'00:00'
   };
-  songUrlList = [];
+  songUrlList = []; //歌单url列表
   progressWidth:number = 0;
   isPlay:boolean = false;
   currentMedia = {
     id:'0',
     index:0
   };
+  isTracks:boolean = false;//是否收藏
   times:any; //定时器
+  userInfo:UserInfo;
+  isLogin:boolean = false;
+  userSongIdsList:any[]; //用户喜爱的歌单的ID列表
 
-  constructor(public musicService:MusicService,public cookieService:CookieService) {}
+
+  constructor(public musicService:MusicService,
+              public cookieService:CookieService,
+              private message: ElMessageService,
+              public userService:UserService) {}
+
+
   ngOnInit() {
     const _this = this;
     //得到当前歌曲的id
     _this.musicService.emitSong.subscribe((result)=>{//获取歌曲详情
       //noinspection TypeScriptUnresolvedVariable
-      _this.currentMedia.id =result.currentSong.id;
+      _this.currentMedia.id = result.currentSong.id;
       _this.media = result.currentSong;
       _this.getMediaUrl(result.ids);
     });
+    //读取用户信息 1.通过缓存 2.通过emit接收
+    if(_this.cookieService.getObject('userInfo')){ //读取用户信息缓存
+      let userData:any = _this.cookieService.getObject('userInfo');
+      _this.userInfo = new UserInfo(userData.userId,userData.username,userData.avatarUrl,userData.headrtSongListId);
+      _this.isLogin = true;
+      _this.getPlayList(_this.userInfo.headrtSongListId);
+    }
+    else{
+      _this.userService.emitUser.subscribe(
+        result=>{
+          _this.userInfo = result;
+          _this.isLogin = true;
+          _this.getPlayList(_this.userInfo.headrtSongListId);
+        }
+      );
+    }
+    console.log(_this.isLogin,_this.userInfo);
+  }
 
+
+
+  checkSongLove(){
+    const _this = this;
+    //通过当前歌曲的id去遍历用户喜爱歌单的id列表,若无则返回-1
+    let isLove = _this.userSongIdsList.findIndex(arr=>arr==_this.currentMedia.id);
+    if(isLove>=0){
+      _this.isTracks = true;
+    }
+  }
+
+  /**
+   * 获取用户喜爱的歌单详情
+   * @param id
+   */
+  public getPlayList(id:string){
+    const _this = this;
+    _this.musicService.getPlayListDetail(id).subscribe(
+      result=>{
+        if(result.code==200){
+          _this.userSongIdsList = [];
+          for(let item of result.playlist.trackIds){
+            _this.userSongIdsList.push(item.id);
+          }
+        }
+        console.log('ids',_this.userSongIdsList);
+      },
+      error=>{
+        console.log('error',error);
+      }
+    )
   }
   /**
    * 获取音乐url事件
@@ -69,8 +132,6 @@ export class PlayerComponent implements OnInit {
         }
       })
   }
-
-
   /**
    * 播放音乐
    * @param url
@@ -83,9 +144,8 @@ export class PlayerComponent implements OnInit {
     _this.audio.load();
     _this.audio.play();
     _this.getTime(_this.audio);
+    _this.checkSongLove();
   }
-
-
   /**
    * 获取歌曲时长
    * @param Media
@@ -126,14 +186,10 @@ export class PlayerComponent implements OnInit {
       }
     }, 10);
   }
-
-  private clearTimes(){
-    this.progressWidth=0;
-    clearInterval(this.times);
-    this.MediaTime.currentTime = "00:00";
-  }
-
-
+  /**
+   * 获取歌曲详情
+   * @param id
+   */
   public getSongDetail(id:string){
     const _this = this;
     _this.musicService.getSongDetail(id).subscribe(
@@ -165,7 +221,6 @@ export class PlayerComponent implements OnInit {
       _this.audio.pause();
     }
   }
-
   /**
    * 点击播放下一首
    */
@@ -191,7 +246,9 @@ export class PlayerComponent implements OnInit {
     _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
     _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
   }
-
+  /**
+   * 点击播放上一首
+   */
   handleMediaBack(){
     const _this = this;
     _this.isPlay = true;
@@ -214,6 +271,26 @@ export class PlayerComponent implements OnInit {
   }
 
   /**
+   * 添加或删除歌曲到用户喜爱的歌单
+    */
+  public setTracks(){
+    const _this = this;
+    if(_this.isLogin&&_this.userInfo){
+      _this.musicService.setSongToTracks(_this.isTracks?'delete':'add',_this.userInfo.headrtSongListId,_this.currentMedia.id).subscribe(
+        result=>{
+          let data = result;
+          if(result.code==200){
+            _this.isTracks = !_this.isTracks;
+          }
+        }
+      );
+
+    }
+    else {
+      _this.message['error']("抱歉,您暂未登录");
+    }
+  }
+  /**
    * 秒长转换分钟格式
    * @param duration
    * @returns {string}
@@ -224,6 +301,19 @@ export class PlayerComponent implements OnInit {
     sec =Math.floor(duration-min*60)<10?('0'+Math.floor(duration-min*60)):Math.floor(duration-min*60);
     return `${min}:${sec}`;
     // console.log(`${min}:${sec}`);
+  }
+
+
+
+
+
+  /**
+   * 歌曲清除时长和定时器
+   */
+  private clearTimes(){
+    this.progressWidth=0;
+    clearInterval(this.times);
+    this.MediaTime.currentTime = "00:00";
   }
   public updateUrl(e){
     e.src = this.default;

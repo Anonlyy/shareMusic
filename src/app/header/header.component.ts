@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../service/user.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
+import {Router, Routes} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,20 +10,20 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 })
 export class HeaderComponent implements OnInit {
   isFullScreen:boolean = false;
-  constructor(public userService:UserService,public cookieService:CookieService) { }
+  constructor(public userService:UserService,public cookieService:CookieService,public router:Router) { }
 
   ngOnInit() {
     const _this = this;
-    if(_this.cookieService.getObject('userInfo')){ //读取用户信息缓存
-      console.log(_this.cookieService.getObject('userInfo'));
-    }
-    else{
-      _this.userService.emitUserInfo.subscribe(
-        result=>{
-          console.log('result',result);
-        }
-      );
-    }
+    // if(_this.cookieService.getObject('userInfo')){ //读取用户信息缓存
+    //   console.log(_this.cookieService.getObject('userInfo'));
+    // }
+    // else{
+    //   _this.userService.emitUserInfo.subscribe(
+    //     result=>{
+    //       console.log('result',result);
+    //     }
+    //   );
+    // }
   }
 
   //全屏
@@ -53,5 +54,6 @@ export class HeaderComponent implements OnInit {
   clearUserCookie(){
     this.cookieService.remove('userInfo');
     window.location.reload();
+    this.router.navigate(['/index']);
   }
 }

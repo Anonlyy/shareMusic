@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Http} from "@angular/http";
+import {Input} from "@angular/core/src/metadata/directives";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,6 @@ import {Http} from "@angular/http";
 })
 export class AppComponent implements OnInit{
   constructor(public http:Http){}
-
   ngOnInit(): void {
   }
 }

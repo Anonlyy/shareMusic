@@ -30,8 +30,8 @@
   </div>
   <div class="play-right">
     <ul class="button-group">
-      <li class="button-item btn-heart">
-        <free-icon icon="heart-o"></free-icon>
+      <li class="button-item btn-heart" (click)="setTracks()">
+        <free-icon icon="{{isTracks?'heart':'heart-o'}}"></free-icon>
       </li>
       <li class="button-item">
         <!--volume-off-->

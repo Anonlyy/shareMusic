@@ -76,7 +76,7 @@ export class ContentIndexComponent implements OnInit {
         for(let item of result.banners){
           _this.bannerUrls.push(item.pic.toString());
         }
-        console.log(_this.bannerUrls)
+        // console.log(_this.bannerUrls)
       })
   }
   public getSongList(){

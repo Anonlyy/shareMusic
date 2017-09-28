@@ -7,8 +7,6 @@ import {Song} from "../content-index/content-index.component";
 export class MusicService {
   emitSong: EventEmitter<EmitSong>;
 
-
-
   constructor(public http:Http) {
     //如需播放歌曲,需传输当前歌曲对象和idList
     this.emitSong = new EventEmitter();
@@ -66,6 +64,12 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取歌曲详情
+   * @param id
+   * @returns {Observable<R|T>}
+   */
+
   public getSongDetail(id:string):Observable<any>{
     return this.http.get(`/song/detail?ids=${id}`)
       .map(this.handleSuccess)
@@ -73,6 +77,25 @@ export class MusicService {
   }
 
 
+  /**
+   * 收藏单曲到歌曲
+   * @param op(add/delete)
+   * @param pid 歌单id
+   * @param tracks 歌单id
+   * @returns {Observable<R|T>}
+   */
+  public setSongToTracks(op:string,pid:string,tracks:string):Observable<any>{
+    return this.http.get(`/playlist/tracks?op=${op}&pid=${pid}&tracks=${tracks}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+
+  /**
+   * 设置cookie时长
+   * @param time
+   * @returns {Date}
+   */
   public setCookie(time:number):Date{
     let date = new Date();
     date.setMinutes(date.getMinutes()+time);

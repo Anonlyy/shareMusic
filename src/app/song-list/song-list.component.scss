@@ -74,6 +74,7 @@ ul,li{
   }
 }
 .media-body{
+  background-color: white;
   .tabs-group{
     width: 100%;
     padding:0 20px;
@@ -129,11 +130,11 @@ ul,li{
             strong{
               width: 100%;
               display: block;
-              cursor: pointer;
+              cursor: default;
               font-weight: normal;
               box-sizing: content-box;
-              transition: all .3s;
-
+              transition: all .1s;
+              padding-left: 10px;
               &:hover{
                 color: #31C27C;
               }
@@ -153,6 +154,11 @@ ul,li{
             }
           }
         }
+        .list-item{
+          &:hover{
+            background-color: #F2F2F2;
+          }
+        }
         .list-title{
           span{
             font-weight: 300;
@@ -166,7 +172,7 @@ ul,li{
           span{
             color: #31C27C;
             strong{
-              padding-left: 10px;
+              padding-left: 15px;
             }
           }
         }

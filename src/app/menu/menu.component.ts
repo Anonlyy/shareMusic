@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
   leftSidenav:boolean = false; //控制侧边栏
   loginForm:FormGroup;
   userData:any;
-  userInfo:UserInfo = new UserInfo('0','Xposean','/assets/image/loading.jpg');
+  userInfo:UserInfo = new UserInfo('0','Xposean','/assets/image/loading.jpg','null');
   isLogin:boolean=false;//检测是否登录
   isOpen:boolean=false;
   userPlayList=[]; //歌单列表
@@ -70,6 +70,7 @@ export class MenuComponent implements OnInit {
     }
     _this.getUserInfo();
   }
+
   //获取用户信息
   getUserInfo(){
     const _this = this;
@@ -89,10 +90,6 @@ export class MenuComponent implements OnInit {
                 console.log('=====刷新成功=====',data);
                 _this.isLogin = true;
                 _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl);
-                let option = {
-                  expires:_this.musicServer.setCookie(30) //设置缓存时长
-                }
-                _this.cookieService.putObject('userInfo',_this.userInfo,option);
                 _this.dataToUserInfo(_this.userInfo); //获取歌单
                 _this.loginForm.reset();
               }
@@ -125,17 +122,23 @@ export class MenuComponent implements OnInit {
     _this.isLogin = true;
     console.log('=====用户信息赋值成功===='+userData.userId);
     _this.userInfo = new UserInfo(userData.userId,userData.username,userData.avatarUrl);
-    this.userServer.emitUserInfo.emit(this.userInfo); //传递给服务,广播给其他组件用户已经登录
     _this.userServer.getUserPlaylist(_this.userInfo.userId)
       .subscribe(result=>{
         let data = result;
         if(data.code==200){
           _this.userPlayList = data.playlist;
+          _this.userInfo.headrtSongListId = _this.userPlayList[0].id; //获取用户喜爱的歌单
+          //用户信息存入缓存
+          let option = {
+            expires:_this.musicServer.setCookie(30) //设置缓存时长
+          }
+          _this.cookieService.putObject('userInfo',_this.userInfo,option);
         }
         else{
           console.log("获取失败:"+data.code);
         }
-      })
+      });
+    _this.userServer.emitUser.emit(_this.userInfo); //传递给服务,广播给其他组件用户已经登录
   }
   openList(){
     this.isOpen = !this.isOpen;
@@ -144,8 +147,10 @@ export class MenuComponent implements OnInit {
 
 //用户信息对象
 export class UserInfo{
-  constructor(public userId:string,
-              public username:string,
-              public avatarUrl:string
+  constructor(
+    public userId:string,
+    public username:string,
+    public avatarUrl:string,
+    public headrtSongListId?:string,//用户喜欢的音乐歌单的id
   ){}
 }

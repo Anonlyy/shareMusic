@@ -15,7 +15,10 @@ export class SongListComponent implements OnInit {
   songList=[];//存储所有歌曲对象
   songIds= [];//存储所有歌曲对象的id
   default ='/assets/image/loading.jpg';
-  currentPlayIndex:number;//正在播放
+  currentPlayIndex = {
+    id:'0',
+    index:0
+  };//正在播放
   constructor(public routerInfo:ActivatedRoute,public musicService:MusicService) { }
   ngOnInit() {
     const _this = this;
@@ -47,10 +50,11 @@ export class SongListComponent implements OnInit {
           for(let item of result.playlist.tracks){
             _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
             _this.songList.push(_this.song);
+            //添加id进数组
             _this.songIds.push(item.id);
           }
         }
-        console.log(result);
+        // console.log(result);
       },
       error=>{
         console.log('error',error);
@@ -65,13 +69,16 @@ export class SongListComponent implements OnInit {
   public playAllSong(){
     const _this = this;
     //播放所有歌曲,默认以第一首为当前歌曲
-    //noinspection TypeScriptValidateTypes
     this.musicService.emitSong.emit(new EmitSong(_this.songList[0],_this.songIds));
   }
   //双击播放音乐
   public playMusic(index:number){
-    console.log(this.songList[index]);
-    this.musicService.emitSong.emit(new EmitSong(this.songList[index],this.songIds));
+    const _this = this;
+    _this.currentPlayIndex = {
+      index:index,
+      id:_this.songList[index].id
+    }
+    this.musicService.emitSong.emit(new EmitSong(_this.songList[index],_this.songIds));
   }
 }
 

@@ -5,10 +5,10 @@ import {UserInfo} from "../menu/menu.component";
 
 @Injectable()
 export class UserService{
-  emitUserInfo:EventEmitter<UserInfo>;
+  emitUser:EventEmitter<UserInfo>;
   constructor(public http:Http) {
     //广播用户信息
-    this.emitUserInfo = new EventEmitter();
+    this.emitUser = new EventEmitter();
   }
 
 
@@ -51,4 +51,11 @@ export class UserService{
   public handleError(error){
     return Observable.throw(`${error}`);
   }
+}
+
+export class EmitUser{
+  constructor(
+    public userInfo:UserInfo,
+    public ids:any[]
+  ){}
 }
