@@ -30,6 +30,7 @@ import { HeaderComponent } from './header/header.component';
 import { MusicTimePipe } from './pipe/music-time.pipe';
 import {StoreModule} from "@ngrx/store";
 import {reducer} from "./ngrx/index";
+import { SoundComponent } from './sound/sound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import {reducer} from "./ngrx/index";
     SongListComponent,
     ErrorComponent,
     HeaderComponent,
-    MusicTimePipe
+    MusicTimePipe,
+    SoundComponent
   ],
   imports: [
     BrowserModule,

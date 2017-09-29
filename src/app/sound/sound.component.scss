@@ -1,0 +1,20 @@
+@charset "utf-8";
+.slider{
+  position: absolute;
+  top: -175px;
+  left: 35px;
+  width: 36px;
+  padding-top: 10px;
+  background-color: white;
+  box-shadow: 3px 4px 10px rgba(0,0,0,.1);
+  .slider-bottom{
+    margin-top:10px;
+    border-top:2px solid #eeeeee;
+    color: #333;
+  }
+  &:hover{
+    .slider-bottom{
+      color: #333;
+    }
+  }
+}

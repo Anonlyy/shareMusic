@@ -47,3 +47,9 @@ input{
   visibility: hidden;
   clear: both;
 }
+.el-slider.is-vertical .el-slider__button-wrapper{
+  left:-15px;
+}
+.el-slider__bar,.el-slider__button,.el-slider__button:hover{
+  background-color: #32C27C;
+}

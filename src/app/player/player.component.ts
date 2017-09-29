@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import {CookieService} from "angular2-cookie/services/cookies.service";
 import {MusicService} from "../service/music.service";
 import {Song} from "../content-index/content-index.component";
@@ -16,6 +16,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
+
   audio:HTMLAudioElement = new Audio(); //音乐对象
    //错误信息提示
   default:string ='/assets/image/loading.jpg';
