@@ -40,7 +40,7 @@
             <span>专辑</span>
             <span>时长</span>
           </li>
-          <li class="list-item clearfix " *ngFor="let item of songList;let index = index;">
+          <li class="list-item clearfix" [hidden]="songList.length<=0" [class.playing]="select == index" *ngFor="let item of songList;let index = index;">
             <span>
              <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
             </span>
@@ -48,9 +48,12 @@
             <span class="text-truncate">{{item.alName}}</span>
             <span class="text-truncate">{{item.dt | musicTime}}</span>
           </li>
+          <li class="null-tip"  *ngIf="songList.length<=0" >
+            歌单为空........
+          </li>
         </ul>
       </div>
     </div>
-    <div class="tip">我可是有底线的~</div>
+    <div class="tip"  *ngIf="songList.length>0">我可是有底线的~</div>
   </div>
 </div>

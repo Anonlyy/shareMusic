@@ -13,8 +13,8 @@
 </div>
 <div class="player-body">
   <div class="play">
-    <img #img [src]="media.blurPicUrl" class="play-pic" (error)="updateUrl(img)" alt="">
-      <div class="play-content">
+    <img #img [src]="media.blurPicUrl" class="play-pic" (error)="updateUrl(img)">
+    <div class="play-content">
         <p class="play-text">
           {{media.name}} <span>-{{media.artistsName}}</span>
         </p>

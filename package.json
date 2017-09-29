@@ -11,7 +11,6 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-
   "private": true,
   "dependencies": {
     "@angular/common": "^4.0.0",
@@ -22,13 +21,17 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^2.2.2",
     "angular2-cookie": "^1.2.6",
     "core-js": "^2.4.1",
     "element-angular": "^0.0.4-alpha.4",
     "font-awesome": "^4.7.0",
     "freeng": "^0.2.3",
+    "ngrx-store-freeze": "^0.1.6",
     "ngx-cookie": "^1.0.0",
     "ngx-cookie-service": "^1.0.8",
+    "reselect": "^3.0.0",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
@@ -49,6 +52,7 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "~2.2.0"
+    "typescript": "~2.2.0",
+    "ngrx-store-freeze": "^0.1.6"
   }
 }

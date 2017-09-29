@@ -3,6 +3,11 @@ import {ActivatedRoute} from "@angular/router";
 import {MusicService, EmitSong} from "../service/music.service";
 import {Song} from "../content-index/content-index.component";
 
+// redux
+import {Store} from "@ngrx/store";
+import * as fromRoot from '../ngrx';
+import {Observable} from "rxjs";
+
 @Component({
   selector: 'song-list',
   templateUrl: './song-list.component.html',
@@ -19,7 +24,14 @@ export class SongListComponent implements OnInit {
     id:'0',
     index:0
   };//正在播放
-  constructor(public routerInfo:ActivatedRoute,public musicService:MusicService) { }
+
+  select:number;
+  number$: Observable<number>;
+  number = 0;
+
+  constructor(public routerInfo:ActivatedRoute,public musicService:MusicService,private store:Store<fromRoot.State>) {
+    this.number$ = store.select(fromRoot.getNumber)
+  }
   ngOnInit() {
     const _this = this;
     this.routerInfo.params.subscribe(
@@ -29,6 +41,19 @@ export class SongListComponent implements OnInit {
         _this.getPlayList(_this.id);
       }
     )
+
+
+
+
+    //ngrx
+    _this.number$.subscribe(num => {
+      // _this.number = num;
+      if(_this.number!==num){
+        console.log('刷新');
+        _this.getPlayList(_this.id);
+      }
+    });
+
   }
   //获取歌单详情
   public getPlayList(id:string){
@@ -74,6 +99,7 @@ export class SongListComponent implements OnInit {
   //双击播放音乐
   public playMusic(index:number){
     const _this = this;
+    _this.select = index;
     _this.currentPlayIndex = {
       index:index,
       id:_this.songList[index].id

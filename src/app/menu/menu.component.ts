@@ -89,7 +89,7 @@ export class MenuComponent implements OnInit {
               if(result.code==200){  //登录成功
                 console.log('=====刷新成功=====',data);
                 _this.isLogin = true;
-                _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl);
+                _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl,'null');
                 _this.dataToUserInfo(_this.userInfo); //获取歌单
                 _this.loginForm.reset();
               }
@@ -133,12 +133,13 @@ export class MenuComponent implements OnInit {
             expires:_this.musicServer.setCookie(30) //设置缓存时长
           }
           _this.cookieService.putObject('userInfo',_this.userInfo,option);
+          _this.userServer.emitUser.emit(_this.userInfo); //传递给服务,广播给其他组件用户已经登录
         }
         else{
           console.log("获取失败:"+data.code);
         }
       });
-    _this.userServer.emitUser.emit(_this.userInfo); //传递给服务,广播给其他组件用户已经登录
+
   }
   openList(){
     this.isOpen = !this.isOpen;

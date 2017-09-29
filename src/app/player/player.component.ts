@@ -6,6 +6,10 @@ import {UserInfo} from "../menu/menu.component";
 import {UserService} from "../service/user.service";
 import { ElMessageService } from 'element-angular'
 
+import * as formRoot from '../ngrx';
+import {REFRESH} from '../ngrx/action/option'
+import {Store} from "@ngrx/store";
+import {Observable} from "rxjs";
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
@@ -15,7 +19,7 @@ export class PlayerComponent implements OnInit {
   audio:HTMLAudioElement = new Audio(); //音乐对象
    //错误信息提示
   default:string ='/assets/image/loading.jpg';
-  media:Song = new Song('00','暂无正在播放的歌曲~','','NULL','http://iph.href.lu/65x65');
+  media:Song = new Song('00','暂无正在播放的歌曲~','','NULL','/assets/image/loading.jpg');
   MediaTime = {
     duration:'00:00',
     currentTime:'00:00'
@@ -29,17 +33,18 @@ export class PlayerComponent implements OnInit {
   };
   isTracks:boolean = false;//是否收藏
   times:any; //定时器
-  userInfo:UserInfo;
+  userInfo:UserInfo = new UserInfo('0','null','null','null');
   isLogin:boolean = false;
-  userSongIdsList:any[]; //用户喜爱的歌单的ID列表
-
+  userSongIdsList = []; //用户喜爱的歌单的ID列表
+  isSongDetailCheck$:Observable<number>; //发送用户是否点击的收藏
 
   constructor(public musicService:MusicService,
               public cookieService:CookieService,
               private message: ElMessageService,
-              public userService:UserService) {}
-
-
+              public userService:UserService,
+              private store:Store<formRoot.State>) {
+    this.isSongDetailCheck$ = store.select(formRoot.getNumber);
+  }
   ngOnInit() {
     const _this = this;
     //得到当前歌曲的id
@@ -61,11 +66,11 @@ export class PlayerComponent implements OnInit {
         result=>{
           _this.userInfo = result;
           _this.isLogin = true;
-          _this.getPlayList(_this.userInfo.headrtSongListId);
+          console.log(_this.isLogin,result);
+          _this.getPlayList(result.headrtSongListId);
         }
       );
     }
-    console.log(_this.isLogin,_this.userInfo);
   }
 
 
@@ -93,7 +98,7 @@ export class PlayerComponent implements OnInit {
             _this.userSongIdsList.push(item.id);
           }
         }
-        console.log('ids',_this.userSongIdsList);
+        // console.log('ids',_this.userSongIdsList);
       },
       error=>{
         console.log('error',error);
@@ -144,7 +149,7 @@ export class PlayerComponent implements OnInit {
     _this.audio.load();
     _this.audio.play();
     _this.getTime(_this.audio);
-    _this.checkSongLove();
+    _this.isLogin?_this.checkSongLove():'';
   }
   /**
    * 获取歌曲时长
@@ -280,13 +285,24 @@ export class PlayerComponent implements OnInit {
         result=>{
           let data = result;
           if(result.code==200){
+            if(_this.isTracks){
+              //取消喜欢就切换下一首
+              _this.handleMediaNext();
+            }
             _this.isTracks = !_this.isTracks;
+            // store调用dispatch可发起action
+            _this.store.dispatch({
+              type: REFRESH,
+              payload: 1
+            });
+
           }
         }
       );
 
     }
     else {
+      this.message.setOptions({ duration:1200 })
       _this.message['error']("抱歉,您暂未登录");
     }
   }
@@ -315,9 +331,17 @@ export class PlayerComponent implements OnInit {
     clearInterval(this.times);
     this.MediaTime.currentTime = "00:00";
   }
+
+  /**
+   * 图片加载错误
+   * @param e
+   */
   public updateUrl(e){
     e.src = this.default;
   }
-
+  public loadingImg(e){
+    console.log('加载中');
+    e.src = this.media.blurPicUrl;
+  }
 
 }

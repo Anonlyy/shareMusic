@@ -11,7 +11,6 @@ import {SearchMusicService} from "./service/search-music.service";
 import {IconModule,ModalModule,InputtextModule,SidenavModule,ButtonModule,NotificationModule} from 'freeng/freeng';
 
 import { MenuComponent } from './menu/menu.component'; //accordion
-import { LoginAlertComponent } from './alert/loginAlert.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {UserService} from "./service/user.service";
@@ -29,14 +28,13 @@ import {LocationStrategy, HashLocationStrategy} from "@angular/common";
 import {TabGroupModule} from "freeng/component/tab/tab.component";
 import { HeaderComponent } from './header/header.component';
 import { MusicTimePipe } from './pipe/music-time.pipe';
-import {ElMessageService} from "element-angular/release";
-import {ExDynamicService, DocumentWrapper} from "element-angular/release/shared/services";
+import {StoreModule} from "@ngrx/store";
+import {reducer} from "./ngrx/index";
 @NgModule({
   declarations: [
     AppComponent,
     PlayerComponent,
     MenuComponent,
-    LoginAlertComponent,
     ContentIndexComponent,
     SongListComponent,
     ErrorComponent,
@@ -59,7 +57,9 @@ import {ExDynamicService, DocumentWrapper} from "element-angular/release/shared/
     ButtonModule,
     NotificationModule,
     BadgeModule,
-    ElModule.forRoot()
+    ElModule.forRoot(),
+
+    StoreModule.provideStore(reducer)
   ],
   providers: [MusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]

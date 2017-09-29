@@ -59,7 +59,8 @@ export class MusicService {
    * @returns {Observable<R|T>}
    */
   public getPlayListDetail(id:string):Observable<any>{
-    return this.http.get(`/playlist/detail?id=${id}`)
+    let timestamp = new Date().getTime()
+    return this.http.get(`/playlist/detail?id=${id}&&timestamp=${timestamp}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
