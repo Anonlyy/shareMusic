@@ -72,8 +72,11 @@ export class SongListComponent implements OnInit {
             data.creator.avatarUrl
           );
           _this.songList = [];
+          let arList;
           for(let item of result.playlist.tracks){
-            _this.song = new Song(item.id,item.name,item.ar[0].name,item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
+            arList = [];
+            for(let j of item.ar){arList.push(j.name)}
+            _this.song = new Song(item.id,item.name,arList.join('/'),item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
             _this.songList.push(_this.song);
             //添加id进数组
             _this.songIds.push(item.id);

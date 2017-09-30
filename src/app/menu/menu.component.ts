@@ -3,8 +3,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {telValidator} from "../valid/validator"
 import {UserService} from "../service/user.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
-import {Router, NavigationEnd} from "@angular/router";
+import {Router} from "@angular/router";
 import {MusicService} from "../service/music.service";
+import {Md5} from "ts-md5/dist/md5";
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -70,11 +71,10 @@ export class MenuComponent implements OnInit {
     }
     _this.getUserInfo();
   }
-
   //获取用户信息
   getUserInfo(){
     const _this = this;
-    _this.userServer.login(_this.loginForm.get('tel').value,_this.loginForm.get('password').value)
+    _this.userServer.login(_this.loginForm.get('tel').value,Md5.hashStr(_this.loginForm.get('password').value).toString())
       .subscribe(result=>{
         let data = result;
         if(data.code==200){

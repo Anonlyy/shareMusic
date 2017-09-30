@@ -201,9 +201,10 @@ export class PlayerComponent implements OnInit {
     _this.musicService.getSongDetail(id).subscribe(
       result=>{
         if(result.code==200){
+          let arList =[];
           let data = result.songs[0];
-          console.log("result",result);
-          _this.media= new Song(data.id,data.name,data.ar[0].name,data.ar[0].id,data.al.picUrl)
+          for(let i of data.ar){arList.push(i.name)}
+          _this.media= new Song(data.id,data.name,arList.join('/'),data.ar[0].id,data.al.picUrl)
         }
       },
       error=>{
