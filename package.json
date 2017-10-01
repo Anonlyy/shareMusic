@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^4.4.4",
     "@angular/common": "^4.0.0",
     "@angular/compiler": "^4.0.0",
     "@angular/core": "^4.0.0",
@@ -25,7 +26,7 @@
     "@ngrx/store": "^2.2.2",
     "angular2-cookie": "^1.2.6",
     "core-js": "^2.4.1",
-    "element-angular": "^0.0.4-alpha.4",
+    "element-angular": "^0.0.4-beta.3",
     "font-awesome": "^4.7.0",
     "freeng": "^0.2.3",
     "ngrx-store-freeze": "^0.1.6",

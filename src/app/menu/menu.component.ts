@@ -83,14 +83,16 @@ export class MenuComponent implements OnInit {
             title: '通知',
             content: '登录成功！'
           });
+          _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl,'null');
+          _this.dataToUserInfo(_this.userInfo); //获取歌单
+          _this.isLogin = true;
+
+
           _this.switchSlideNav();
           _this.userServer.loginRefresh().subscribe(
             result=>{
               if(result.code==200){  //登录成功
                 console.log('=====刷新成功=====',data);
-                _this.isLogin = true;
-                _this.userInfo = new UserInfo(data.profile.userId,data.profile.nickname,data.profile.avatarUrl,'null');
-                _this.dataToUserInfo(_this.userInfo); //获取歌单
                 _this.loginForm.reset();
               }
               else{
