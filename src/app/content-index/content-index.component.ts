@@ -1,6 +1,7 @@
 import {Component, OnInit, AfterContentInit} from '@angular/core';
 import {MusicService, EmitSong} from "../service/music.service";
 import {CookieService} from "angular2-cookie/services/cookies.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'content-index',
@@ -48,7 +49,7 @@ export class ContentIndexComponent implements OnInit {
   ];
   songIds = []; //存储播放列表的id列表
   default ='/assets/image/loading.jpg'
-  constructor(public musicServer:MusicService,public cookieServer:CookieService) { }
+  constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
@@ -134,7 +135,19 @@ export class ContentIndexComponent implements OnInit {
   public updateUrl(e){
     e.src = this.default;
   }
-
+  public getTopListId(index:number){
+    const _this = this;
+    _this.musicServer.getTopList(index).subscribe(
+      result=>{
+        let data = result.result;
+        // console.log('排行榜id:',data.id);
+        _this.router.navigate(['/list',data.id]);
+      },
+      error=>{
+        console.log('error',error);
+      }
+    )
+  }
 
 
 }

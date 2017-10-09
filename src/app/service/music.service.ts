@@ -91,6 +91,12 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  public getTopList(idx:number):Observable<any>{
+    return this.http.get(`/top/list?idx=${idx}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
 
   /**
    * 设置cookie时长

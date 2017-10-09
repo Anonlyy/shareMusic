@@ -85,8 +85,8 @@
       <div class="media-content">
         <ul class="content-list clearfix">
           <!--topList-->
-          <li class="content" *ngFor="let item of topList">
-            <a href="#" class="content-info">
+          <li class="content" *ngFor="let item of topList;let index = index">
+            <a href="#" class="content-info" (click)="getTopListId(index)">
               <img  #img (error)="updateUrl(img)" src="{{item.picUrl}}" alt="">
               <div class="content-hover">
                 <!--<free-icon icon="play-circle"></free-icon>-->
