@@ -15,21 +15,25 @@ export class HeaderComponent implements OnInit {
   searchValue:FormControl = new FormControl();
   searchSuggestList = [
     {
+      icon:'headphones',
       key:"albums",
       name:"专辑",
       list: [],  //专辑
     },
     {
+      icon:'user-o',
       key:"artists",
       name:"歌手",
       list:[],
     },
     {
+      icon:'list-ul',
       key:"playlists",
       name:"歌单",
       list:[], //歌单
     },
     {
+      icon:'music',
       key:"songs",
       name:"歌曲",
       list:[], //歌曲
@@ -73,7 +77,6 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['/index']);
   }
   inputBlur(){
-    console.log(111);
     const _this = this;
     _this.searchValue.valueChanges.subscribe(result=>{
       if(result==""||result==null){
@@ -111,11 +114,3 @@ export class HeaderComponent implements OnInit {
   }
 }
 
-
-//搜索建议数据单个对象
-// export class Suggest{
-//   constructor(
-//     public id:string,
-//     public name:string
-//   ){}
-// }

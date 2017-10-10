@@ -9,7 +9,10 @@
     <div class="search-suggest" [hidden]="!isFocus">
       <div class="suggest" *ngFor="let content of searchSuggestList">
         <div class="suggest-content" *ngIf="content.list.length>0">
-          <div class="content-title">{{content.name}}</div>
+          <div class="content-title">
+            <free-icon icon="{{content.icon}}"></free-icon>
+            {{content.name}}
+          </div>
           <div class="content-val" >
             <ul class="list" *ngFor="let item of content.list">
               <li class="list-item text-truncate">

@@ -1,0 +1,44 @@
+<div class="global-media free-iscroll">
+  <div class="media-header">
+    <div class="media-notice">
+      搜索
+      <span class="search-name">
+        "TRANSFORMER (变形女) EXO"
+      </span>
+    </div>
+  </div>
+  <div class="media-body">
+    <div class="tabs-group">
+      <div class="tabs-header">
+        <ul class="tabs-title-list">
+          <li class="title-item tabs-active">歌曲</li>
+          <li class="title-item">专辑</li>
+          <li class="title-item">歌单</li>
+          <li class="title-item">歌手</li>
+        </ul>
+      </div>
+      <div class="tabs-content">
+        <ul class="tabs-content-list">
+          <li class="list-title clearfix">
+            <span>歌曲</span>
+            <span>歌手</span>
+            <span>专辑</span>
+            <span>时长</span>
+          </li>
+          <li class="list-item clearfix" [hidden]="songList.length<=0"  *ngFor="let item of songList;let index = index;">
+            <span>
+             <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
+            </span>
+            <span class="text-truncate">{{item.artistsName}}</span>
+            <span class="text-truncate">{{item.alName}}</span>
+            <span class="text-truncate">{{item.dt | musicTime}}</span>
+          </li>
+          <li class="null-tip"  *ngIf="songList.length<=0" >
+            暂时没有搜索到结果哦(～￣▽￣)～
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>
+  </div>
+</div>

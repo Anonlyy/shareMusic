@@ -1,6 +1,4 @@
 <div class="global-media free-iscroll">
-  <!--[el-loading]="true" [text]="'拼命加载中'"-->
-  <!--<el-tag>加载中..</el-tag>-->
   <div class="media-header clearfix">
     <div class="media-inner">
       <img [src]="playListDetail.picUrl" #img  (error)="updateUrl(img)" alt="">
@@ -50,11 +48,11 @@
             <span class="text-truncate">{{item.dt | musicTime}}</span>
           </li>
           <li class="null-tip"  *ngIf="songList.length<=0" >
-            歌单为空........
+            歌单为空╮(╯﹏╰）╭........
           </li>
         </ul>
       </div>
     </div>
-    <div class="tip"  *ngIf="songList.length>0">我可是有底线的~</div>
+    <div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>
   </div>
 </div>

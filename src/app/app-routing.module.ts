@@ -3,10 +3,11 @@ import {ContentIndexComponent} from "./content-index/content-index.component";
 import {NgModule} from "@angular/core";
 import {SongListComponent} from "./song-list/song-list.component";
 import {ErrorComponent} from "./error/error.component";
+import {SearchResultComponent} from "./search-result/search-result.component";
 const routes:Routes = [
   {
     path:'',
-    redirectTo:'index',
+    redirectTo:'searchResult',
     pathMatch:'full'
   },
   {
@@ -16,6 +17,10 @@ const routes:Routes = [
   {
     path:'list/:id',
     component:SongListComponent
+  },
+  {
+    path:'searchResult',
+    component:SearchResultComponent
   },
   {
     path:'**',

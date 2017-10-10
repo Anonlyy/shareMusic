@@ -68,9 +68,13 @@
           border-bottom: 1px solid #dedede;
           padding-top: 10px;
           font-size: .82rem;
-          color: #2CAE6F;
+          box-sizing: border-box;
           font-weight: normal;
+          color: #2CAE6F;
           border-right: 1px solid #dedede;
+          free-icon{
+            color: #999;
+          }
         }
         .content-val{
           width: 180px;
