@@ -1,16 +1,27 @@
 @charset "utf-8";
+.sound{
+  width: 35px;
+  //width: 35px;
+}
 .slider{
   display: none;
   position: absolute;
-  top: -175px;
-  left: 35px;
-  width: 36px;
-  padding-top: 10px;
+  top: -58px;
+  left: -15px;
+  width: 136px;
   background-color: white;
   box-shadow: 3px 4px 10px rgba(0,0,0,.1);
+  padding-right: 40px;
+  padding-left:10px;
   .slider-bottom{
-    margin-top:10px;
-    border-top:2px solid #eeeeee;
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: right;
+    height:36px;
+    line-height:36px;
+    width: 35px;
+    border-left:2px solid #eeeeee;
     color: #333;
   }
   &:hover{

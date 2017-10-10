@@ -9,12 +9,12 @@ export class SoundComponent implements OnInit {
   @Input() audio:HTMLAudioElement = new Audio();
   isShow:boolean = false;
   constructor() { }
-
   ngOnInit() {
     this.audio.volume = 0.1;
   }
   moveChange(e){
     let soundValue = parseInt(e);
+    console.log('soundValue',soundValue)
     this.audio.volume = soundValue/100;
   }
   setShowVolume(){

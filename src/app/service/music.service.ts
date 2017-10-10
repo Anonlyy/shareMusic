@@ -64,7 +64,6 @@ export class MusicService {
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
-
   /**
    * 获取歌曲详情
    * @param id

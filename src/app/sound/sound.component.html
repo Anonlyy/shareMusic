@@ -1,8 +1,11 @@
-<free-icon icon="volume-down" (click)="setShowVolume()"></free-icon>
-<div class="slider" [class.show]="isShow">
-  <el-slider [vertical]="true"  [min]="0" [max]="100" [model]="10" [vertical-height]="100" (modelChange)="moveChange($event)">
-  </el-slider>
-  <div class="slider-bottom">
-    <free-icon icon="volume-down"></free-icon>
+<div class="sound" >
+  <free-icon icon="volume-down" (click)="setShowVolume()" ></free-icon>
+  <div class="slider" [class.show]="isShow">
+    <el-slider  [model]="10" [vertical-height]="100" (modelChange)="moveChange($event)">
+    </el-slider>
+    <div class="slider-bottom">
+      <free-icon icon="volume-down"></free-icon>
+    </div>
   </div>
 </div>
+

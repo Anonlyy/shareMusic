@@ -148,9 +148,8 @@ export class ContentIndexComponent implements OnInit {
       }
     )
   }
-
-
 }
+
 //单个·歌单对象
 export class SongList{
   constructor(

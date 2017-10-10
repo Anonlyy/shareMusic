@@ -1,20 +1,41 @@
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs";
+import {Http} from "@angular/http";
 
 @Injectable()
 export class SearchMusicService {
 
-  constructor() { }
+  constructor(public http:Http) { }
 
   /**
    * 搜索音乐
-   * @param res
-   * @returns {Promise<any>}
+   * @param keywords
+   * @param type
+   * @returns {Observable<R|T>}
    */
-
-  public handleSuccess(res:Response){
-     return res.json();
+  searchMusic(keywords:string,type:number=1):Observable<any>{
+    return this.http.get(`/search?keywords=${keywords}&type=${type}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
   }
-  public handleError(error:any){
-    return error.json();
+
+  /**
+   * 搜索建议
+   * @param keywords
+   * @returns {Observable<R|T>}
+   */
+  searchSuggest(keywords:string):Observable<any>{
+    return this.http.get(`/search/suggest?keywords=${keywords}&limit=10`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+
+
+  public handleSuccess(res){
+    return res.json();
+  }
+  public handleError(error){
+    return Observable.throw(`${error}`);
   }
 }

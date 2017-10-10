@@ -15,6 +15,7 @@
   .search{
     padding-left:20px;
     vertical-align: middle;
+    position: relative;
     .input-search{
       height: 30px;
       position: relative;
@@ -49,6 +50,61 @@
         top: 50%;
         transform: translateY(-50%);
         color: white;
+      }
+    }
+    .search-suggest{
+      position: absolute;
+      background-color: white;
+      top: 40px;
+      left: 20px;
+      box-shadow: 5px 5px 20px rgba(0,0,0,.1);
+      border-radius: 3px;
+      width: 240px;
+      .suggest-content{
+        display: flex;
+        .content-title{
+          width: 60px;
+          text-align: center;
+          border-bottom: 1px solid #dedede;
+          padding-top: 10px;
+          font-size: .82rem;
+          color: #2CAE6F;
+          font-weight: normal;
+          border-right: 1px solid #dedede;
+        }
+        .content-val{
+          width: 180px;
+          border-bottom: 1px solid #dedede;
+          .list{
+            margin: 0;
+            padding:0;
+            list-style-type:none;
+            .list-item{
+              font-size: .8rem;
+              height:30px;
+              line-height:30px;
+              padding-left: 10px;
+              cursor: pointer;
+              &:hover{
+                background-color: #2CAE6F;
+                color: white;
+              }
+              .item-tip{
+                font-style: normal;
+                font-size: .6rem;
+                color: #999;
+                i{
+                  font-style: normal;
+                }
+              }
+            }
+          }
+        }
+      }
+      .suggest-content:nth-child(2n){
+        .content-val{
+          background-color: #E2E4E6;
+        }
       }
     }
   }

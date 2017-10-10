@@ -1,7 +1,7 @@
 <div class="global-media free-iscroll">
-  <!--[el-loading]="true" [text]="'拼命加载中'"y-->
+  <!--[el-loading]="true" [text]="'拼命加载中'"-->
   <!--<el-tag>加载中..</el-tag>-->
-  <div class="media-header clearfix" >
+  <div class="media-header clearfix">
     <div class="media-inner">
       <img [src]="playListDetail.picUrl" #img  (error)="updateUrl(img)" alt="">
     </div>
@@ -24,7 +24,8 @@
       </div>
     </div>
   </div>
-  <div class="media-body">
+  <div class="media-body" [el-loading]="isLoading"  [text]="'拼命加载中'">
+    <!--<el-tag>加载中..</el-tag>-->
     <div class="tabs-group">
       <div class="tabs-header">
         <ul class="tabs-title-list">

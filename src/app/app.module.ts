@@ -30,6 +30,7 @@ import { MusicTimePipe } from './pipe/music-time.pipe';
 import {StoreModule} from "@ngrx/store";
 import {reducer} from "./ngrx/index";
 import { SoundComponent } from './sound/sound.component';
+import {SearchMusicService} from "./service/search-music.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,7 @@ import { SoundComponent } from './sound/sound.component';
 
     StoreModule.provideStore(reducer)
   ],
-  providers: [MusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
+  providers: [MusicService,SearchMusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

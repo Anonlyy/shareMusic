@@ -29,6 +29,8 @@ export class SongListComponent implements OnInit {
   number$: Observable<number>;
   number = 0;
 
+  isLoading:boolean = true;
+
   constructor(public routerInfo:ActivatedRoute,public musicService:MusicService,private store:Store<fromRoot.State>) {
     this.number$ = store.select(fromRoot.getNumber)
   }
@@ -81,6 +83,7 @@ export class SongListComponent implements OnInit {
             //添加id进数组
             _this.songIds.push(item.id);
           }
+          _this.isLoading = false;
         }
         // console.log(result);
       },
