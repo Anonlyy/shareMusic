@@ -13,8 +13,8 @@ export class SearchMusicService {
    * @param type
    * @returns {Observable<R|T>}
    */
-  searchMusic(keywords:string,type:number=1):Observable<any>{
-    return this.http.get(`/search?keywords=${keywords}&type=${type}`)
+  searchMusic(keywords:string,offset:number,type:string|number):Observable<any>{
+    return this.http.get(`/search?keywords=${keywords}&offset=${offset}&type=${type}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }

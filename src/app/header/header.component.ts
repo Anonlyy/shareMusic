@@ -116,8 +116,6 @@ export class HeaderComponent implements OnInit {
     if(key=='songs'){
       this.router.navigate(['/searchResult',value]);
     }
-
-
   }
   //失去焦点事件
   inputBlur(){

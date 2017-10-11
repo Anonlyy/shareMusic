@@ -158,7 +158,8 @@ export class SongList{
     public picUrl:string, //歌单图片
     public playCount:number, //收藏指数
     public copywriter:string, //推荐理由
-    public trackCount:number //歌单歌曲数目
+    public trackCount:number, //歌单歌曲数目
+    public creator:string  //歌单创建者
   ){}
 }
 

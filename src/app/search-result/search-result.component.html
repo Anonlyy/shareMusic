@@ -3,22 +3,22 @@
     <div class="media-notice">
       搜索
       <span class="search-name">
-        {{searchValue}}
+        "{{searchValue}}"
       </span>
     </div>
   </div>
-  <div class="media-body">
+  <div class="media-body" [el-loading]="isLoading"  [text]="'拼命加载中'">
     <div class="tabs-group">
       <div class="tabs-header">
         <ul class="tabs-title-list">
-          <li class="title-item tabs-active">歌曲</li>
-          <li class="title-item">专辑</li>
-          <li class="title-item">歌单</li>
-          <li class="title-item">歌手</li>
+          <li class="title-item " (click)="changeNavbar(index)" [class.tabs-active]="index == currentNavIndex" *ngFor="let navItem of searchTypeList;let index = index;">
+            {{navItem.name}}
+          </li>
         </ul>
       </div>
-      <div class="tabs-content">
-        <ul class="tabs-content-list">
+      <div class="tabs-content" >
+        <!--歌曲列表 start-->
+        <ul class="tabs-content-list" *ngIf="currentNavIndex == 0">
           <li class="list-title clearfix">
             <span>歌曲</span>
             <span>歌手</span>
@@ -37,8 +37,47 @@
             暂时没有搜索到结果哦(～￣▽￣)～
           </li>
         </ul>
+        <!--歌曲列表 end-->
+        <!--专辑列表 start-->
+        <ul class="tabs-content-list albums"  *ngIf="currentNavIndex == 1">
+          <li class="list-item clearfix" [hidden]="albumsList.length<=0"  *ngFor="let item of albumsList;let index = index;">
+            <span>
+              <img class="pic" src="{{item.picUrl}}" alt="">
+            </span>
+            <span class="text-truncate">
+             {{item.name}}
+            </span>
+            <span class="text-truncate">{{item.artists}}</span>
+            <span class="text-truncate">{{item.songsNum}}首</span>
+          </li>
+          <li class="null-tip"  *ngIf="albumsList.length<=0" >
+            暂时没有搜索到结果哦(～￣▽￣)～
+          </li>
+        </ul>
+        <!--专辑列表 end-->
+        <!--歌单列表 start-->
+        <ul class="tabs-content-list albums"  *ngIf="currentNavIndex == 2">
+          <li class="list-item clearfix" [hidden]="playlistsList.length<=0"  *ngFor="let item of playlistsList;let index = index;">
+            <span>
+              <img class="pic" src="{{item.picUrl}}" alt="">
+            </span>
+            <span class="text-truncate">
+             {{item.name}}
+              <i class="creator">By {{item.creator}}</i>
+            </span>
+            <span class="text-truncate"  style="padding-left: 40px;">收藏:  <el-tag type="success">{{item.playCount}}</el-tag></span>
+            <span class="text-truncate">{{item.trackCount}}首</span>
+          </li>
+          <li class="null-tip"  *ngIf="playlistsList.length<=0" >
+            暂时没有搜索到结果哦(～￣▽￣)～
+          </li>
+        </ul>
+        <!--歌单列表 end-->
       </div>
     </div>
-    <div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>
+    <div class="pagination"  *ngIf="songList.length>0">
+      <el-pagination (modelChange)="changePagination($event)" [total]="searchCount" [page-size]="30" [layout]="['prev', 'pager', 'next','total']">
+      </el-pagination>
+    </div>
   </div>
 </div>

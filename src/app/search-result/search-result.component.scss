@@ -44,16 +44,8 @@ ul,li{
           font-size: .8rem;
           font-weight: normal;
           cursor: pointer;
-          transition: all .2s;
+          transition: color .2s;
           position: relative;
-          .badeg{
-            font-style: normal;
-            font-size: .5rem;
-            background-color: #31C27C;
-            padding:0 2px;
-            color: white;
-            border-radius: 5px;
-          }
           &:hover{
             color: #30BC78;
           }
@@ -62,6 +54,7 @@ ul,li{
           border-bottom: 2px solid #31C27C;
         }
       }
+
     }
     .tabs-content{
       .tabs-content-list{
@@ -135,13 +128,50 @@ ul,li{
           }
         }
       }
+      .albums{
+        .list-item{
+          >span{
+            height: 60px;
+            line-height:60px;
+            box-sizing: border-box;
+            .creator{
+              display: inline-block;
+              margin-left:10px;
+              color: #888;
+              font-style: normal;
+              //font-weight: normal;
+            }
+            &:first-child{
+
+              width: 7%;
+              padding:6px 0;
+            }
+            &:nth-child(2){
+              width: 43%;
+            }
+            &:nth-child(3){
+              width: 30%;
+            }
+            &:last-child{
+              width: 20%;
+              text-align: center;
+              color: #888;
+            }
+          }
+          .pic{
+            width: 50px;
+            height: 50px;
+          }
+
+        }
+      }
     }
   }
-  .tip{
+  .pagination{
+    padding:20px 0;
     font-size: .7rem;
     height:35px;
     line-height:35px;
     text-align: center;
-    background: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.05));
   }
 }
