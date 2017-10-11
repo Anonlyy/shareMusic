@@ -19,7 +19,7 @@ const routes:Routes = [
     component:SongListComponent
   },
   {
-    path:'searchResult',
+    path:'searchResult/:value',
     component:SearchResultComponent
   },
   {

@@ -1,7 +1,8 @@
 <div class="global-header">
   <div class="search">
     <div class="input-search">
-      <input type="text" class="input" placeholder="搜索" [formControl]="searchValue" (blur)="isFocus=false;" (focus)="inputBlur()">
+      <!---->
+      <input type="text" class="input" placeholder="搜索" [formControl]="searchValue"  (blur)="inputBlur()" (focus)="inputFocus()">
       <i>
         <free-icon icon="search"></free-icon>
       </i>
@@ -15,7 +16,7 @@
           </div>
           <div class="content-val" >
             <ul class="list" *ngFor="let item of content.list">
-              <li class="list-item text-truncate">
+              <li class="list-item text-truncate" (click)="toSearchResult(content.key,item.name)">
                 <span class="item-name">{{item.name}}</span>
                 <i class="item-tip" *ngIf="content.key=='albums'">/{{item.artist.name}}</i>
                 <span class="item-tip" *ngIf="content.key=='songs'">/

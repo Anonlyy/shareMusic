@@ -45,7 +45,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
 
   }
-
   //全屏
   fullScreen(flag:boolean) {
     this.isFullScreen = !this.isFullScreen;
@@ -76,7 +75,7 @@ export class HeaderComponent implements OnInit {
     window.location.reload();
     this.router.navigate(['/index']);
   }
-  inputBlur(){
+  inputFocus(){
     const _this = this;
     _this.searchValue.valueChanges.subscribe(result=>{
       if(result==""||result==null){
@@ -86,7 +85,7 @@ export class HeaderComponent implements OnInit {
       _this.getSearchSuggest(result);
     })
   }
-  //搜索建议
+  //获取搜索建议
   getSearchSuggest(keywords:any){
     const _this = this;
     _this.isFocus = true;
@@ -105,12 +104,26 @@ export class HeaderComponent implements OnInit {
                 }
               })
             }
-            console.log('key',_this.searchSuggestList);
+            // console.log('key',_this.searchSuggestList);
           }
         },
         error=>{
           alert('搜索有误:'+error);
         })
+  }
+  //跳转搜索结果页(限歌曲)
+  toSearchResult(key:string,value:any){
+    if(key=='songs'){
+      this.router.navigate(['/searchResult',value]);
+    }
+
+
+  }
+  //失去焦点事件
+  inputBlur(){
+    setTimeout(()=>{
+      this.isFocus = false;
+    },300)
   }
 }
 
