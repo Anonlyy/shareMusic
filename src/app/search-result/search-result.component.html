@@ -73,6 +73,19 @@
           </li>
         </ul>
         <!--歌单列表 end-->
+        <!--歌手列表 start-->
+        <ul class="tabs-list-artist clearfix" *ngIf="currentNavIndex == 3">
+          <li class="artist-item" *ngFor="let item of artistsList">
+            <div class="item-heading">
+              <img #headImg [src]="item.picUrl" (error)="headImg.src='/assets/image/loading.jpg'" alt="">
+            </div>
+            <div class="item-content">
+              <p>{{item.name}}</p>
+              <span>专辑:{{item.albumSize}} MV:{{item.mvSize}}</span>
+            </div>
+          </li>
+        </ul>
+        <!--歌手列表 end-->
       </div>
     </div>
     <div class="pagination"  *ngIf="songList.length>0">

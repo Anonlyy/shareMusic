@@ -16,6 +16,8 @@ export class SearchResultComponent implements OnInit {
   albumsList = []; //存储所有专辑对象
   playlists: SongList; //单个歌单对象
   playlistsList = []; //存储所有歌单对象
+  artists:Artists; //单个歌手对象
+  artistsList = []; //存储所有歌手对象
   searchValue: string = ''; //搜索结果
   searchCount: number = 0; //搜索结果条数
   currentNavIndex: number = 0;
@@ -104,15 +106,21 @@ export class SearchResultComponent implements OnInit {
                   _this.playlists = new SongList(item.id, item.name, item.coverImgUrl,item.bookCount,'',item.trackCount,item.creator.nickname );
                   _this.playlistsList.push(_this.playlists);
                 }
-                console.log(_this.playlistsList)
                 break;
+              case 100://搜索歌手
+                let artistsReault = result.result.artists;
+                _this.artistsList = [];
+                for (let item of artistsReault) {
+                  _this.artists = new Artists(item.id, item.name, item.picUrl,item.albumSize,item.mvSize);
+                  _this.artistsList.push(_this.artists);
+                }
+                console.log(_this.artistsList)
             }
             _this.isLoading = false;
           }
         }
       )
   }
-
   //翻页
   changePagination(pageIndex: number) {
     this.getSearchValue(pageIndex - 1);
@@ -135,7 +143,19 @@ export class Albums {
               public picUrl: string,
               public artists: string, //专辑作者
               public songsNum: number, //专辑歌曲数
+  ) {}
+}
 
-  ) {
-  }
+
+//歌手对象
+export class Artists{
+  constructor(
+    private id:string,
+    public name:string,
+    public picUrl:string,
+    public albumSize:number, //专辑数量
+    public mvSize?:number, //mv数量
+    public songSize?:number, //单曲数量
+
+  ){}
 }
