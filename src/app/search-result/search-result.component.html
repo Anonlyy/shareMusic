@@ -77,7 +77,7 @@
         <ul class="tabs-list-artist clearfix" *ngIf="currentNavIndex == 3">
           <li class="artist-item" *ngFor="let item of artistsList">
             <div class="item-heading">
-              <img #headImg [src]="item.picUrl" (error)="headImg.src='/assets/image/loading.jpg'" alt="">
+              <img #headImg [src]="'/assets/image/loading.jpg'" (load)="imgLoad(headImg,item.picUrl)" (error)="headImg.src='/assets/image/loading.jpg'" alt="">
             </div>
             <div class="item-content">
               <p>{{item.name}}</p>

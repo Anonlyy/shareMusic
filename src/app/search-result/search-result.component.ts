@@ -20,7 +20,8 @@ export class SearchResultComponent implements OnInit {
   artistsList = []; //存储所有歌手对象
   searchValue: string = ''; //搜索结果
   searchCount: number = 0; //搜索结果条数
-  currentNavIndex: number = 0;
+  currentNavIndex: number = 0; //当前选项卡下标
+  // currentType:number = 1; //当前类型(1,10,100,1000)
   searchTypeList = [
     {
       key: 'songs',
@@ -114,7 +115,7 @@ export class SearchResultComponent implements OnInit {
                   _this.artists = new Artists(item.id, item.name, item.picUrl,item.albumSize,item.mvSize);
                   _this.artistsList.push(_this.artists);
                 }
-                console.log(_this.artistsList)
+                // console.log(_this.artistsList)
             }
             _this.isLoading = false;
           }
@@ -123,7 +124,7 @@ export class SearchResultComponent implements OnInit {
   }
   //翻页
   changePagination(pageIndex: number) {
-    this.getSearchValue(pageIndex - 1);
+    this.getSearchValue(pageIndex - 1,this.searchTypeList[this.currentNavIndex].type,this.currentNavIndex);
   }
 
   //切换选项卡
@@ -132,6 +133,11 @@ export class SearchResultComponent implements OnInit {
     _this.currentNavIndex = index;
     _this.getSearchValue(0, _this.searchTypeList[index].type, index);
     _this.isLoading = true;
+  }
+
+  //图片加载完成
+  imgLoad(img:any,url:string){
+    img.src = url;
   }
 }
 

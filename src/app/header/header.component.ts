@@ -111,6 +111,13 @@ export class HeaderComponent implements OnInit {
           alert('搜索有误:'+error);
         })
   }
+  //直接搜索结果
+  goSearch(value:string){
+    this.router.navigate(['/searchResult',value]);
+    setTimeout(()=>{
+      this.isFocus = false;
+    },300)
+  }
   //跳转搜索结果页(限歌曲)
   toSearchResult(key:string,value:any){
     if(key=='songs'){

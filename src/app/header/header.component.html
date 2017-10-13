@@ -2,7 +2,7 @@
   <div class="search">
     <div class="input-search">
       <!---->
-      <input type="text" class="input" placeholder="搜索" [formControl]="searchValue"  (blur)="inputBlur()" (focus)="inputFocus()">
+      <input #searchInput type="text" class="input" placeholder="搜索" [formControl]="searchValue" (keyup.enter)="goSearch(searchInput.value)" (blur)="inputBlur()" (focus)="inputFocus()">
       <i>
         <free-icon icon="search"></free-icon>
       </i>
