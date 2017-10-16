@@ -41,7 +41,7 @@ export class PlayerComponent implements OnInit {
 
   constructor(public musicService:MusicService,
               public cookieService:CookieService,
-              private message: ElMessageService,
+              // private message: ElMessageService,
               public userService:UserService,
               private store:Store<formRoot.State>) {
     this.isSongDetailCheck$ = store.select(formRoot.getNumber);
@@ -304,8 +304,8 @@ export class PlayerComponent implements OnInit {
 
     }
     else {
-      this.message.setOptions({ duration:1200 })
-      _this.message['error']("抱歉,您暂未登录");
+      // this.message.setOptions({ duration:1200 })
+      // _this.message['error']("抱歉,您暂未登录");
     }
   }
   /**

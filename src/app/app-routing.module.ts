@@ -4,10 +4,11 @@ import {NgModule} from "@angular/core";
 import {SongListComponent} from "./song-list/song-list.component";
 import {ErrorComponent} from "./error/error.component";
 import {SearchResultComponent} from "./search-result/search-result.component";
+import {SingerComponent} from "./singer/singer.component";
 const routes:Routes = [
   {
     path:'',
-    redirectTo:'searchResult',
+    redirectTo:'singer',
     pathMatch:'full'
   },
   {
@@ -21,6 +22,10 @@ const routes:Routes = [
   {
     path:'searchResult/:value',
     component:SearchResultComponent
+  },
+  {
+    path:'singer/:id',
+    component:SingerComponent
   },
   {
     path:'**',

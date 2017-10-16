@@ -15,61 +15,34 @@ ul,li{
   .media-inner{
     display: block;
     float: left;
+    font-size: 0;
     img{
-      width: 145px;
-      height: 150px;
+      width: 160px;
+      height: 165px;
     }
   }
   .media-notice{
     display: block;
     float: left;
     vertical-align: top;
-    padding-left:20px;
+    padding-left:12px;
     .media-title{
-      font-weight: bold;
-      font-size: 1.8rem;
-      margin:0 0 5px 0;
-    }
-    .media-artist{
-      height: 35px;
-      line-height:35px;
-      font-size: .85rem;
       font-weight: normal;
-      .nickname{
-        float: left;
-        height: 30px;
-        line-height:35px;
-        img{
-          border-radius: 50%;
-          width: 24px;
-          height: 24px;
-          margin-right: 5px;
-          vertical-align: middle;
-        }
+      font-size: 1.4rem;
+      margin:0 0 5px 0;
+      i{
+        font-style: normal;
+        font-size: .95rem;
+        color: #888;
       }
-      .tags-list{
-        float: left;
-        margin: 0 0 0 20px;
-        padding: 0;
-        list-style:none;
-        li{
-          font-size: .65rem;
-          font-weight: normal;
-          margin-right: 2px;
-          float: left;
-        }
-      }
-
     }
     .media-desc{
-      height: 30px;
+      height: 90px;
       width: 800px;
       font-size: .65rem;
       margin: 0;
-      line-height: 30px;
-    }
-    .button-group{
-
+      line-height: 22px;
+      overflow-y: auto;
     }
   }
 }
@@ -127,8 +100,8 @@ ul,li{
             font-size: .75rem;
             font-weight: normal;
             color: #333;
-            box-sizing: border-box;
             padding-right: 5px;
+            box-sizing: border-box;
             strong{
               width: 100%;
               display: block;
@@ -142,10 +115,10 @@ ul,li{
               }
             }
             &:first-child{
-              width: 50%;
+              width: 40%;
             }
             &:nth-child(2){
-              width: 20%;
+              width: 30%;
             }
             &:nth-child(3){
               width: 20%;

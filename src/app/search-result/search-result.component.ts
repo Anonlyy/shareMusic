@@ -10,6 +10,7 @@ import {SearchMusicService} from "../service/search-music.service";
 })
 export class SearchResultComponent implements OnInit {
   isLoading: boolean = true;
+  defaultSrc:string ='/assets/image/loading.jpg';
   song: Song = new Song('0', 'null', 'null', '0', '/assets/image/loading.jpg', '0', 0);
   songList = [];//存储所有歌曲对象
   albums: Albums = new Albums('0', '0', '/assets/image/loading.jpg', '0', 0);
@@ -27,29 +28,32 @@ export class SearchResultComponent implements OnInit {
       key: 'songs',
       type: 1,
       name: '歌曲',
-      countName: 'songCount'
+      countName: 'songCount',
+      listName:'songList'
     },
     {
       key: 'albums',
       type: 10,
       name: '专辑',
-      countName: 'albumCount'
+      countName: 'albumCount',
+      listName:'albumsList'
     },
     {
       key: 'playlists',
       type: 1000,
       name: '歌单',
-      countName: 'playlistCount'
+      countName: 'playlistCount',
+      listName:'playlistsList'
     },
     {
       key: 'artists',
       type: 100,
       name: '歌手',
-      countName: 'artistCount'
+      countName: 'artistCount',
+      listName:'artistsList'
     }]
 
-  constructor(public searchMusicService: SearchMusicService, public routerInfo: ActivatedRoute) {
-  }
+  constructor(public searchMusicService: SearchMusicService, public routerInfo: ActivatedRoute) {}
 
   ngOnInit() {
     const _this = this;
@@ -96,7 +100,7 @@ export class SearchResultComponent implements OnInit {
                   for (let j of item.artists) {
                     artistList.push(j.name)
                   }
-                  _this.albums = new Albums(item.id, item.name, item.blurPicUrl, artistList.join('/'), item.size);
+                  _this.albums = new Albums(item.id, item.name, item.blurPicUrl==null?_this.defaultSrc:item.blurPicUrl, artistList.join('/'), item.size);
                   _this.albumsList.push(_this.albums);
                 }
                 break;
@@ -104,7 +108,7 @@ export class SearchResultComponent implements OnInit {
                 let playlistsResult = result.result.playlists;
                 _this.playlistsList = [];
                 for (let item of playlistsResult) {
-                  _this.playlists = new SongList(item.id, item.name, item.coverImgUrl,item.bookCount,'',item.trackCount,item.creator.nickname );
+                  _this.playlists = new SongList(item.id, item.name, item.coverImgUrl==null?_this.defaultSrc:item.coverImgUrl,item.bookCount,'',item.trackCount,item.creator.nickname );
                   _this.playlistsList.push(_this.playlists);
                 }
                 break;
@@ -112,7 +116,8 @@ export class SearchResultComponent implements OnInit {
                 let artistsReault = result.result.artists;
                 _this.artistsList = [];
                 for (let item of artistsReault) {
-                  _this.artists = new Artists(item.id, item.name, item.picUrl,item.albumSize,item.mvSize);
+                  console.log(item.picUrl==null);
+                  _this.artists = new Artists(item.id, item.name, item.picUrl==null?_this.defaultSrc:item.picUrl,item.albumSize,item.mvSize);
                   _this.artistsList.push(_this.artists);
                 }
                 // console.log(_this.artistsList)
@@ -137,6 +142,7 @@ export class SearchResultComponent implements OnInit {
 
   //图片加载完成
   imgLoad(img:any,url:string){
+    if(url==null||url=='null'){img.src=this.defaultSrc;return;}
     img.src = url;
   }
 }
@@ -162,6 +168,7 @@ export class Artists{
     public albumSize:number, //专辑数量
     public mvSize?:number, //mv数量
     public songSize?:number, //单曲数量
-
+    public desc?:string, //歌手描述
+    public alias?:string, //其他名字
   ){}
 }

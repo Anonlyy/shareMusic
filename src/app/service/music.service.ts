@@ -10,7 +10,6 @@ export class MusicService {
   constructor(public http:Http) {
     //如需播放歌曲,需传输当前歌曲对象和idList
     this.emitSong = new EventEmitter();
-    // this.songIds = new EventEmitter();
   }
   /**
    * 获取推荐歌单
@@ -90,11 +89,24 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取排行榜
+   * @param idx
+   * @returns {Observable<R|T>}
+   */
   public getTopList(idx:number):Observable<any>{
     return this.http.get(`/top/list?idx=${idx}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
+
+  public getSinger(id:string):Observable<any>{
+    return this.http.get(`/artists?id=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+
 
 
   /**

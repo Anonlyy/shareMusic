@@ -16,7 +16,7 @@ import {Observable} from "rxjs";
 export class SongListComponent implements OnInit {
   id:string;
   playListDetail:PlayListDetail = new PlayListDetail('null','/assets/image/loading.jpg','暂无描述',[],0,'admin','/assets/image/loading.jpg'); //歌单详情对象
-  song:Song = new Song('0','null','null','0','http://iph.href.lu/56x65','0',0);
+  song:Song = new Song('0','null','null','0','/assets/image/loading.jpg','0',0);
   songList=[];//存储所有歌曲对象
   songIds= [];//存储所有歌曲对象的id
   default ='/assets/image/loading.jpg';

@@ -16,7 +16,7 @@
           </div>
           <div class="content-val" >
             <ul class="list" *ngFor="let item of content.list">
-              <li class="list-item text-truncate" (click)="toSearchResult(content.key,item.name)">
+              <li class="list-item text-truncate" (click)="toSearchResult(content.key,item)">
                 <span class="item-name">{{item.name}}</span>
                 <i class="item-tip" *ngIf="content.key=='albums'">/{{item.artist.name}}</i>
                 <span class="item-tip" *ngIf="content.key=='songs'">/

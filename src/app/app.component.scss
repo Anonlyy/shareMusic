@@ -11,7 +11,8 @@
   transform:translate(-50%,-50%);
   background-color: white;
   .global-menu{
-    display: table-cell;
+    display: block;
+    float: left;
     position: relative;
     width: 230px;
     height: 815px;
@@ -34,7 +35,8 @@
     padding-bottom:65px;
     box-sizing: content-box;
     background-color: rgba(0,0,0,.02);
-    display: table-cell;
+    display: block;
+    float: left;
     width: 1040px;
     vertical-align: top;
     overflow-y: hidden;

@@ -104,8 +104,8 @@ export class HeaderComponent implements OnInit {
                 }
               })
             }
-            // console.log('key',_this.searchSuggestList);
           }
+          console.log('searchSuggestList',_this.searchSuggestList)
         },
         error=>{
           alert('搜索有误:'+error);
@@ -120,8 +120,13 @@ export class HeaderComponent implements OnInit {
   }
   //跳转搜索结果页(限歌曲)
   toSearchResult(key:string,value:any){
-    if(key=='songs'){
-      this.router.navigate(['/searchResult',value]);
+    switch (key){
+      case 'songs':
+        this.router.navigate(['/searchResult',value.name]);
+        break;
+      case 'artists':
+        this.router.navigate(['/singer',value.id]);
+        break;
     }
   }
   //失去焦点事件

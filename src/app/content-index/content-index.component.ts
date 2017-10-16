@@ -39,18 +39,12 @@ export class ContentIndexComponent implements OnInit {
   songList:SongList;  //推荐歌单
   newSongList:any; //最新音乐列表
   newSong:Song; //最新音乐
-  bannerUrls = [
-    "http://p3.music.126.net/s25q2x5QyqsAzilCurD-2w==/7973658325212564.jpg",
-    "http://p4.music.126.net/V9-MXz6b2MNhEKjutoDWIg==/7937374441542745.jpg",
-    "http://p4.music.126.net/CTU5B9R9y3XyYBZXJUXzTg==/2897213141428023.jpg",
-    "http://p4.music.126.net/tGPljf-IMOCyPvumoWLOTg==/7987951976374270.jpg",
-    "http://p4.music.126.net/mp2Y2n4ueZzIj6JSnUOdtw==/7875801790676538.jpg",
-    "http://p3.music.126.net/e0gGadEhjur2UuUpDF9hPg==/7788940372125389.jpg"
-  ];
+  banners = [];
   songIds = []; //存储播放列表的id列表
   default ='/assets/image/loading.jpg'
   constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
+    this.getBannerImg()
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
     if(songListCookie){
@@ -64,20 +58,21 @@ export class ContentIndexComponent implements OnInit {
     else{
       this.getSongList();
     }
+    //获取新音乐
     songCookie?this.setSongList(songCookie):this.getNewSong();
   }
   public setSongList(data:any){
     this.songList = data;
   }
+  //获取banner
   public getBannerImg(){
     const _this = this;
     _this.musicServer.getBannerImg()
       .subscribe(result=>{
-        _this.bannerUrls = [];
+        _this.banners = [];
         for(let item of result.banners){
-          _this.bannerUrls.push(item.pic.toString());
+          _this.banners.push(item);
         }
-        // console.log(_this.bannerUrls)
       })
   }
   public getSongList(){

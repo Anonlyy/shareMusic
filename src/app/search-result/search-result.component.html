@@ -42,7 +42,7 @@
         <ul class="tabs-content-list albums"  *ngIf="currentNavIndex == 1">
           <li class="list-item clearfix" [hidden]="albumsList.length<=0"  *ngFor="let item of albumsList;let index = index;">
             <span>
-              <img class="pic" src="{{item.picUrl}}" alt="">
+              <img class="pic" #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
             </span>
             <span class="text-truncate">
              {{item.name}}
@@ -59,7 +59,7 @@
         <ul class="tabs-content-list albums"  *ngIf="currentNavIndex == 2">
           <li class="list-item clearfix" [hidden]="playlistsList.length<=0"  *ngFor="let item of playlistsList;let index = index;">
             <span>
-              <img class="pic" src="{{item.picUrl}}" alt="">
+              <img class="pic" #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
             </span>
             <span class="text-truncate">
              {{item.name}}
@@ -77,10 +77,10 @@
         <ul class="tabs-list-artist clearfix" *ngIf="currentNavIndex == 3">
           <li class="artist-item" *ngFor="let item of artistsList">
             <div class="item-heading">
-              <img #headImg [src]="'/assets/image/loading.jpg'" (load)="imgLoad(headImg,item.picUrl)" (error)="headImg.src='/assets/image/loading.jpg'" alt="">
+              <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
             </div>
             <div class="item-content">
-              <p>{{item.name}}</p>
+              <p class="text-truncate">{{item.name}}</p>
               <span>专辑:{{item.albumSize}} MV:{{item.mvSize}}</span>
             </div>
           </li>
@@ -88,7 +88,7 @@
         <!--歌手列表 end-->
       </div>
     </div>
-    <div class="pagination"  *ngIf="songList.length>0">
+    <div class="pagination"  *ngIf="searchTypeList[currentNavIndex].length>30">
       <el-pagination (modelChange)="changePagination($event)" [total]="searchCount" [page-size]="30" [layout]="['prev', 'pager', 'next','total']">
       </el-pagination>
     </div>

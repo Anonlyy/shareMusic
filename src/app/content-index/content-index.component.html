@@ -2,9 +2,10 @@
   <div class="media-banner">
 
     <el-carousel height="320px">
-      <el-carousel-item *ngFor="let item of bannerUrls;let i = index;">
+      <el-carousel-item *ngFor="let item of banners;let i = index;" [label]="item.typeTitle" interval="5000" >
+
         <div class="small">
-          <img src="{{item}}" alt="">
+          <img src="{{item.pic}}" alt="">
         </div>
       </el-carousel-item>
     </el-carousel>

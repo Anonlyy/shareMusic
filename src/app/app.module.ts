@@ -32,6 +32,7 @@ import {reducer} from "./ngrx/index";
 import { SoundComponent } from './sound/sound.component';
 import {SearchMusicService} from "./service/search-music.service";
 import { SearchResultComponent } from './search-result/search-result.component';
+import { SingerComponent } from './singer/singer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +44,8 @@ import { SearchResultComponent } from './search-result/search-result.component';
     HeaderComponent,
     MusicTimePipe,
     SoundComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    SingerComponent
   ],
   imports: [
     BrowserModule,

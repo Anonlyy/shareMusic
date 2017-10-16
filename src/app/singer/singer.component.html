@@ -1,0 +1,48 @@
+<div class="global-media free-iscroll"  [el-loading]="isLoading"  [text]="'拼命加载中'">
+  <div class="media-header clearfix">
+    <div class="media-inner">
+      <img [src]="defaultSrc" #img (load)="updateUrl(img)" alt="">
+    </div>
+    <div class="media-notice">
+      <h3 class="media-title">{{artist.name}} <i>{{artist.alias}}</i></h3>
+      <p class="media-desc free-iscroll">
+        {{artist.desc}}
+      </p>
+      <div class="button-group">
+        <button fButton theme="primary" icon="play-circle">播放热门50首</button>
+        <button fButton icon="heart-o">收藏热门50首</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="media-body" >
+    <div class="tabs-group">
+      <div class="tabs-header">
+        <ul class="tabs-title-list">
+          <li class="title-item tabs-active">歌曲</li>
+          <li class="title-item">评论</li>
+        </ul>
+      </div>
+      <div class="tabs-content">
+        <ul class="tabs-content-list">
+          <li class="list-title clearfix">
+            <span>歌曲</span>
+            <span>歌手</span>
+            <span>专辑</span>
+            <span>时长</span>
+          </li>
+          <li class="list-item clearfix" [hidden]="songList.length<=0" [class.playing]="select == index" *ngFor="let item of songList;let index = index;">
+            <span>
+             <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
+            </span>
+            <span class="text-truncate">{{item.artistsName}}</span>
+            <span class="text-truncate">{{item.alName}}</span>
+            <span class="text-truncate">{{item.dt | musicTime}}</span>
+          </li>
+          <li class="null-tip"  *ngIf="songList.length<=0" >暂无歌曲╮(╯﹏╰）╭</li>
+        </ul>
+      </div>
+    </div>
+    <!--<div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>-->
+  </div>
+</div>
