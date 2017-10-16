@@ -1,7 +1,7 @@
 <div class="global-media free-iscroll"  [el-loading]="isLoading"  [text]="'拼命加载中'">
   <div class="media-header clearfix">
     <div class="media-inner">
-      <img [src]="defaultSrc" #img (load)="updateUrl(img)" alt="">
+      <img [src]="artist.picUrl" #img (error)="updateUrl(img)" alt="">
     </div>
     <div class="media-notice">
       <h3 class="media-title">{{artist.name}} <i>{{artist.alias}}</i></h3>

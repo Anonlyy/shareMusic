@@ -24,7 +24,6 @@ export class SongListComponent implements OnInit {
     id:'0',
     index:0
   };//正在播放
-
   select:number;
   number$: Observable<number>;
   number = 0;

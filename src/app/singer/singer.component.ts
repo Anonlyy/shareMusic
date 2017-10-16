@@ -35,7 +35,7 @@ export class SingerComponent implements OnInit {
             _this.songList = [];
             let singerInfo = result.artist;
             let arList;
-            _this.artist = new Artists(singerInfo.id,singerInfo.name,singerInfo.picUrl,singerInfo.albumSize,0,0,singerInfo.briefDesc==null?'暂无描述':singerInfo.briefDesc,singerInfo.alias[0]);
+            _this.artist = new Artists(singerInfo.id,singerInfo.name,singerInfo.picUrl,singerInfo.albumSize,0,0,(singerInfo.briefDesc==null||singerInfo.briefDesc=="")?'暂无描述':singerInfo.briefDesc,singerInfo.alias[0]);
             for(let item of result.hotSongs){
               arList = [];
               for (let j of item.ar) {
@@ -57,6 +57,6 @@ export class SingerComponent implements OnInit {
   }
 
   updateUrl(img){
-    img.src = this.artist.picUrl;
+    img.src = this.defaultSrc;
   }
 }
