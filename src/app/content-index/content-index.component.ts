@@ -41,7 +41,8 @@ export class ContentIndexComponent implements OnInit {
   newSong:Song; //最新音乐
   banners = [];
   songIds = []; //存储播放列表的id列表
-  default ='/assets/image/loading.jpg'
+  default ='/assets/image/loading.jpg';
+  isLoading:boolean[] = [true,true];
   constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
     this.getBannerImg()
@@ -51,6 +52,7 @@ export class ContentIndexComponent implements OnInit {
       this.newSongList =[];
       this.songIds = [];
       this.newSongList = this.cookieServer.getObject('newSongList');
+      this.isLoading[0] = false; //将加载动画取消
       for(let item of this.newSongList){
         this.songIds.push(item.id);
       }
@@ -63,6 +65,7 @@ export class ContentIndexComponent implements OnInit {
   }
   public setSongList(data:any){
     this.songList = data;
+    this.isLoading[1] = false; //将加载动画取消
   }
   //获取banner
   public getBannerImg(){
@@ -77,8 +80,7 @@ export class ContentIndexComponent implements OnInit {
   }
   public getSongList(){
     const _this = this;
-    _this.musicServer.getPersonalized()
-      .subscribe(
+    _this.musicServer.getPersonalized().subscribe(
         result=>{
           let data = result;
           if(data.code==200){
@@ -87,6 +89,7 @@ export class ContentIndexComponent implements OnInit {
               expires:_this.musicServer.setCookie(30) //设置缓存时长
             }
             _this.cookieServer.putObject('songList',_this.songList,option);
+            _this.isLoading[0] = false;
           }
           else{
             console.log(data);
@@ -112,6 +115,7 @@ export class ContentIndexComponent implements OnInit {
               let option = {
                 expires:_this.musicServer.setCookie(30) //设置缓存有效期,分钟为单位
               }
+              _this.isLoading[1] = false;
               _this.cookieServer.putObject('newSongList',_this.newSongList,option);
             }
           }

@@ -23,7 +23,6 @@ export class AppComponent implements OnInit{
     this.number$ = store.select(fromRoot.getNumber)
   }
 
-
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

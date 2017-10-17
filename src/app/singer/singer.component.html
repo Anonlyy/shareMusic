@@ -69,7 +69,7 @@
         <div class="introduction" *ngIf="currentNavIndex == 2">
           <div class="singer">
             <p>
-              {{artist.desc}}╮(╯﹏╰）╭
+              {{artist.desc}}
             </p>
           </div>
           <div class="list-item" *ngFor="let item of introduction">
@@ -86,7 +86,6 @@
         <ul class="tabs-album-list simi-singer-list clearfix" *ngIf="currentNavIndex == 3">
           <li class="list-item" *ngFor="let item of simiList">
             <div class="item-heading">
-              <!--(load)="imgLoad(headImg,item.picUrl)" alt="" -->
               <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
             </div>
             <div class="item-content">
@@ -95,7 +94,7 @@
               </p>
             </div>
           </li>
-          <!--<li class="null-tip"  *ngIf="albumsList.length<=0" >暂无专辑╮(╯﹏╰）╭</li>-->
+          <li class="null-tip"  *ngIf="simiList.length<=0" >暂无相似的歌手╮(╯﹏╰）╭</li>
         </ul>
         <!--相似歌手 end-->
       </div>

@@ -6,6 +6,7 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 import {Router} from "@angular/router";
 import {MusicService} from "../service/music.service";
 import {Md5} from "ts-md5/dist/md5";
+import {ElNotificationService} from "element-angular/release";
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -45,7 +46,7 @@ export class MenuComponent implements OnInit {
     }
   ]
 
-  constructor(public fbind:FormBuilder,public userServer:UserService,public cookieService:CookieService,public router:Router,public musicServer:MusicService) { }
+  constructor(public fbind:FormBuilder,public userServer:UserService,public cookieService:CookieService,public router:Router,public musicServer:MusicService,private notify: ElNotificationService) { }
 
   ngOnInit() {
     this.loginForm = this.fbind.group({
@@ -144,7 +145,12 @@ export class MenuComponent implements OnInit {
 
   }
   openList(){
-    this.isOpen = !this.isOpen;
+    if(this.isLogin){
+      this.isOpen = !this.isOpen;
+    }
+    else{
+      this.notify['error']('抱歉,您暂未登录','提示');
+    }
   }
 }
 
