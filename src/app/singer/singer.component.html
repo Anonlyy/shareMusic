@@ -10,7 +10,7 @@
       </p>
       <div class="button-group">
         <button fButton theme="primary" icon="play-circle">播放热门50首</button>
-        <button fButton icon="heart-o">收藏热门50首</button>
+        <button fButton icon="heart-o">收藏</button>
       </div>
     </div>
 
@@ -19,12 +19,14 @@
     <div class="tabs-group">
       <div class="tabs-header">
         <ul class="tabs-title-list">
-          <li class="title-item tabs-active">歌曲</li>
-          <li class="title-item">评论</li>
+          <li class="title-item " (click)="changeNavbar(index)" [class.tabs-active]="index == currentNavIndex" *ngFor="let navItem of searchTypeList;let index = index;">
+            {{navItem.name}}
+          </li>
         </ul>
       </div>
       <div class="tabs-content">
-        <ul class="tabs-content-list">
+        <!--歌手单曲 start-->
+        <ul class="tabs-content-list" *ngIf="currentNavIndex == 0">
           <li class="list-title clearfix">
             <span>歌曲</span>
             <span>歌手</span>
@@ -41,8 +43,47 @@
           </li>
           <li class="null-tip"  *ngIf="songList.length<=0" >暂无歌曲╮(╯﹏╰）╭</li>
         </ul>
+        <!--歌手单曲 end-->
+        <!--歌手专辑 start-->
+        <ul class="tabs-album-list clearfix" *ngIf="currentNavIndex == 1">
+          <li class="list-item" *ngFor="let item of albumsList">
+            <div class="item-heading">
+              <!--(load)="imgLoad(headImg,item.picUrl)" alt="" (click)="goSingerDetail(item)"-->
+              <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
+            </div>
+            <div class="item-content">
+              <p class="text-truncate">{{item.name}}</p>
+              <span>{{item.publishTime | createTime}}</span>
+            </div>
+          </li>
+          <li class="null-tip"  *ngIf="albumsList.length<=0" >暂无专辑╮(╯﹏╰）╭</li>
+          <!--<li class="page-item">-->
+            <!--<div class="pagination"  *ngIf="albumsList.length>30">-->
+              <!--<el-pagination (modelChange)="changePagination($event)" [page-count]="pageCount" [page-size]="30" [layout]="['prev', 'next']">-->
+              <!--</el-pagination>-->
+            <!--</div>-->
+          <!--</li>-->
+        </ul>
+        <!--歌手专辑 end-->
+        <!--歌手经历 start-->
+        <div class="introduction clearfix" *ngIf="currentNavIndex == 2">
+          <div class="singer">
+            <p>
+              {{artist.desc}}
+            </p>
+          </div>
+          <div class="list-item" *ngFor="let item of introduction">
+            <h3 class="item-title">
+              {{item.ti}}
+            </h3>
+            <p class="item-content">
+              {{item.txt}}
+            </p>
+          </div>
+          <li class="null-tip"  *ngIf="introduction.length<=0&&!artist" >该歌手暂无简介╮(╯﹏╰）╭</li>
+        </div>
+        <!--歌手经历 end-->
       </div>
     </div>
-    <!--<div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>-->
   </div>
 </div>

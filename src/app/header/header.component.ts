@@ -4,6 +4,7 @@ import {CookieService} from "angular2-cookie/services/cookies.service";
 import {Router, Routes} from "@angular/router";
 import {FormControl} from "@angular/forms";
 import {SearchMusicService} from "../service/search-music.service";
+import {ElNotificationService} from "element-angular/release";
 
 @Component({
   selector: 'app-header',
@@ -40,7 +41,7 @@ export class HeaderComponent implements OnInit {
     },
   ];
   isFocus:boolean=false;
-  constructor(public searchMusicService:SearchMusicService,public cookieService:CookieService,public router:Router) { }
+  constructor(public searchMusicService:SearchMusicService,public cookieService:CookieService,public router:Router,private notify: ElNotificationService) { }
 
   ngOnInit() {
 
@@ -113,6 +114,10 @@ export class HeaderComponent implements OnInit {
   }
   //直接搜索结果
   goSearch(value:string){
+    if(value==""||value==null){
+      this.notify['error']('抱歉,您的搜索内容为空','提示');
+      return;
+    }
     this.router.navigate(['/searchResult',value]);
     setTimeout(()=>{
       this.isFocus = false;

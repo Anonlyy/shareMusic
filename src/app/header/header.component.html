@@ -3,7 +3,7 @@
     <div class="input-search">
       <!---->
       <input #searchInput type="text" class="input" placeholder="搜索" [formControl]="searchValue" (keyup.enter)="goSearch(searchInput.value)" (blur)="inputBlur()" (focus)="inputFocus()">
-      <i>
+      <i (click)="goSearch(searchInput.value)">
         <free-icon icon="search"></free-icon>
       </i>
     </div>

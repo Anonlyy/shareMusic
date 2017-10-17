@@ -128,7 +128,7 @@ ul,li{
             font-weight: normal;
             color: #333;
             box-sizing: border-box;
-            padding-right: 5px;
+            padding-right: 10px;
             strong{
               width: 100%;
               display: block;
@@ -137,6 +137,8 @@ ul,li{
               box-sizing: content-box;
               transition: all .1s;
               padding-left: 10px;
+              box-sizing: border-box;
+              padding-right: 10px;
               &:hover{
                 color: #31C27C;
               }

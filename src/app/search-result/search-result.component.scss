@@ -71,6 +71,8 @@ ul,li{
             font-size: .75rem;
             font-weight: normal;
             color: #333;
+            padding-right: 5px;
+            box-sizing: border-box;
             strong{
               width: 100%;
               display: block;
@@ -79,6 +81,7 @@ ul,li{
               box-sizing: content-box;
               transition: all .1s;
               padding-left: 10px;
+              padding-right: 10px;
               &:hover{
                 color: #31C27C;
               }
@@ -142,7 +145,6 @@ ul,li{
               //font-weight: normal;
             }
             &:first-child{
-
               width: 7%;
               padding:6px 0;
             }
@@ -169,16 +171,21 @@ ul,li{
         display: block;
         >li{
           box-sizing: border-box;
-          padding:20px 10px;
+          padding:15px 8px;
           width:1/6*100%;
           float: left;
           .item-heading{
             text-align: center;
             img{
-              width: 100px;
-              height: 100px;
+              width: 120px;
+              height: 120px;
               border-radius: 50%;
               cursor: pointer;
+            }
+            &:hover{
+              img{
+                opacity: 0.9;
+              }
             }
           }
           .item-content{

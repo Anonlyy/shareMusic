@@ -77,10 +77,10 @@
         <ul class="tabs-list-artist clearfix" *ngIf="currentNavIndex == 3">
           <li class="artist-item" *ngFor="let item of artistsList">
             <div class="item-heading">
-              <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
+              <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" (click)="goSingerDetail(item)">
             </div>
             <div class="item-content">
-              <p class="text-truncate">{{item.name}}</p>
+              <p class="text-truncate" (click)="goSingerDetail(item)">{{item.name}}</p>
               <span>专辑:{{item.albumSize}} MV:{{item.mvSize}}</span>
             </div>
           </li>

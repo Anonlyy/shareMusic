@@ -10,6 +10,7 @@ import * as formRoot from '../ngrx';
 import {REFRESH} from '../ngrx/action/option'
 import {Store} from "@ngrx/store";
 import {Observable} from "rxjs";
+import {ElNotificationService} from "element-angular/release";
 @Component({
   selector: 'player',
   templateUrl: './player.component.html',
@@ -43,6 +44,7 @@ export class PlayerComponent implements OnInit {
               public cookieService:CookieService,
               // private message: ElMessageService,
               public userService:UserService,
+              private notify: ElNotificationService,
               private store:Store<formRoot.State>) {
     this.isSongDetailCheck$ = store.select(formRoot.getNumber);
   }
@@ -306,6 +308,7 @@ export class PlayerComponent implements OnInit {
     else {
       // this.message.setOptions({ duration:1200 })
       // _this.message['error']("抱歉,您暂未登录");
+      this.notify['error']('抱歉,您暂未登录','提示');
     }
   }
   /**

@@ -17,7 +17,7 @@ ul,li{
     float: left;
     font-size: 0;
     img{
-      width: 160px;
+      width: 170px;
       height: 165px;
     }
   }
@@ -110,6 +110,7 @@ ul,li{
               box-sizing: content-box;
               transition: all .1s;
               padding-left: 10px;
+              padding-right: 10px;
               &:hover{
                 color: #31C27C;
               }
@@ -156,6 +157,98 @@ ul,li{
               padding-left: 15px;
             }
           }
+        }
+      }
+      .tabs-album-list{
+        padding-top:20px;
+        padding-bottom: 10px;
+        position: relative;
+        .list-item{
+          width:1/5*100%;
+          float: left;
+          margin-bottom: 21px;
+          box-sizing: border-box;
+          padding:0 15px;
+          .item-heading{
+            text-align: center;
+            img{
+              width: 100%;
+              height: 170px;
+              cursor: pointer;
+            }
+            &:hover{
+              img{
+                opacity: 0.9;
+              }
+            }
+          }
+          .item-content{
+            text-align: left;
+            padding-left:5px;
+            p{
+              color: #000;
+              font-size: .8rem;
+              cursor: pointer;
+              font-weight: normal;
+              margin:0;
+              &:hover{
+                color: #31C27C;
+              }
+            }
+            >span{
+              margin-top: 5px;
+              display: block;
+              font-weight: normal;
+              font-size: .75rem;
+              color: #999;
+            }
+          }
+        }
+        .page-item{
+          position: absolute;
+          bottom: 10px;
+          margin: 0 auto;
+          width: 50%;
+          left: 50%;
+          transform: translateX(-50%);
+          right: 0;
+          display: flex;
+          justify-content: center;
+        }
+        .null-tip{
+          padding:10px 0;
+          text-align: center;
+          font-size: .8rem;
+          font-weight: normal;
+        }
+      }
+      .introduction{
+        padding:20px 0 10px;
+        .singer,.list-item{
+          .item-title{
+            height:30px;
+            line-height:30px;
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: normal;
+            &::before{
+              content: '';
+              width: 5px;
+              height: 30px;
+              display: inline-block;
+              background-color: #31C27C;
+              vertical-align: top;
+            }
+          }
+          p{
+            font-size: .8rem;
+            line-height:25px;
+            color: #888;
+            margin: 0;
+          }
+        }
+        .singer{
+          margin-bottom: 20px;
         }
       }
     }

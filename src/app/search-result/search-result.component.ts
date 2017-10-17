@@ -53,8 +53,7 @@ export class SearchResultComponent implements OnInit {
       listName:'artistsList'
     }]
 
-  constructor(public searchMusicService: SearchMusicService, public routerInfo: ActivatedRoute) {}
-
+  constructor(public searchMusicService: SearchMusicService, public routerInfo: ActivatedRoute,public router:Router) {}
   ngOnInit() {
     const _this = this;
     _this.routerInfo.params.subscribe(
@@ -75,7 +74,6 @@ export class SearchResultComponent implements OnInit {
           if (result.code == 200) {
             _this.searchCount = 0;
             _this.searchCount = parseInt(result.result[_this.searchTypeList[index].countName]);
-            console.log('type', type);
             switch (type) {
               case 1: //搜索歌曲
                 let songsResult = result.result.songs;
@@ -142,8 +140,13 @@ export class SearchResultComponent implements OnInit {
 
   //图片加载完成
   imgLoad(img:any,url:string){
-    if(url==null||url=='null'){img.src=this.defaultSrc;return;}
+    if(url==null||url=='null'||url==''){img.src=this.defaultSrc;return;}
     img.src = url;
+  }
+
+  //跳转歌手页
+  goSingerDetail(item:any){
+    this.router.navigate(['/singer',item.id])
   }
 }
 
@@ -155,6 +158,7 @@ export class Albums {
               public picUrl: string,
               public artists: string, //专辑作者
               public songsNum: number, //专辑歌曲数
+              public publishTime?:string, //发行时间(毫秒)
   ) {}
 }
 

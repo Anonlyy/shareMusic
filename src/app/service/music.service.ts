@@ -100,12 +100,35 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取歌手单曲和信息
+   * @param id
+   * @returns {Observable<R|T>}
+   */
   public getSinger(id:string):Observable<any>{
     return this.http.get(`/artists?id=${id}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
 
+  /**
+   * 获取歌手专辑
+   * @param id
+   * @param limit
+   * @param offset
+   * @returns {Observable<R|T>}
+   */
+  public getSingerAlbum(id:string,limit:number=30,offset:number=0):Observable<any>{
+    return this.http.get(`/artist/album?id=${id}&limit=${limit}&offset=${offset}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+  public getSingerIntroduction(id:string):Observable<any> {
+    return this.http.get(`/artist/desc?id=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
 
 
 
