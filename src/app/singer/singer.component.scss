@@ -229,15 +229,15 @@ ul,li{
             height:30px;
             line-height:30px;
             margin: 0;
-            font-size: 1.2rem;
+            font-size: .85rem;
             font-weight: normal;
             &::before{
               content: '';
               width: 5px;
-              height: 30px;
+              height: 20px;
               display: inline-block;
               background-color: #31C27C;
-              vertical-align: top;
+              vertical-align: middle;
             }
           }
           p{
@@ -249,6 +249,25 @@ ul,li{
         }
         .singer{
           margin-bottom: 20px;
+        }
+        .list-item{
+          margin-bottom: 20px;
+        }
+      }
+      .simi-singer-list{
+        .list-item{
+          width:1/7*100%;
+          padding:10px;
+          box-sizing: border-box;
+          .item-heading{
+            img{
+              border-radius: 50%;
+              height: 125px;
+            }
+          }
+          .item-content{
+            text-align: center;
+          }
         }
       }
     }

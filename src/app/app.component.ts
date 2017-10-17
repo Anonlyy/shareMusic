@@ -7,6 +7,7 @@ import {REFRESH} from "./ngrx/action/option";
 import {Observable} from "rxjs";
 import {routeAnimation} from "./animations";
 import {NavigationEnd, Router} from "@angular/router";
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

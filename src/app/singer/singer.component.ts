@@ -18,7 +18,7 @@ export class SingerComponent implements OnInit {
   isLoading:boolean = true;
   searchTypeList = [
     {
-      name: '歌曲',
+      name: '热门50首单曲',
     },
     {
       name: '专辑',
@@ -34,6 +34,7 @@ export class SingerComponent implements OnInit {
   albumsList = []; //存储所有专辑对象
   pageCount: number = 0; //结果条数
   introduction = []; //歌手经历
+  simiList = [];
   constructor(public routerInfo:ActivatedRoute,public musicServer:MusicService) { }
 
   ngOnInit() {
@@ -106,9 +107,9 @@ export class SingerComponent implements OnInit {
     const _this = this;
     _this.musicServer.getSingerIntroduction(id).subscribe(
       result=>{
-        console.log(result);
         if(result.code==200){
           for(let item of result.introduction){
+            if(item.ti==""||item.txt==""){continue;}
             _this.introduction.push(item)
           }
         }
@@ -118,6 +119,30 @@ export class SingerComponent implements OnInit {
       }
     )
   }
+  //获取相似歌手
+  getSimiSinger(id:string){
+    const _this = this;
+    _this.musicServer.getSimiSinger(id).subscribe(
+      result=>{
+        if(result.code==200){
+          for(let item of result.artists){
+            _this.simiList.push({
+              id:item.id,
+              picUrl:item.picUrl,
+              name:item.name
+            })
+          }
+        }
+        else{
+          console.log(result.code);
+        }
+      }
+    )
+    console.log(_this.simiList);
+  }
+
+
+
   //翻页(因为接口问题,所以暂时无法实现翻页功能)
   // changePagination(pageIndex: number) {
   //   this.getSingerAlbum(this.singerId,30,pageIndex - 1);
@@ -135,6 +160,10 @@ export class SingerComponent implements OnInit {
         break;
       case 2:
         _this.getSingerIntroduction(_this.singerId);
+        break;
+      case 3:
+        _this.getSimiSinger(_this.singerId);
+        break;
     }
     // _this.isLoading = true;
   }

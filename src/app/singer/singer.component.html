@@ -66,10 +66,10 @@
         </ul>
         <!--歌手专辑 end-->
         <!--歌手经历 start-->
-        <div class="introduction clearfix" *ngIf="currentNavIndex == 2">
+        <div class="introduction" *ngIf="currentNavIndex == 2">
           <div class="singer">
             <p>
-              {{artist.desc}}
+              {{artist.desc}}╮(╯﹏╰）╭
             </p>
           </div>
           <div class="list-item" *ngFor="let item of introduction">
@@ -80,9 +80,24 @@
               {{item.txt}}
             </p>
           </div>
-          <li class="null-tip"  *ngIf="introduction.length<=0&&!artist" >该歌手暂无简介╮(╯﹏╰）╭</li>
         </div>
         <!--歌手经历 end-->
+        <!--相似歌手 start-->
+        <ul class="tabs-album-list simi-singer-list clearfix" *ngIf="currentNavIndex == 3">
+          <li class="list-item" *ngFor="let item of simiList">
+            <div class="item-heading">
+              <!--(load)="imgLoad(headImg,item.picUrl)" alt="" -->
+              <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="">
+            </div>
+            <div class="item-content">
+              <p class="text-truncate">
+                {{item.name}}
+              </p>
+            </div>
+          </li>
+          <!--<li class="null-tip"  *ngIf="albumsList.length<=0" >暂无专辑╮(╯﹏╰）╭</li>-->
+        </ul>
+        <!--相似歌手 end-->
       </div>
     </div>
   </div>

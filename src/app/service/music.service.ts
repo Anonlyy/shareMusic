@@ -124,13 +124,27 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取歌手描述
+   * @param id
+   * @returns {Observable<R|T>}
+   */
   public getSingerIntroduction(id:string):Observable<any> {
     return this.http.get(`/artist/desc?id=${id}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }
 
-
+  /**
+   * 获取相似歌手
+   * @param id
+   * @returns {Observable<R|T>}
+   */
+  public getSimiSinger(id:string):Observable<any> {
+    return this.http.get(`/simi/artist?id=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
 
   /**
    * 设置cookie时长
