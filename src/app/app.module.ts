@@ -34,6 +34,7 @@ import {SearchMusicService} from "./service/search-music.service";
 import { SearchResultComponent } from './search-result/search-result.component';
 import { SingerComponent } from './singer/singer.component';
 import { CreateTimePipe } from './pipe/create-time.pipe';
+import { RadioIndexComponent } from './radio-index/radio-index.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { CreateTimePipe } from './pipe/create-time.pipe';
     SoundComponent,
     SearchResultComponent,
     SingerComponent,
-    CreateTimePipe
+    CreateTimePipe,
+    RadioIndexComponent
   ],
   imports: [
     BrowserModule,

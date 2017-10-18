@@ -5,10 +5,11 @@ import {SongListComponent} from "./song-list/song-list.component";
 import {ErrorComponent} from "./error/error.component";
 import {SearchResultComponent} from "./search-result/search-result.component";
 import {SingerComponent} from "./singer/singer.component";
+import {RadioIndexComponent} from "./radio-index/radio-index.component";
 const routes:Routes = [
   {
     path:'',
-    redirectTo:'singer',
+    redirectTo:'radio',
     pathMatch:'full'
   },
   {
@@ -26,6 +27,10 @@ const routes:Routes = [
   {
     path:'singer/:id',
     component:SingerComponent
+  },
+  {
+    path:'radio',
+    component:RadioIndexComponent
   },
   {
     path:'**',

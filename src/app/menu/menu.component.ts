@@ -72,6 +72,7 @@ export class MenuComponent implements OnInit {
     }
     _this.getUserInfo();
   }
+
   //获取用户信息
   getUserInfo(){
     const _this = this;
