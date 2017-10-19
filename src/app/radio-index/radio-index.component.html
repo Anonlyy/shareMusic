@@ -3,17 +3,53 @@
     <div class="media-header">
       <div class="media">
         <ul class="category-list clearfix">
-          <li class="category-item">
+          <li class="category-item" *ngFor="let item of radioCategoryList">
             <div class="item-heading">
-              <free-icon icon="home"></free-icon>
+              <span class="item-img" [style.background-image]="getImage(item.iconSrc)"></span>
             </div>
             <div class="item-content">
-              有声书
+              {{item.name}}
             </div>
           </li>
         </ul>
       </div>
     </div>
-    <div class="media-body"></div>
+    <div class="media-body">
+      <div class="media">
+        <div class="media-left">
+          <div class="media-heading">
+            <h3 class="title">推荐电台</h3>
+          </div>
+          <div class="media-content">
+            <ul class="list" >
+              <li class="list-item" *ngFor="let item of recommendList">
+                <img [src]="item.picUrl" alt="">
+                <div class="item-content">
+                  <!--歌曲接口-->
+                  <a class="recommend-name text-truncate" href="#">{{item.name}}</a>
+                  <!--节目接口-->
+                  <a class="album-name text-truncate" href="#">{{item.radioName}}</a>
+                </div>
+                <span class="category">{{item.category}}</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+        <div class="media-right">
+          <div class="media-heading">
+            <h3 class="title">精彩节目推荐</h3>
+          </div>
+          <div class="media-content">
+            <ul class="list">
+              <li class="list-item">111</li>
+              <li class="list-item">111</li>
+              <li class="list-item">111</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
