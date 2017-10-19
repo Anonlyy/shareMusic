@@ -64,6 +64,7 @@ export class RadioIndexComponent implements OnInit {
     )
   }
 
+  //获取推荐电台
 
 
   //返回安全的图片src
@@ -89,12 +90,10 @@ export class Recommend{
 // 电台对象
 export class Djprogram{
   constructor(
-    public id:number,      //节目id
+    public id:number,      //电台ID
     public name:string,     //节目名字
     public picUrl:string,  //封面
     public artistsName:string, //作者
     public radioName:string,  //专辑(电台)名字
-    public radioId:string,    //所属电台ID
-    public category:string, //分类
   ){}
 }

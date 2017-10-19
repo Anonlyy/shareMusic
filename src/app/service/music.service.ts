@@ -147,6 +147,19 @@ export class MusicService {
   }
 
   /**
+   * 获取热门歌手
+   * @param offset
+   * @param limit
+   * @returns {Observable<R|T>}
+   */
+  public getSingerList(offset:number=0,limit:number=30):Observable<any> {
+    return this.http.get(`/top/artists?offset=${offset}&limit=${limit}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+
+  /**
    * 设置cookie时长
    * @param time
    * @returns {Date}

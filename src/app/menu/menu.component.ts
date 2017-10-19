@@ -30,9 +30,9 @@ export class MenuComponent implements OnInit {
       url:'/index'
     },
     {
-      name:'MV',
-      icon:"film",
-      url:'/mv'
+      name:'歌手',
+      icon:"users",
+      url:'/singers'
     },
     {
       name:'电台',
