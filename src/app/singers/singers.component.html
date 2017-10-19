@@ -10,7 +10,7 @@
           <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
         </div>
         <div class="item-content">
-          <a href="#" class="text-truncate">{{item.name}} {{'/'+item.alias}}</a>
+          <a href="#" class="text-truncate">{{item.name}} {{item.alias}}</a>
         </div>
       </li>
     </ul>

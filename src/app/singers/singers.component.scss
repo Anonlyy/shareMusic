@@ -44,8 +44,10 @@ ul,li{
           >a{
             font-size: .8rem;
             display: block;
+            font-weight:normal;
             color: #222;
             margin:5px 0;
+            transition: all .3s;
           }
           &:hover{
             >a{

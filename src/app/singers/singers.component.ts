@@ -23,7 +23,7 @@ export class SingersComponent implements OnInit {
       result=>{
         if(result.code==200){
           for(let item of result.artists){
-            _this.artists = new Artists(item.id,item.name,item.img1v1Url,item.albumSize,0,item.musicSize,'null',(item.alias==null||item.alias.length==0)?"":item.alias)
+            _this.artists = new Artists(item.id,item.name,item.img1v1Url,item.albumSize,0,item.musicSize,'null',(item.alias==null||item.alias.length==0)?"":('/'+item.alias));
             _this.hotSingerList.push(_this.artists);
           }
           _this.isLoading = false;
