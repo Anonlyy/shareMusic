@@ -1,19 +1,18 @@
-<div class="global-media">
+<div class="global-media free-iscroll">
   <div class="media-header">
     <h3 class="title">热门歌手</h3>
   </div>
-  <div class="media-body">
-    <ul class="media-list">
-      <li class="media-item clearfix">
+  <div class="media-body" [el-loading]="isLoading"  [text]="'拼命加载中'">
+    <ul class="media-list clearfix">
+      <li class="media-item"  *ngFor="let item of hotSingerList">
         <div class="item-heading">
-          <!--(load)="imgLoad(headImg,item.picUrl)"-->
-          <img #headImg [src]="defaultSrc"  alt="" >
+          <!---->
+          <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
         </div>
         <div class="item-content">
-          <a href="#" class="text-truncate">周杰伦 / Jay Chou</a>
+          <a href="#" class="text-truncate">{{item.name}} {{'/'+item.alias}}</a>
         </div>
       </li>
-
     </ul>
   </div>
 </div>

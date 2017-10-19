@@ -7,9 +7,18 @@ ul,li{
 .global-media{
   height: 815px;
   overflow-y: auto;
+  .media-header{
+    padding-left:20px;
+    box-sizing: border-box;
+    .title{
+      font-size: 1rem;
+      font-weight: bold;
+      color: #32C27C;
+    }
+  }
   .media-body{
     background-color: white;
-    padding:20px 30px;
+    padding:20px 15px;
     .media-list{
       .media-item{
         width:1/6*100%;
@@ -20,13 +29,13 @@ ul,li{
           cursor: pointer;
           img{
             width: 80%;
-            height: 135px;
-            transition: all .3s;
+            height: 140px;
+            transition: all .2s;
           }
           &:hover{
             opacity:.8;
             img{
-              border-radius: 50%;
+              border-radius: 15px;
             }
           }
         }
