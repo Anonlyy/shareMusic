@@ -15,6 +15,7 @@ export class SingersComponent implements OnInit {
   pageLoading:boolean = false;
   showIndex:number = 30; //默认显示范围
   pageIndex:number =1;
+  maxPageIndex:number = 4;
   constructor(private musicService:MusicService) { }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class SingersComponent implements OnInit {
       result=>{
         if(result.code==200){
           for(let item of result.artists){
-            _this.artists = new Artists(item.id,item.name,item.img1v1Url,item.albumSize,0,item.musicSize,'null',(item.alias==null||item.alias.length==0)?"":('/'+item.alias));
+            _this.artists = new Artists(item.id,item.name,item.img1v1Url,item.albumSize,0,item.musicSize,'null',(item.alias==null||item.alias.length==0)?"":(item.alias[0]));
             _this.hotSingerList.push(_this.artists);
             // _this.hotSingerList.push()
           }
@@ -53,15 +54,17 @@ export class SingersComponent implements OnInit {
     const _this = this;
     //scrollHeight - offsetHeight = 滚动条总高度
     let scrollHeight = e.target.scrollHeight - e.target.offsetHeight;
-    if(e.target.scrollTop>=scrollHeight&&_this.pageIndex<4){
-      _this.pageLoading = true;
-      setTimeout(()=>{
-        _this.pageIndex +=1;
-        _this.pageLoading =false;
-        _this.showIndex = (30*_this.pageIndex);
-        console.log('到底了',_this.showIndex);
-      },1000)
+    //定时器节流
+    if(e.target.scrollTop==scrollHeight&&_this.pageIndex<_this.maxPageIndex){
+          let timer = null;
+          clearTimeout(timer);
+          _this.pageLoading = true;
+          timer = setTimeout(function() {
+            _this.pageIndex +=1;
+            _this.pageLoading = false;
+            _this.showIndex = (30*_this.pageIndex);
+            console.log('到底了',_this.showIndex);
+          }, 300);
     }
-    // console.log(scrollHeight,e.target.scrollTop);
   }
 }

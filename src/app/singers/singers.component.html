@@ -5,17 +5,17 @@
   <div class="media-body" [el-loading]="isLoading"  [text]="'拼命加载中'">
     <ul class="media-list clearfix">
       <li class="media-item"  *ngFor="let item of hotSingerList;let i = index;" [class.hide]="i >= showIndex">
-        <div class="item-content">
-          <div class="item-heading">
-            <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
+          <div class="item-left">
+            <img #headImg [src]="item.picUrl" alt="" >
           </div>
-          <div class="item-content">
-            <a href="#" class="text-truncate">{{item.name}} {{item.alias}}</a>
+          <div class="item-right">
+            <a href="#">{{item.name}}</a>
+            <p class="alias-name">{{item.alias}}</p>
+            <span class="music-size">歌曲数: {{item.songSize}}</span>
           </div>
-        </div>
       </li>
     </ul>
-    <div class="loading" [el-loading]="pageLoading"  [text]="'拼命加载中'"></div>
-    <div class="tip"  *ngIf="pageIndex>=4">我可是有底线的￣ω￣=</div>
+    <div class="loading" [el-loading]="pageLoading" *ngIf="pageIndex<maxPageIndex"  [text]="'拼命加载中'"></div>
+    <div class="tip"  *ngIf="pageIndex>=maxPageIndex">我可是有底线的￣ω￣=</div>
   </div>
 </div>

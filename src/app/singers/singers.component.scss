@@ -21,44 +21,64 @@ ul,li{
     padding:20px 15px 0;
     .media-list{
       .media-item{
-        width:1/6*100%;
+        width:1/4*100%;
         float: left;
-        margin-bottom: 20px;
-        .item-heading{
+        box-shadow: 3px 5px 5px rgba(0,0,0,.04);
+        padding:10px 15px;
+        box-sizing: border-box;
+        border-top:1px solid #eeeeee;
+        display: flex;
+        justify-content: center;
+        border-radius: 5px;
+        .item-left{
           text-align: center;
           cursor: pointer;
+          width: 50%;
           img{
-            width: 80%;
-            height: 140px;
-            transition: all .2s;
+            width: 110px;
+            height: 110px;
           }
           &:hover{
             opacity:.8;
-            img{
-              border-radius: 15px;
-            }
           }
         }
-        .item-content{
-          text-align: center;
+        .item-right{
+          width: 50%;
+          padding-left: 10px;
+          box-sizing: border-box;
+          position: relative;
           >a{
-            font-size: .8rem;
+            font-size: .75rem;
             display: block;
             font-weight:normal;
             color: #222;
             margin:5px 0;
             transition: all .3s;
-          }
-          &:hover{
-            >a{
+            &:hover{
               color: #31C27C;
             }
+          }
+          .alias-name{
+            margin:5px 0 0 0;
+            font-size: .7rem;
+            color: #999;
+            font-weight: normal;
+          }
+          .music-size{
+            position: absolute;
+            bottom: 25px;
+            left: 10px;
+            font-size: .7rem;
+            display: block;
           }
         }
       }
       .hide{
         display: none;
       }
+    }
+    .loading{
+      height: 40px;
     }
     .tip{
       font-size: .7rem;
