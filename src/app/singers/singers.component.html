@@ -1,18 +1,21 @@
-<div class="global-media free-iscroll">
+<div class="global-media free-iscroll" (scroll)="scrollBottom($event)">
   <div class="media-header">
     <h3 class="title">热门歌手</h3>
   </div>
   <div class="media-body" [el-loading]="isLoading"  [text]="'拼命加载中'">
     <ul class="media-list clearfix">
-      <li class="media-item"  *ngFor="let item of hotSingerList">
-        <div class="item-heading">
-          <!---->
-          <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
-        </div>
+      <li class="media-item"  *ngFor="let item of hotSingerList;let i = index;" [class.hide]="i >= showIndex">
         <div class="item-content">
-          <a href="#" class="text-truncate">{{item.name}} {{item.alias}}</a>
+          <div class="item-heading">
+            <img #headImg [src]="defaultSrc" (load)="imgLoad(headImg,item.picUrl)" alt="" >
+          </div>
+          <div class="item-content">
+            <a href="#" class="text-truncate">{{item.name}} {{item.alias}}</a>
+          </div>
         </div>
       </li>
     </ul>
+    <div class="loading" [el-loading]="pageLoading"  [text]="'拼命加载中'"></div>
+    <div class="tip"  *ngIf="pageIndex>=4">我可是有底线的￣ω￣=</div>
   </div>
 </div>

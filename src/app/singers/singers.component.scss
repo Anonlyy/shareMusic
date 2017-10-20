@@ -18,7 +18,7 @@ ul,li{
   }
   .media-body{
     background-color: white;
-    padding:20px 15px;
+    padding:20px 15px 0;
     .media-list{
       .media-item{
         width:1/6*100%;
@@ -56,6 +56,16 @@ ul,li{
           }
         }
       }
+      .hide{
+        display: none;
+      }
+    }
+    .tip{
+      font-size: .7rem;
+      height:35px;
+      line-height:35px;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.05));
     }
   }
 }
