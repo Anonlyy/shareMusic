@@ -22,6 +22,10 @@ const routes:Routes = [
     component:SongListComponent
   },
   {
+    path:'albums',
+    component:SongListComponent
+  },
+  {
     path:'searchResult/:value',
     component:SearchResultComponent
   },
@@ -29,6 +33,7 @@ const routes:Routes = [
     path:'singer/:id',
     component:SingerComponent
   },
+
   {
     path:'radio',
     component:RadioIndexComponent

@@ -2,7 +2,7 @@ import {Injectable, EventEmitter} from '@angular/core';
 import {Http} from "@angular/http";
 import {Observable} from "rxjs";
 import {UserInfo} from "../menu/menu.component";
-
+import 'rxjs/Rx';
 @Injectable()
 export class UserService{
   emitUser:EventEmitter<UserInfo>;

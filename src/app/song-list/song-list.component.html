@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="media-body" >
-    <div class="tabs-group">
+    <div class="tabs-group" *ngIf="listType==1">
       <div class="tabs-header">
         <ul class="tabs-title-list">
           <li class="title-item tabs-active">歌曲 <i class="badeg">{{playListDetail.trackCount}}</i></li>
@@ -36,6 +36,35 @@
             <span>歌曲</span>
             <span>歌手</span>
             <span>专辑</span>
+            <span>时长</span>
+          </li>
+          <li class="list-item clearfix" [hidden]="songList.length<=0" [class.playing]="select == index" *ngFor="let item of songList;let index = index;">
+            <span>
+             <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
+            </span>
+            <span class="text-truncate">{{item.artistsName}}</span>
+            <span class="text-truncate">{{item.alName}}</span>
+            <span class="text-truncate">{{item.dt | musicTime}}</span>
+          </li>
+          <li class="null-tip"  *ngIf="songList.length<=0" >
+            歌单为空╮(╯﹏╰）╭........
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="tabs-group"  *ngIf="listType==2">
+      <div class="tabs-header">
+        <ul class="tabs-title-list">
+          <li class="title-item tabs-active">歌曲 <i class="badeg">{{playListDetail.trackCount}}</i></li>
+          <li class="title-item">评论</li>
+        </ul>
+      </div>
+      <div class="tabs-content">
+        <ul class="tabs-content-list">
+          <li class="list-title clearfix">
+            <span>歌曲</span>
+            <span>歌手</span>
+            <span>热度</span>
             <span>时长</span>
           </li>
           <li class="list-item clearfix" [hidden]="songList.length<=0" [class.playing]="select == index" *ngFor="let item of songList;let index = index;">

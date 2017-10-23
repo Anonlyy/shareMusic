@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MusicService} from "../service/music.service";
 import {Artists} from "../search-result/search-result.component";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-singers',
@@ -16,11 +17,16 @@ export class SingersComponent implements OnInit {
   showIndex:number = 30; //默认显示范围
   pageIndex:number =1;
   maxPageIndex:number = 4;
-  constructor(private musicService:MusicService) { }
+  constructor(private musicService:MusicService,private http:Http) { }
 
   ngOnInit() {
     this.getSingers();
     // this.scrollBottom();
+    this.http.get(`personalized/newsong`).subscribe(
+      result=>{
+        console.log(result);
+      }
+    )
   }
   public getSingers(offset:number=0,limit:number=200):void{
     const _this = this;

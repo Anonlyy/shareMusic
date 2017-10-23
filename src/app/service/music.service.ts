@@ -1,6 +1,7 @@
+import {Http} from "@angular/http";
 import {Injectable, EventEmitter} from '@angular/core';
 import {Observable} from "rxjs";
-import {Http} from "@angular/http";
+import 'rxjs/Rx';
 import {Song} from "../content-index/content-index.component";
 
 @Injectable()
@@ -154,6 +155,12 @@ export class MusicService {
    */
   public getSingerList(offset:number=0,limit:number=30):Observable<any> {
     return this.http.get(`/top/artists?offset=${offset}&limit=${limit}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+  public getAlbumList(id:string):Observable<any> {
+    return this.http.get(`/album?id=${id}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }

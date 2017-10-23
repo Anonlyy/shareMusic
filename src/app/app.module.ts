@@ -37,6 +37,7 @@ import { CreateTimePipe } from './pipe/create-time.pipe';
 import { RadioIndexComponent } from './radio-index/radio-index.component';
 import {RadioServiceService} from "./service/radio-service.service";
 import { SingersComponent } from './singers/singers.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,7 +75,7 @@ import { SingersComponent } from './singers/singers.component';
 
     StoreModule.provideStore(reducer)
   ],
-  providers: [RadioServiceService,MusicService,SearchMusicService,UserService,CookieService, {provide:LocationStrategy,useClass:HashLocationStrategy}],
+  providers: [RadioServiceService,MusicService,SearchMusicService,UserService,CookieService, { provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

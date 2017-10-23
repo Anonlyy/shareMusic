@@ -3,7 +3,6 @@
 
     <el-carousel height="320px">
       <el-carousel-item *ngFor="let item of banners;let i = index;" [label]="item.typeTitle" interval="5000" >
-
         <div class="small">
           <img src="{{item.pic}}" alt="">
         </div>
@@ -30,7 +29,6 @@
                 <p>
                   {{item.copywriter}}
                 </p>
-
               </div>
             </a>
             <div class="content-desc">

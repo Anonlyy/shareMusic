@@ -40,9 +40,10 @@
       .media-content {
         background-color: white;
         .content-list {
-          padding: 0 5px;
+          padding: 10px 5px 0;
+          background-color: rgba(0,0,0,.03);
           list-style: none;
-          margin-bottom: 0;
+          margin: 0;
           display: block;
           .content {
             float: left;

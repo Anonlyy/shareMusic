@@ -23,11 +23,12 @@ ul,li{
       .media-item{
         width:1/4*100%;
         float: left;
-        box-shadow: 3px 5px 5px rgba(0,0,0,.04);
+        box-shadow: 5px 5px 5px rgba(0,0,0,.1);
         padding:10px 15px;
         box-sizing: border-box;
-        border-top:1px solid #eeeeee;
+        border-top:1px solid rgba(0,0,0,.05);
         display: flex;
+        margin-bottom: 10px;
         justify-content: center;
         border-radius: 5px;
         .item-left{

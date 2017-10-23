@@ -132,6 +132,9 @@ export class HeaderComponent implements OnInit {
       case 'artists':
         this.router.navigate(['/singer',value.id]);
         break;
+      case 'albums':
+        this.router.navigate(['/albums',{'id':value.id,'type':2}]);
+        break;
     }
   }
   //失去焦点事件

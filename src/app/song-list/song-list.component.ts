@@ -27,6 +27,7 @@ export class SongListComponent implements OnInit {
   select:number;
   number$: Observable<number>;
   number = 0;
+  listType:number = 0; //1为歌单页,2为专辑页
 
   isLoading:boolean = true;
 
@@ -36,10 +37,20 @@ export class SongListComponent implements OnInit {
   ngOnInit() {
     const _this = this;
     this.routerInfo.params.subscribe(
-      data=>{
-        //noinspection TypeScriptUnresolvedVariable
+      result=>{
+        let data:any = result;
         _this.id = data.id;
-        _this.getPlayList(_this.id);
+
+        if(data.type=="1"||data.type==""||data.type==null){
+          _this.listType = 1;
+          _this.getPlayList(_this.id);
+          console.log('歌单页');
+        }
+        else if(data.type=="2"){
+          _this.listType = 2;
+          _this.getAlbums(_this.id);
+          console.log('专辑页');
+        }
       }
     )
 
@@ -91,6 +102,43 @@ export class SongListComponent implements OnInit {
       }
     )
   }
+
+  //获取专辑详情
+  public getAlbums(id:string){
+    const _this = this;
+    _this.musicService.getAlbumList(id).subscribe(
+      result=>{
+        // let data = result.playlist;
+        // if(result.code==200){
+        //   _this.playListDetail = new PlayListDetail(
+        //     data.name,
+        //     data.coverImgUrl,
+        //     data.description?data.description:'###这位同志很懒,暂无歌单描述###',
+        //     data.tags,
+        //     data.trackCount,
+        //     data.creator.nickname,
+        //     data.creator.avatarUrl
+        //   );
+        //   _this.songList = [];
+        //   let arList;
+        //   for(let item of result.playlist.tracks){
+        //     arList = [];
+        //     for(let j of item.ar){arList.push(j.name)}
+        //     _this.song = new Song(item.id,item.name,arList.join('/'),item.ar[0].id,item.al.picUrl,item.al.name,item.dt);
+        //     _this.songList.push(_this.song);
+        //     //添加id进数组
+        //     _this.songIds.push(item.id);
+        //   }
+        //   _this.isLoading = false;
+        // }
+        console.log(result);
+      },
+      error=>{
+        console.log('error',error);
+      }
+    )
+  }
+
   //图片加载错误
   public updateUrl(e){
     e.src = this.default;
