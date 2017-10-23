@@ -1,4 +1,5 @@
-<div class="global-media free-iscroll" [el-loading]="isLoading"  [text]="'拼命加载中'">
+<div class="global-media free-iscroll" >
+  <!--[el-loading]="isLoading"  [text]="'拼命加载中'"-->
   <div class="media-header clearfix">
     <div class="media-inner">
       <img [src]="playListDetail.picUrl" #img  (error)="updateUrl(img)" alt="">
@@ -11,7 +12,7 @@
           <span>{{playListDetail.nickname}}</span>
         </div>
         <ul class="tags-list">
-          <li *ngFor="let item of playListDetail.tags">#{{item}}</li>
+          <li [hidden]="playListDetail.tags.length<=0" *ngFor="let item of playListDetail.tags">#{{item}}</li>
         </ul>
       </div>
       <p class="media-desc text-truncate">{{playListDetail.desc}}</p>
@@ -67,20 +68,25 @@
             <span>热度</span>
             <span>时长</span>
           </li>
-          <li class="list-item clearfix" [hidden]="songList.length<=0" [class.playing]="select == index" *ngFor="let item of songList;let index = index;">
+          <li class="list-item clearfix" [hidden]="albumList.length<=0" *ngFor="let item of albumList;let index = index;">
             <span>
              <strong class="text-truncate" (dblclick)="playMusic(index)">{{item.name}}</strong>
             </span>
             <span class="text-truncate">{{item.artistsName}}</span>
-            <span class="text-truncate">{{item.alName}}</span>
+            <span class="text-truncate">
+              <!--{{item.popNum}}-->
+              <i class="pop"></i>
+
+            </span>
             <span class="text-truncate">{{item.dt | musicTime}}</span>
           </li>
-          <li class="null-tip"  *ngIf="songList.length<=0" >
-            歌单为空╮(╯﹏╰）╭........
+          <li class="null-tip"  *ngIf="albumList.length<=0" >
+            专辑单曲为空╮(╯﹏╰）╭........
           </li>
         </ul>
       </div>
     </div>
-    <div class="tip"  *ngIf="songList.length>0">我可是有底线的￣ω￣=</div>
+    <!-- -->
+    <div class="tip" *ngIf="(listType==2)?albumList.length>0:songList.length>0">我可是有底线的￣ω￣=</div>
   </div>
 </div>

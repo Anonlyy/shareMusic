@@ -172,5 +172,6 @@ export class Song{
     public blurPicUrl:string, //歌曲封面图片
     public alName?:string, //专辑名字
     public dt?:number,//歌曲时长
+    public popNum?:number, //热度
   ){}
 }
