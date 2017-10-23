@@ -147,10 +147,10 @@ export class PlayerComponent implements OnInit {
   playMedia(url:string){
     const _this = this;
     _this.audio.pause();
-    // _this.audio.crossOrigin = "anonymous";
     _this.audio.src = url; //播放当前点击的歌曲
     _this.audio.load();
     _this.audio.play();
+    window.document.title = '『正在播放』'+_this.media.name;
     _this.getTime(_this.audio);
     _this.isLogin?_this.checkSongLove():'';
   }
@@ -177,7 +177,6 @@ export class PlayerComponent implements OnInit {
           _this.MediaTime.currentTime = _this.setTimes(Math.floor(Media.currentTime));
           // console.log('currentTime：',_this.setTimes(Math.floor(Media.currentTime)));
           _this.progressWidth +=(100/duration);
-
           if(_this.audio.paused){
             //noinspection TypeScriptUnresolvedFunction
             clearInterval(_this.times);
@@ -225,9 +224,11 @@ export class PlayerComponent implements OnInit {
     if(_this.audio.paused){ //暂停状态
       _this.getTime(_this.audio,"pause");
       _this.audio.play();
+      window.document.title = '『正在播放』'+_this.media.name;
     }
     else {
       _this.audio.pause();
+      window.document.title = '『暂停播放』'+_this.media.name;
     }
   }
   /**
