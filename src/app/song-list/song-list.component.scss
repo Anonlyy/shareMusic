@@ -151,10 +151,28 @@ ul,li{
             }
             &:nth-child(3){
               width: 20%;
+              display: flex;
+              align-items: center;
             }
             &:last-child{
               width: 10%;
               text-align: center;
+            }
+            >.pop{
+              width: 100px;
+              height: 12px;
+              background-color: white;
+              border-radius: 10px;
+              overflow: hidden;
+              display: block;
+              .pop-value{
+                width: 10%;
+                height:12px;
+                background: linear-gradient(45deg, #31C27C 0%, #05abe0 100%);
+                display: block;
+                z-index: 100;
+                border-radius: 10px;
+              }
             }
           }
         }

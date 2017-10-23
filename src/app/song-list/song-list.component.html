@@ -75,8 +75,9 @@
             <span class="text-truncate">{{item.artistsName}}</span>
             <span class="text-truncate">
               <!--{{item.popNum}}-->
-              <i class="pop"></i>
-
+              <span class="pop">
+                <i class="pop-value" [style.width]="item.popNum+'%'"></i>
+              </span>
             </span>
             <span class="text-truncate">{{item.dt | musicTime}}</span>
           </li>
@@ -87,6 +88,6 @@
       </div>
     </div>
     <!-- -->
-    <div class="tip" *ngIf="(listType==2)?albumList.length>0:songList.length>0">我可是有底线的￣ω￣=</div>
+    <div class="tip" *ngIf="(listType==2)?albumList.length>30:songList.length>30">我可是有底线的￣ω￣=</div>
   </div>
 </div>
