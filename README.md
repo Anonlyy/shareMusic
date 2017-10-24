@@ -17,21 +17,18 @@
 
 ### 1.安装api服务器 ###
 	
-> git clone https://github.com/Binaryify/NeteaseCloudMusicApi.git
-
-> npm install(推荐cnpm)
+    git clone https://github.com/Binaryify/NeteaseCloudMusicApi.git
+    npm install(推荐cnpm)
 
 ### 2.启动服务器 ###
-> node app.js
+    node app.js
    
 ### 3.安装前端项目 ###
-	
-> git clone https://github.com/Anonlyy/shareMusic.git
-
-> npm install(推荐cnpm)
+    git clone https://github.com/Anonlyy/shareMusic.git
+    npm install(推荐cnpm)
 
 ### 4.启动项目 ###
-> npm start
+    npm start
   [1]: https://ws1.sinaimg.cn/large/a0b131e2gy1fkskdm1s1qj21fl0rhkfo.jpg
   [2]: https://github.com/Binaryify/NeteaseCloudMusicApi
   [3]: https://github.com/eleme/element-angular
