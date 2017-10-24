@@ -10,7 +10,7 @@ import {SingersComponent} from "./singers/singers.component";
 const routes:Routes = [
   {
     path:'',
-    redirectTo:'singers',
+    redirectTo:'index',
     pathMatch:'full'
   },
   {
