@@ -35,9 +35,12 @@ note:
 - 如遇504错误,一般为后台api服务器未启动,请启动后再刷新页面。
 - 使用的公用的API,如遇奔溃和图片获取缓慢请谅解。
 
-![index](https://i.imgur.com/2S7hGFr.gif)
-![user](https://i.imgur.com/wB5SXBc.gif)
-![search](https://i.imgur.com/O9PfftS.gif)
+![](https://i.imgur.com/2S7hGFr.gif)
+![](https://i.imgur.com/wB5SXBc.gif)
+![](https://i.imgur.com/O9PfftS.gif)
+
+
+
   [1]: https://ws1.sinaimg.cn/large/a0b131e2gy1fkskdm1s1qj21fl0rhkfo.jpg
   [2]: https://github.com/Binaryify/NeteaseCloudMusicApi
   [3]: https://github.com/eleme/element-angular
