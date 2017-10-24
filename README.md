@@ -1,5 +1,5 @@
 # ShareMusic
-![主界面](https://ws1.sinaimg.cn/large/a0b131e2gy1fkskdm1s1qj21fl0rhkfo.jpg)
+![主界面](https://github.com/Anonlyy/shareMusic/raw/master/src/assets/md/md1.png)
 ---
 **这是一款基于Anuglar4框架的音乐播放器,并使用[网易云音乐API][2],样式布局则参考QQ音乐客户端**
 
