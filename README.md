@@ -36,13 +36,13 @@
 - 使用的公用的API,如遇奔溃和图片获取缓慢请谅解。
 - 仅供个人学习使用。
 
-![](https://ws1.sinaimg.cn/large/a0b131e2gy1fkuc2edo4xg20z70ple89.jpg)
+![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/index.gif)
 
 
-![user](https://i.imgur.com/wB5SXBc.gif)
+![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/user.gif)
 
 
-![](https://ws1.sinaimg.cn/large/a0b131e2gy1fkuc2hrvrtg20z70plhdy.jpg)
+![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/searcg.gif)
 
 
 
