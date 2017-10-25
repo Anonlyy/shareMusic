@@ -31,7 +31,7 @@
                 <div class="item-header">
                   <img class="item-bg" #img [src]="item.picUrl" alt="">
                   <div class="hover-cover">
-                    <free-icon icon="play-circle-o"></free-icon>
+                    <img src="/assets/image/ic_play.png" alt="">
                   </div>
                 </div>
                 <a href="#" class="item-text text-truncate">{{item.name}}</a>
@@ -40,6 +40,20 @@
           </ul>
         </div>
         <!--每日歌曲-->
+        <div class="media-song">
+          <ul class="media-list clearfix">
+            <li class="media-item" *ngFor="let item of topSongList">
+              <div class="media-left">
+                <img [src]="item.blurPicUrl" alt="">
+              </div>
+              <div class="media-right">
+                <a href="#">{{item.name}}</a>
+                <p>{{item.artistsName}}</p>
+                <div class="album-name text-truncate">{{item.alName}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!--每日推荐-->

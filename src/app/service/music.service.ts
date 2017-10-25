@@ -170,8 +170,20 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取每日推荐歌(网友精选歌碟)
+   * @param limit
+   * @param order
+   * @returns {Observable<R|T>}
+   */
   public getTopPlayList(limit:number=4,order:string='hot'):Observable<any> {
     return this.http.get(`/top/playlist?limit=${limit}&order=${order}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+  public getTopSong():Observable<any> {
+    return this.http.get(`/recommend/songs`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }

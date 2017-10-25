@@ -39,6 +39,9 @@ export class ContentIndexComponent implements OnInit {
   songList:SongList;  //推荐歌单
   topPlayList:SongList; //每日推荐歌单
   topPlayListArr = []; //每日推荐歌单列表
+  topSong:Song; //每日推荐歌曲对象
+  topSongList = []; //每日推荐歌曲列表
+
   newSongList:any; //最新音乐列表
   newSong:Song; //最新音乐
   banners = [];
@@ -48,6 +51,7 @@ export class ContentIndexComponent implements OnInit {
   constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
     this.getBannerImg();
+    this.getDayPlayList();
     this.getDaySongList();
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
@@ -82,6 +86,7 @@ export class ContentIndexComponent implements OnInit {
         }
       })
   }
+  //获取推荐歌单
   public getSongList(){
     const _this = this;
     _this.musicServer.getPersonalized().subscribe(
@@ -103,6 +108,7 @@ export class ContentIndexComponent implements OnInit {
           alert(error);
         });
   }
+  //获取最新音乐
   public getNewSong(){
     const _this = this;
     _this.musicServer.getNewSong()
@@ -133,7 +139,7 @@ export class ContentIndexComponent implements OnInit {
       );
   }
   //获取每日推荐歌单
-  public getDaySongList(){
+  public getDayPlayList(){
     const _this = this;
     _this.musicServer.getTopPlayList().subscribe(
       result=>{
@@ -143,7 +149,6 @@ export class ContentIndexComponent implements OnInit {
             _this.topPlayList = new SongList(item.id,item.name,item.coverImgUrl,item.playCount,item.description,item.trackCount,item.creator.nickname);
             _this.topPlayListArr.push(_this.topPlayList);
           }
-          console.log(_this.topPlayListArr);
         }
         else{
           console.log('错误代码:'+result.code);
@@ -154,8 +159,31 @@ export class ContentIndexComponent implements OnInit {
       }
     )
   }
-
-
+  //获取每日推荐歌曲
+  public getDaySongList(){
+    const _this = this;
+    _this.musicServer.getTopSong().subscribe(
+      result=>{
+        if(result.code==200){
+          _this.topSongList = [];
+          let arList;
+          for(let i=0;i<10;i++){
+            arList = [];
+            for(let j of result.recommend[i].artists){arList.push(j.name)}
+            _this.topSong = new Song(result.recommend[i].id,result.recommend[i].name,arList.join('/'),result.recommend[i].artists[0].id,result.recommend[i].album.blurPicUrl,result.recommend[i].album.name);
+            _this.topSongList.push(_this.topSong);
+          }
+          console.log(_this.topSongList);
+        }
+        else{
+          console.log('错误代码:'+result.code);
+        }
+      },
+      error=>{
+        console.log('请求每日推荐歌曲错误:',error);
+      }
+    )
+  }
 
   public playSong(index:number){
     this.musicServer.emitSong.emit(new EmitSong(this.newSongList[index],this.songIds));

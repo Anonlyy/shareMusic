@@ -42,7 +42,7 @@
 ![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/user.gif)
 
 
-![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/searcg.gif)
+![](https://raw.githubusercontent.com/Anonlyy/shareMusic/master/src/assets/md/search.gif)
 
 
 
