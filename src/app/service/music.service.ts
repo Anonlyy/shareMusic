@@ -159,8 +159,19 @@ export class MusicService {
       .catch(this.handleError);
   }
 
+  /**
+   * 获取该专辑单曲
+   * @param id
+   * @returns {Observable<R|T>}
+   */
   public getAlbumList(id:string):Observable<any> {
     return this.http.get(`/album?id=${id}`)
+      .map(this.handleSuccess)
+      .catch(this.handleError);
+  }
+
+  public getTopPlayList(limit:number=4,order:string='hot'):Observable<any> {
+    return this.http.get(`/top/playlist?limit=${limit}&order=${order}`)
       .map(this.handleSuccess)
       .catch(this.handleError);
   }

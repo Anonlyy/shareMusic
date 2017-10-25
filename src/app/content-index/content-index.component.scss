@@ -265,5 +265,111 @@
         }
       }
     }
+
+    .media-day{
+      background-color: white;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      //padding-bottom: 20px;
+      .media-header{
+        height: 50px;
+        line-height: 50px;
+        padding: 0 10px;
+        border-left: 2px solid #31C27C;
+        border-bottom: 1px solid #dedede;
+        //box-shadow: 5px 3px 3px rgba(0,0,0,.1);
+        h3{
+          margin: 0;
+        }
+      }
+      .media-content{
+
+        .media-paylist{
+          background-color: rgba(0,0,0,.03);
+          .media-list{
+            margin: 0;
+            padding:3px 5px 0;
+            width: 100%;
+            list-style:none;
+            .media-item{
+              display: block;
+              float: left;
+              width:1/5*100%;
+              height: 230px;
+              padding-right: 10px;
+              box-sizing: border-box;
+              .item-inner{
+                box-shadow: 5px 3px 6px rgba(0,0,0,.03);
+                width: 100%;
+                height: 230px;
+                display: block;
+                background-color: white;
+                font-size: 0;
+                overflow: hidden;
+                .item-header{
+                  position: relative;
+                  cursor: pointer;
+                  padding:5px;
+                  box-sizing: border-box;
+                  .item-bg{
+                    width: 100%;
+                    height: 190px;
+                  }
+                  .hover-cover{
+                    position: absolute;
+                    right: 10px;
+                    bottom:10px;
+                    color: white;
+                    opacity: 0;
+                    font-size: 35px;
+                    transition: all .3s;
+                  }
+                  &:hover{
+                    .hover-cover{
+                      opacity:1;
+                    }
+                  }
+                }
+                .item-text{
+                  display: block;
+                  height: 30px;
+                  font-size: 13px;
+                  font-weight: normal;
+                  padding-left: 10px;
+                  box-sizing: border-box;
+                  color: #000;
+                  &:hover{
+                    color: #31C27C;
+                  }
+                }
+              }
+            }
+            .date-item{
+              .date{
+                border:1px solid #EEEEEE;
+                border-radius: 2px;
+                width: 100%;
+                height: 100%;
+                background-color: white;
+                text-align: center;
+                box-sizing: border-box;
+                padding-top: 82px;
+                p{
+                  display: block;
+                  margin:0;
+                  font-size: 21px;
+                }
+                h3{
+                  margin: 0;
+                  font-size: 40px;
+                  font-weight: bold;
+                  color: #31C27C;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

@@ -11,6 +11,38 @@
 
   </div>
   <div class="media-body" >
+    <!--每日推荐-->
+    <div class="media-day">
+      <div class="media-header">
+        <h3>每日推荐</h3>
+      </div>
+      <div class="media-content">
+        <!--每日歌单-->
+        <div class="media-paylist">
+          <ul class="media-list clearfix">
+            <li class="media-item date-item">
+              <div class="date">
+                <p>星期二</p>
+                <h3>24</h3>
+              </div>
+            </li>
+            <li class="media-item" *ngFor="let item of topPlayListArr">
+              <div class="item-inner">
+                <div class="item-header">
+                  <img class="item-bg" #img [src]="item.picUrl" alt="">
+                  <div class="hover-cover">
+                    <free-icon icon="play-circle-o"></free-icon>
+                  </div>
+                </div>
+                <a href="#" class="item-text text-truncate">{{item.name}}</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--每日歌曲-->
+      </div>
+    </div>
+    <!--每日推荐-->
     <!--推荐歌单-->
     <div class="media" [el-loading]="isLoading[0]"  [text]="'拼命加载中'">
       <div class="media-header">

@@ -150,9 +150,10 @@ export class PlayerComponent implements OnInit {
     _this.audio.src = url; //播放当前点击的歌曲
     _this.audio.load();
     _this.audio.play();
-    window.document.title = '『正在播放』'+_this.media.name;
     _this.getTime(_this.audio);
     _this.isLogin?_this.checkSongLove():'';
+    setTimeout(()=>{window.document.title = '『正在播放』'+_this.media.name;},300);
+
   }
   /**
    * 获取歌曲时长
@@ -203,9 +204,11 @@ export class PlayerComponent implements OnInit {
       result=>{
         if(result.code==200){
           let arList =[];
+          _this.media  = new Song('00','暂无正在播放的歌曲~','','NULL','/assets/image/loading.jpg');
           let data = result.songs[0];
           for(let i of data.ar){arList.push(i.name)}
           _this.media= new Song(data.id,data.name,arList.join('/'),data.ar[0].id,data.al.picUrl)
+          console.log( _this.media);
         }
       },
       error=>{
@@ -252,9 +255,9 @@ export class PlayerComponent implements OnInit {
         index:_this.currentMedia.index+1
       }
     }
-    // console.log(_this.songUrlList);
     _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
     _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
+
   }
   /**
    * 点击播放上一首
@@ -278,6 +281,7 @@ export class PlayerComponent implements OnInit {
     }
     _this.getSongDetail(_this.songUrlList[_this.currentMedia.index].id);
     _this.playMedia(_this.songUrlList[_this.currentMedia.index].url);
+
   }
 
   /**

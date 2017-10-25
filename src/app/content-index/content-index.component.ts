@@ -37,6 +37,8 @@ export class ContentIndexComponent implements OnInit {
       picUrl:'/assets/image/topList4.jpg'
     }];  //排行榜数据
   songList:SongList;  //推荐歌单
+  topPlayList:SongList; //每日推荐歌单
+  topPlayListArr = []; //每日推荐歌单列表
   newSongList:any; //最新音乐列表
   newSong:Song; //最新音乐
   banners = [];
@@ -45,9 +47,11 @@ export class ContentIndexComponent implements OnInit {
   isLoading:boolean[] = [true,true];
   constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
-    this.getBannerImg()
+    this.getBannerImg();
+    this.getDaySongList();
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
+
     if(songListCookie){
       this.newSongList =[];
       this.songIds = [];
@@ -128,6 +132,31 @@ export class ContentIndexComponent implements OnInit {
         }
       );
   }
+  //获取每日推荐歌单
+  public getDaySongList(){
+    const _this = this;
+    _this.musicServer.getTopPlayList().subscribe(
+      result=>{
+        if(result.code==200){
+          _this.topPlayListArr = [];
+          for(let item of result.playlists){
+            _this.topPlayList = new SongList(item.id,item.name,item.coverImgUrl,item.playCount,item.description,item.trackCount,item.creator.nickname);
+            _this.topPlayListArr.push(_this.topPlayList);
+          }
+          console.log(_this.topPlayListArr);
+        }
+        else{
+          console.log('错误代码:'+result.code);
+        }
+      },
+      error=>{
+        console.log('请求每日推荐错误:'+error);
+      }
+    )
+  }
+
+
+
   public playSong(index:number){
     this.musicServer.emitSong.emit(new EmitSong(this.newSongList[index],this.songIds));
   }
