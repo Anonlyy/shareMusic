@@ -48,11 +48,17 @@ export class ContentIndexComponent implements OnInit {
   songIds = []; //存储播放列表的id列表
   default ='/assets/image/loading.jpg';
   isLoading:boolean[] = [true,true];
+  currentDate = {
+    day:0, //周几
+    date:0  //当月几号
+  }
+
   constructor(public musicServer:MusicService,public cookieServer:CookieService,public router:Router) { }
   ngOnInit() {
     this.getBannerImg();
     this.getDayPlayList();
     this.getDaySongList();
+    this.getNowDate();
     let songListCookie = this.cookieServer.getObject('newSongList');
     let songCookie = this.cookieServer.getObject('songList');
 
@@ -170,7 +176,7 @@ export class ContentIndexComponent implements OnInit {
           for(let i=0;i<10;i++){
             arList = [];
             for(let j of result.recommend[i].artists){arList.push(j.name)}
-            _this.topSong = new Song(result.recommend[i].id,result.recommend[i].name,arList.join('/'),result.recommend[i].artists[0].id,result.recommend[i].album.blurPicUrl,result.recommend[i].album.name);
+            _this.topSong = new Song(result.recommend[i].id,result.recommend[i].name,arList.join('/'),result.recommend[i].artists[0].id,result.recommend[i].album.blurPicUrl,result.recommend[i].album.name,0,0,result.recommend[i].album.id);
             _this.topSongList.push(_this.topSong);
           }
           console.log(_this.topSongList);
@@ -204,6 +210,21 @@ export class ContentIndexComponent implements OnInit {
       }
     )
   }
+
+  //跳转至专辑页
+  public toAlbum(albumId:number){
+    this.router.navigate(['/albums',{'id':albumId,'type':2}]);
+  }
+
+  //获取当日时间
+  public getNowDate(){
+    const _this = this;
+    let currentDate = new Date();
+    _this.currentDate = {
+      day:currentDate.getDay(),
+      date:currentDate.getDate()
+    }
+  }
 }
 
 //单个·歌单对象
@@ -230,5 +251,6 @@ export class Song{
     public alName?:string, //专辑名字
     public dt?:number,//歌曲时长
     public popNum?:number, //热度
+    public albumId?:number, //对应专辑ID
   ){}
 }

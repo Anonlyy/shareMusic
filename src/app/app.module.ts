@@ -37,6 +37,7 @@ import { CreateTimePipe } from './pipe/create-time.pipe';
 import { RadioIndexComponent } from './radio-index/radio-index.component';
 import {RadioServiceService} from "./service/radio-service.service";
 import { SingersComponent } from './singers/singers.component';
+import { DayToWeekPipe } from './pipe/day-to-week.pipe';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { SingersComponent } from './singers/singers.component';
     SingerComponent,
     CreateTimePipe,
     RadioIndexComponent,
-    SingersComponent
+    SingersComponent,
+    DayToWeekPipe
   ],
   imports: [
     BrowserModule,

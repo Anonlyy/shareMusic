@@ -446,8 +446,11 @@
                   background-color: #13CE66;
                   box-shadow: 5px 3px 2px rgba(0,0,0,.01);
                   border-radius: 2px;
-                  //border: 1px solid #888;
                   color: white;
+                  cursor: pointer;
+                  &:hover{
+                    opacity: .6;
+                  }
                 }
               }
               &:nth-of-type(2n){

@@ -22,19 +22,19 @@
           <ul class="media-list clearfix">
             <li class="media-item date-item">
               <div class="date">
-                <p>星期二</p>
-                <h3>24</h3>
+                <p>{{currentDate.day | dayToWeek}}</p>
+                <h3>{{currentDate.date}}</h3>
               </div>
             </li>
             <li class="media-item" *ngFor="let item of topPlayListArr">
               <div class="item-inner">
                 <div class="item-header">
-                  <img class="item-bg" #img [src]="item.picUrl" alt="">
+                  <img class="item-bg" [routerLink]="['/list',item.id]" #img [src]="item.picUrl" (error)="updateUrl(img)"  alt="">
                   <div class="hover-cover">
                     <img src="/assets/image/ic_play.png" alt="">
                   </div>
                 </div>
-                <a href="#" class="item-text text-truncate">{{item.name}}</a>
+                <a [routerLink]="['/list',item.id]"  class="item-text text-truncate">{{item.name}}</a>
               </div>
             </li>
           </ul>
@@ -49,7 +49,7 @@
               <div class="media-right">
                 <a href="#">{{item.name}}</a>
                 <p>{{item.artistsName}}</p>
-                <div class="album-name text-truncate">{{item.alName}}</div>
+                <div class="album-name text-truncate" (click)="toAlbum(item.albumId)">{{item.alName}}</div>
               </div>
             </li>
           </ul>

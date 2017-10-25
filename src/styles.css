@@ -11,8 +11,9 @@
 *::selection,*::-moz-selection{
   background-color: #35C17B;
   color: white;
+  outline: none;
 }
-li:focus,a:focus{
+li:focus,a:focus,img:focus{
   outline:none;
   border:none;
 }
