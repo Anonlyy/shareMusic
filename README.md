@@ -31,18 +31,18 @@
 
 ### 4.启动项目 ###
     npm start
-> note:
+> **note:**
 - 如遇504错误,一般为后台api服务器未启动,请启动后再刷新页面。
 - 使用的公用的API,如遇奔溃和图片获取缓慢请谅解。
 - 仅供个人学习使用。
 
-![index](https://i.imgur.com/2S7hGFr.gif)
+![](https://ws1.sinaimg.cn/large/a0b131e2gy1fkuc2edo4xg20z70ple89.jpg)
 
 
 ![user](https://i.imgur.com/wB5SXBc.gif)
 
 
-![search](https://i.imgur.com/O9PfftS.gif)
+![](https://ws1.sinaimg.cn/large/a0b131e2gy1fkuc2hrvrtg20z70plhdy.jpg)
 
 
 
